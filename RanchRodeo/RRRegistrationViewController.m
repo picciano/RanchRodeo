@@ -29,7 +29,7 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
         [self setTitle:@"Registration"];
         
         UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(resetData)];
-        [self.navigationItem setRightBarButtonItem:resetItem];
+        [self.navigationItem setLeftBarButtonItem:resetItem];
     }
     return self;
 }
@@ -50,7 +50,7 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
 
 - (void)resetData
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Confiration" message:[NSString stringWithFormat:@"Are you certain that you want to delete all of the registration data? This action cannot be undone.\n\nType \"%@\" to confirm this action.", kRRRegistrationEraseChallengeText] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Clear all", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:[NSString stringWithFormat:@"Are you certain that you want to erase all of the registration data? This action cannot be undone.\n\nEnter \"%@\" to confirm this action.", kRRRegistrationEraseChallengeText] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Clear all", nil];
     [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [alertView show];
 }
@@ -64,11 +64,14 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
     
     if (![[alertView textFieldAtIndex:0].text isEqualToString:kRRRegistrationEraseChallengeText])
     {
+        UIAlertView *notErasedAlertView = [[UIAlertView alloc] initWithTitle:@"Confirmation Incorrect" message:@"The confirmation code was not entered correctly. The registration data was not erased." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [notErasedAlertView show];
+        
         return;
     }
     
-    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Confiration" message:@"Registrationdata has been deleted." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alertView2 show];
+    UIAlertView *erasedAlertView = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:@"The registration data has been erased." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [erasedAlertView show];
 }
 
 @end
