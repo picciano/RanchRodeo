@@ -9,8 +9,6 @@
 #import "RRRegistrationViewController.h"
 #import "RRRiderViewController.h"
 #import "RRRosterViewController.h"
-#import "RRDataManager.h"
-#import "Rider.h"
 
 @interface RRRegistrationViewController ()
 

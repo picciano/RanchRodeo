@@ -4,6 +4,7 @@
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="isChild" attributeType="Boolean" syncable="YES"/>
         <attribute name="isNewRider" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isParent" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isRoper" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isWaiverSigned" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
@@ -21,7 +22,7 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="warnings" inverseEntity="Team" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Rider" positionX="-99" positionY="9" width="128" height="193"/>
+        <element name="Rider" positionX="-99" positionY="9" width="128" height="208"/>
         <element name="Team" positionX="171" positionY="-18" width="128" height="73"/>
         <element name="Warning" positionX="144" positionY="161" width="128" height="73"/>
     </elements>

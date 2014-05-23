@@ -15,7 +15,7 @@
 		E40101BF192EA004009B780F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101BE192EA004009B780F /* main.m */; };
 		E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101C2192EA004009B780F /* RRAppDelegate.m */; };
 		E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */; };
-		E40101C8192EA004009B780F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40101C7192EA004009B780F /* Images.xcassets */; };
+		E40101C8192EA004009B780F /* Background.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40101C7192EA004009B780F /* Background.xcassets */; };
 		E40101CF192EA004009B780F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101CE192EA004009B780F /* XCTest.framework */; };
 		E40101D0192EA004009B780F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B0192EA004009B780F /* Foundation.framework */; };
 		E40101D1192EA004009B780F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B4192EA004009B780F /* UIKit.framework */; };
@@ -32,6 +32,7 @@
 		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
 		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
+		E4835FD7192F8D10006F6398 /* RRStringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRStringUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		E40101C1192EA004009B780F /* RRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RRAppDelegate.h; sourceTree = "<group>"; };
 		E40101C2192EA004009B780F /* RRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RRAppDelegate.m; sourceTree = "<group>"; };
 		E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RanchRodeo.xcdatamodel; sourceTree = "<group>"; };
-		E40101C7192EA004009B780F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E40101C7192EA004009B780F /* Background.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Background.xcassets; sourceTree = "<group>"; };
 		E40101CD192EA004009B780F /* RanchRodeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RanchRodeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40101CE192EA004009B780F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E40101D7192EA004009B780F /* RanchRodeoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RanchRodeoTests-Info.plist"; sourceTree = "<group>"; };
@@ -81,6 +82,8 @@
 		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
 		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
 		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
+		E4835FD5192F8D10006F6398 /* RRStringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRStringUtilities.h; sourceTree = "<group>"; };
+		E4835FD6192F8D10006F6398 /* RRStringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRStringUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +151,7 @@
 				E4010202192ED598009B780F /* Utilities */,
 				E40101E5192EA2CD009B780F /* View Controllers */,
 				E40101FE192EAD04009B780F /* Data model */,
-				E40101C7192EA004009B780F /* Images.xcassets */,
+				E40101C7192EA004009B780F /* Background.xcassets */,
 				E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */,
 				E40101B9192EA004009B780F /* Supporting Files */,
 			);
@@ -203,14 +206,14 @@
 		E40101FE192EAD04009B780F /* Data model */ = {
 			isa = PBXGroup;
 			children = (
+				E40101FF192ED545009B780F /* RRDataManager.h */,
+				E4010200192ED545009B780F /* RRDataManager.m */,
 				E40101FB192EACFC009B780F /* Warning.h */,
 				E40101FC192EACFC009B780F /* Warning.m */,
 				E40101F8192EACFC009B780F /* Rider.h */,
 				E40101F9192EACFC009B780F /* Rider.m */,
 				E40101F5192EACFC009B780F /* Team.h */,
 				E40101F6192EACFC009B780F /* Team.m */,
-				E40101FF192ED545009B780F /* RRDataManager.h */,
-				E4010200192ED545009B780F /* RRDataManager.m */,
 			);
 			name = "Data model";
 			sourceTree = "<group>";
@@ -219,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */,
+				E4835FD5192F8D10006F6398 /* RRStringUtilities.h */,
+				E4835FD6192F8D10006F6398 /* RRStringUtilities.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -302,7 +307,7 @@
 				E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */,
 				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
-				E40101C8192EA004009B780F /* Images.xcassets in Resources */,
+				E40101C8192EA004009B780F /* Background.xcassets in Resources */,
 				E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +331,7 @@
 				E40101FA192EACFC009B780F /* Rider.m in Sources */,
 				E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */,
 				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
+				E4835FD7192F8D10006F6398 /* RRStringUtilities.m in Sources */,
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
 				E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */,
 				E40101BF192EA004009B780F /* main.m in Sources */,
@@ -532,6 +538,7 @@
 				E40101E1192EA004009B780F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E40101E2192EA004009B780F /* Build configuration list for PBXNativeTarget "RanchRodeoTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +547,7 @@
 				E40101E4192EA004009B780F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

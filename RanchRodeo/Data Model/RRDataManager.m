@@ -8,9 +8,6 @@
 
 #import "RRDataManager.h"
 #import "RRAppDelegate.h"
-#import "Rider.h"
-#import "Team.h"
-#import "Warning.h"
 
 @interface RRDataManager ()
 
@@ -44,6 +41,14 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 {
     Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[self managedObjectContext]];
     return object;
+}
+
+- (BOOL)save
+{
+    NSError *error = nil;
+    [[self managedObjectContext] save:&error];
+    
+    return (error == nil);
 }
 
 @end

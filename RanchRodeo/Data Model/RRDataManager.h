@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "CWLSynthesizeSingleton.h"
-
-@class Rider;
-@class Team;
-@class Warning;
+#import "Rider.h"
+#import "Team.h"
+#import "Warning.h"
 
 @interface RRDataManager : NSObject
 
 CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
 
+- (BOOL)save;
 - (NSArray *)allRiders;
 - (Rider *)newRider;
 
