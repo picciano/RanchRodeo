@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Rider;
+
 @interface RRRiderViewController : UIViewController
+
+@property (nonatomic, strong) Rider *rider;
 
 @end

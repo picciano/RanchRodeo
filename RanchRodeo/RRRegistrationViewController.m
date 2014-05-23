@@ -9,8 +9,17 @@
 #import "RRRegistrationViewController.h"
 #import "RRRiderViewController.h"
 #import "RRRosterViewController.h"
+#import "RRDataManager.h"
+#import "Rider.h"
 
 @interface RRRegistrationViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfRidersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfTeamsLabel;
+
+@property (strong, nonatomic) NSArray *riders;
 
 - (IBAction)createRider:(id)sender;
 - (IBAction)viewRoster:(id)sender;
@@ -34,9 +43,21 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setRiders:[[RRDataManager sharedRRDataManager] allRiders]];
+}
+
 - (IBAction)createRider:(id)sender
 {
     RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
+    [viewController setRider:[[RRDataManager sharedRRDataManager] newRider]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

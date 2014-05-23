@@ -31,6 +31,7 @@
 		E40101F7192EACFC009B780F /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F6192EACFC009B780F /* Team.m */; };
 		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
+		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,9 @@
 		E40101F9192EACFC009B780F /* Rider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rider.m; path = "Data Model/Rider.m"; sourceTree = "<group>"; };
 		E40101FB192EACFC009B780F /* Warning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Warning.h; path = "Data Model/Warning.h"; sourceTree = "<group>"; };
 		E40101FC192EACFC009B780F /* Warning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Warning.m; path = "Data Model/Warning.m"; sourceTree = "<group>"; };
+		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
+		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
+		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 			children = (
 				E40101C1192EA004009B780F /* RRAppDelegate.h */,
 				E40101C2192EA004009B780F /* RRAppDelegate.m */,
+				E4010202192ED598009B780F /* Utilities */,
 				E40101E5192EA2CD009B780F /* View Controllers */,
 				E40101FE192EAD04009B780F /* Data model */,
 				E40101C7192EA004009B780F /* Images.xcassets */,
@@ -204,8 +209,18 @@
 				E40101F9192EACFC009B780F /* Rider.m */,
 				E40101F5192EACFC009B780F /* Team.h */,
 				E40101F6192EACFC009B780F /* Team.m */,
+				E40101FF192ED545009B780F /* RRDataManager.h */,
+				E4010200192ED545009B780F /* RRDataManager.m */,
 			);
 			name = "Data model";
+			sourceTree = "<group>";
+		};
+		E4010202192ED598009B780F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +329,7 @@
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
 				E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */,
 				E40101BF192EA004009B780F /* main.m in Sources */,
+				E4010201192ED545009B780F /* RRDataManager.m in Sources */,
 				E40101F7192EACFC009B780F /* Team.m in Sources */,
 				E40101E9192EA2F5009B780F /* RRRegistrationViewController.m in Sources */,
 			);
