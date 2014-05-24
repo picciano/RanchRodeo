@@ -29,7 +29,17 @@
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.rider.firstName, self.rider.lastName]];
     [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[self.rider numberOfRides]]];
     [self.categoryLabel setText:[self.rider category]];
-    [self.waiverSignedImageView setHighlighted:[self.rider.isWaiverSigned boolValue]];
+    
+    UIImage *icon;
+    if ([self.rider.isWaiverSigned boolValue])
+    {
+        icon = [UIImage imageNamed:@"Icon-Check"];
+    }
+    else
+    {
+        icon = [UIImage imageNamed:@"Icon-X"];
+    }
+    [self.waiverSignedImageView setImage:icon];
 }
 
 @end

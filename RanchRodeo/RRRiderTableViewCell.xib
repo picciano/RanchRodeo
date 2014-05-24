@@ -32,7 +32,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon-X" highlightedImage="Icon-Check" translatesAutoresizingMaskIntoConstraints="NO" id="wEX-bi-r6w">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon-X" translatesAutoresizingMaskIntoConstraints="NO" id="wEX-bi-r6w">
                         <rect key="frame" x="512" y="0.0" width="43" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -47,7 +47,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Icon-Check" width="43" height="43"/>
         <image name="Icon-X" width="43" height="43"/>
     </resources>
 </document>
