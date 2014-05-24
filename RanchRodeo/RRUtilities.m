@@ -11,6 +11,7 @@
 @implementation RRUtilities
 
 static NSNumberFormatter *f;
+static const float kNumberOfRidersPerTeam = 4.0f;
 
 + (NSString *)stringFromNumber:(NSNumber *)number
 {
@@ -46,6 +47,25 @@ static NSNumberFormatter *f;
     });
     
     return [f numberFromString:string];
+}
+
++ (int)numberOfRides:(NSArray *)riders
+{
+    int numberOfRides = 0;
+    
+    for (Rider *rider in riders)
+    {
+        numberOfRides += [rider.numberOfRides intValue];
+    }
+    
+    return numberOfRides;
+}
+
++ (int)numberOfTeams:(NSArray *)riders
+{
+    float numberOfRides = [self numberOfRides:riders];
+    float numberOfTeams = numberOfRides / kNumberOfRidersPerTeam;
+    return ceil(numberOfTeams);
 }
 
 @end

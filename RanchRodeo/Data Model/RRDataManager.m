@@ -37,18 +37,47 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return objects;
 }
 
-+ (Rider *)newRider
++ (Rider *)createRider
 {
     Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[RRDataManager managedObjectContext]];
     return object;
 }
 
++ (void)rollback
+{
+    [[RRDataManager managedObjectContext] rollback];
+}
+
 + (BOOL)save
 {
-    NSError *error = nil;
-    [[RRDataManager managedObjectContext] save:&error];
+    NSError *saveError = nil;
+    [[RRDataManager managedObjectContext] save:&saveError];
     
-    return (error == nil);
+    return (saveError == nil);
+}
+
++ (void)reset
+{
+    [self deleteEntitiesOfType:kRRDataManagerEntityTypeRider];
+    [self deleteEntitiesOfType:kRRDataManagerEntityTypeTeam];
+    [self deleteEntitiesOfType:kRRDataManagerEntityTypeWarning];
+}
+
++ (void)deleteEntitiesOfType:(NSString *)type
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:type inManagedObjectContext:[RRDataManager managedObjectContext]]];
+    [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    NSError *error = nil;
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *object in objects)
+    {
+        [[RRDataManager managedObjectContext] deleteObject:object];
+    }
+    NSError *saveError = nil;
+    [[RRDataManager managedObjectContext] save:&saveError];
 }
 
 @end

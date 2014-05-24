@@ -56,14 +56,27 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self loadData];
+}
+
+- (void)loadData
+{
     [self setRiders:[RRDataManager allRiders]];
     [self.tableView reloadData];
+    [self updateDisplay];
+}
+
+- (void)updateDisplay
+{
+    self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%i", self.riders.count];
+    self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [RRUtilities numberOfRides:self.riders]];
+    self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [RRUtilities numberOfTeams:self.riders]];
 }
 
 - (IBAction)createRider:(id)sender
 {
     RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
-    [viewController setRider:[RRDataManager newRider]];
+    [viewController setRider:[RRDataManager createRider]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -96,6 +109,9 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
         
         return;
     }
+    
+    [RRDataManager reset];
+    [self loadData];
     
     UIAlertView *erasedAlertView = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:@"The registration data has been erased." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [erasedAlertView show];

@@ -73,6 +73,19 @@
     self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
+    {
+        [RRDataManager rollback];
+    }
+    else
+    {
+        [self updateDataObjectFromDisplay];
+        [RRDataManager save];
+    }
+}
+
 - (IBAction)saveRider:(id)sender
 {
     if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
@@ -84,9 +97,8 @@
     
     [self updateDataObjectFromDisplay];
     
-    BOOL success = [RRDataManager save];
-    
-    if (success) {
+    if ([RRDataManager save])
+    {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

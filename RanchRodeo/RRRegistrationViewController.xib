@@ -6,9 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RRRegistrationViewController">
             <connections>
-                <outlet property="numberOfRidersLabel" destination="ndN-Lx-rzm" id="Zy7-UW-did"/>
-                <outlet property="numberOfRidesLabel" destination="4Cg-LO-yLg" id="oMg-A2-eDk"/>
-                <outlet property="numberOfTeamsLabel" destination="dHP-af-7pi" id="15w-3p-Yde"/>
+                <outlet property="numberOfRidersLabel" destination="ndN-Lx-rzm" id="6OM-9I-Uig"/>
+                <outlet property="numberOfRidesLabel" destination="4Cg-LO-yLg" id="aeD-YY-5eA"/>
+                <outlet property="numberOfTeamsLabel" destination="dHP-af-7pi" id="KK0-KF-pVC"/>
                 <outlet property="tableView" destination="Kvt-ti-deo" id="OJA-ri-ouh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

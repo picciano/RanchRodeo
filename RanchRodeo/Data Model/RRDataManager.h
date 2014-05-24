@@ -14,8 +14,10 @@
 
 @interface RRDataManager : NSObject
 
++ (void)rollback;
 + (BOOL)save;
++ (void)reset;
 + (NSArray *)allRiders;
-+ (Rider *)newRider;
++ (Rider *)createRider;
 
 @end
