@@ -13,6 +13,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *numberOfRidesLabel;
 @property (nonatomic, weak) IBOutlet UILabel *categoryLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *waiverSignedImageView;
 
 @end
 
@@ -23,23 +24,12 @@
     [super awakeFromNib];
 }
 
-- (void)setRider:(Rider *)rider
-{
-    if (_rider == rider)
-    {
-        return;
-    }
-    
-    _rider = rider;
-    
-    [self updateInterface];
-}
-
 - (void)updateInterface
 {
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.rider.firstName, self.rider.lastName]];
     [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[self.rider numberOfRides]]];
     [self.categoryLabel setText:[self.rider category]];
+    [self.waiverSignedImageView setHighlighted:[self.rider.isWaiverSigned boolValue]];
 }
 
 @end

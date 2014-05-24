@@ -135,6 +135,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor clearColor];
+    [(RRRiderTableViewCell *)cell updateInterface];
 }
 
 @end

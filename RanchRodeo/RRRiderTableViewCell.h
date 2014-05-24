@@ -12,4 +12,6 @@
 
 @property (nonatomic, weak) Rider *rider;
 
+- (void)updateInterface;
+
 @end
