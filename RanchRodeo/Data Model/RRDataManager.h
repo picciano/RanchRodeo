@@ -19,5 +19,6 @@
 + (void)reset;
 + (NSArray *)allRiders;
 + (Rider *)createRider;
++ (BOOL)destroyObject:(NSManagedObject *)object;
 
 @end

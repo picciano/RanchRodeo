@@ -6,7 +6,7 @@
         <attribute name="isNewRider" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isParent" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isRoper" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="isWaiverSigned" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isWaiverSigned" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
         <attribute name="numberOfRides" attributeType="Integer 16" minValueString="2" maxValueString="5" defaultValueString="2" syncable="YES"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="parents" inverseEntity="Rider" syncable="YES"/>

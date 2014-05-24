@@ -43,6 +43,15 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return object;
 }
 
++ (BOOL)destroyObject:(NSManagedObject *)object
+{
+    [[RRDataManager managedObjectContext] deleteObject:object];
+    NSError *saveError = nil;
+    [[RRDataManager managedObjectContext] save:&saveError];
+    
+    return (saveError == nil);
+}
+
 + (void)rollback
 {
     [[RRDataManager managedObjectContext] rollback];

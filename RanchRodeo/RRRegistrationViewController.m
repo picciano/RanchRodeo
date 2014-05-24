@@ -51,6 +51,8 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
      registerNib:[UINib nibWithNibName:@"RRRiderTableViewCell"
                                 bundle:[NSBundle mainBundle]]
      forCellReuseIdentifier:kRRRegistrationRiderCell];
+    
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,7 +119,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
     [erasedAlertView show];
 }
 
-#pragma mark - UITableViewDataSource methods
+#pragma mark - UITableViewDataSource and UITableViewDelegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -136,6 +138,27 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 {
     cell.backgroundColor = [UIColor clearColor];
     [(RRRiderTableViewCell *)cell updateInterface];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
+    [viewController setRider:self.riders[indexPath.row]];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [RRDataManager destroyObject:self.riders[indexPath.row]];
+        [self loadData];
+    }
 }
 
 @end
