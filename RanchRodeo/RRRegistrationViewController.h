@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RRRegistrationViewController : UIViewController
+@interface RRRegistrationViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

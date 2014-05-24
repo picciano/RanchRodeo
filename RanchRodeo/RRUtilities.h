@@ -1,5 +1,5 @@
 //
-//  RRStringUtilities.h
+//  RRUtilities.h
 //  RanchRodeo
 //
 //  Created by Anthony Picciano on 5/23/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RRStringUtilities : NSObject
+@interface RRUtilities : NSObject
 
 + (NSString *)stringFromNumber:(NSNumber *)number;
 + (NSNumber *)numberFromString:(NSString *)string;

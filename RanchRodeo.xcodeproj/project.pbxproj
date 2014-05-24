@@ -32,7 +32,10 @@
 		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
 		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
-		E4835FD7192F8D10006F6398 /* RRStringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRStringUtilities.m */; };
+		E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRUtilities.m */; };
+		E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */; };
+		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
+		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +85,13 @@
 		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
 		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
 		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
-		E4835FD5192F8D10006F6398 /* RRStringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRStringUtilities.h; sourceTree = "<group>"; };
-		E4835FD6192F8D10006F6398 /* RRStringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRStringUtilities.m; sourceTree = "<group>"; };
+		E4835FD5192F8D10006F6398 /* RRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRUtilities.h; sourceTree = "<group>"; };
+		E4835FD6192F8D10006F6398 /* RRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRUtilities.m; sourceTree = "<group>"; };
+		E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRiderTableViewCell.h; sourceTree = "<group>"; };
+		E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRiderTableViewCell.m; sourceTree = "<group>"; };
+		E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderTableViewCell.xib; sourceTree = "<group>"; };
+		E49DD2A019302E0C00A1BB9E /* Rider+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Rider+Category.h"; path = "Data Model/Rider+Category.h"; sourceTree = "<group>"; };
+		E49DD2A119302E0C00A1BB9E /* Rider+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Rider+Category.m"; path = "Data Model/Rider+Category.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +201,9 @@
 				E40101E6192EA2F5009B780F /* RRRegistrationViewController.h */,
 				E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */,
 				E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */,
+				E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */,
+				E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */,
+				E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */,
 				E40101F0192EA5A6009B780F /* RRRiderViewController.h */,
 				E40101F1192EA5A6009B780F /* RRRiderViewController.m */,
 				E40101F2192EA5A6009B780F /* RRRiderViewController.xib */,
@@ -222,8 +233,10 @@
 			isa = PBXGroup;
 			children = (
 				E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */,
-				E4835FD5192F8D10006F6398 /* RRStringUtilities.h */,
-				E4835FD6192F8D10006F6398 /* RRStringUtilities.m */,
+				E4835FD5192F8D10006F6398 /* RRUtilities.h */,
+				E4835FD6192F8D10006F6398 /* RRUtilities.m */,
+				E49DD2A019302E0C00A1BB9E /* Rider+Category.h */,
+				E49DD2A119302E0C00A1BB9E /* Rider+Category.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -306,6 +319,7 @@
 			files = (
 				E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */,
 				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
+				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
 				E40101C8192EA004009B780F /* Background.xcassets in Resources */,
 				E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */,
@@ -331,8 +345,10 @@
 				E40101FA192EACFC009B780F /* Rider.m in Sources */,
 				E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */,
 				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
-				E4835FD7192F8D10006F6398 /* RRStringUtilities.m in Sources */,
+				E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */,
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
+				E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */,
+				E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */,
 				E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */,
 				E40101BF192EA004009B780F /* main.m in Sources */,
 				E4010201192ED545009B780F /* RRDataManager.m in Sources */,

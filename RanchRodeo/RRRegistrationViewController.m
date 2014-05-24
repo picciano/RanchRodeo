@@ -9,6 +9,7 @@
 #import "RRRegistrationViewController.h"
 #import "RRRiderViewController.h"
 #import "RRRosterViewController.h"
+#import "RRRiderTableViewCell.h"
 
 @interface RRRegistrationViewController ()
 
@@ -27,6 +28,7 @@
 @implementation RRRegistrationViewController
 
 NSString * const kRRRegistrationEraseChallengeText = @"erase";
+NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,12 +46,18 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView
+     registerNib:[UINib nibWithNibName:@"RRRiderTableViewCell"
+                                bundle:[NSBundle mainBundle]]
+     forCellReuseIdentifier:kRRRegistrationRiderCell];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self setRiders:[[RRDataManager sharedRRDataManager] allRiders]];
+    [self.tableView reloadData];
 }
 
 - (IBAction)createRider:(id)sender
@@ -91,6 +99,26 @@ NSString * const kRRRegistrationEraseChallengeText = @"erase";
     
     UIAlertView *erasedAlertView = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:@"The registration data has been erased." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [erasedAlertView show];
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.riders.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RRRiderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRRRegistrationRiderCell forIndexPath:indexPath];    
+    [cell setRider:self.riders[indexPath.row]];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 @end

@@ -15,5 +15,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import "RRDataManager.h"
-    #import "RRStringUtilities.h"
+    #import "RRUtilities.h"
+    #import "Rider+Category.h"
 #endif
