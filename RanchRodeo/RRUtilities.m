@@ -24,6 +24,18 @@ static NSNumberFormatter *f;
     return [f stringFromNumber:number];
 }
 
++ (NSString *)stringFromDouble:(double)value
+{
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterNoStyle];
+        [f setMaximumFractionDigits:0];
+    });
+    
+    return [f stringFromNumber:[NSNumber numberWithDouble:value]];
+}
+
 + (NSNumber *)numberFromString:(NSString *)string
 {
     static dispatch_once_t pred;

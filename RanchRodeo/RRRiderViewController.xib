@@ -6,6 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RRRiderViewController">
             <connections>
+                <outlet property="firstNameField" destination="aoM-Yh-Q90" id="a33-lO-lRc"/>
+                <outlet property="isChildSwitch" destination="PFf-AJ-Swb" id="u0g-Y4-Fx6"/>
+                <outlet property="isNewRiderSwitch" destination="eG6-Iz-CN4" id="70C-gE-QsW"/>
+                <outlet property="isParentSwitch" destination="Siz-Ru-Cvz" id="8D3-lg-vom"/>
+                <outlet property="isRoperSwitch" destination="9rZ-6V-1qu" id="OgC-ed-Etu"/>
+                <outlet property="isWaiverSignedSwitch" destination="Lx0-JO-HL6" id="bTN-xR-xO3"/>
+                <outlet property="lastNameField" destination="V6g-He-fEX" id="z7O-df-PoR"/>
                 <outlet property="numberOfRidesLabel" destination="u3C-D2-4DV" id="F7s-sW-rRn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

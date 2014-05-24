@@ -14,10 +14,8 @@
 
 @interface RRDataManager : NSObject
 
-CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
-
-- (BOOL)save;
-- (NSArray *)allRiders;
-- (Rider *)newRider;
++ (BOOL)save;
++ (NSArray *)allRiders;
++ (Rider *)newRider;
 
 @end

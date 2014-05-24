@@ -10,10 +10,38 @@
 
 @implementation Rider (Category)
 
-+ (NSString *)categoryFromRider:(Rider *)rider
+NSString * const kRiderCategoryChild = @"K";
+NSString * const kRiderCategoryParent = @"P";
+NSString * const kRiderCategoryRoper = @"R";
+NSString * const kRiderCategoryNewRider = @"N";
+NSString * const kRiderCategoryGeneral = @"G";
+
+- (NSString *)category
 {
-    //TODO: implement this
-    return @"G";
+    NSMutableString *category = [[NSMutableString alloc] init];
+    
+    if ([[self isChild] boolValue]) {
+        [category appendString:kRiderCategoryChild];
+    }
+    
+    if ([[self isParent] boolValue]) {
+        [category appendString:kRiderCategoryParent];
+    }
+
+    if ([[self isRoper] boolValue]) {
+        [category appendString:kRiderCategoryRoper];
+    }
+    
+    if ([[self isNewRider] boolValue]) {
+        [category appendString:kRiderCategoryNewRider];
+    }
+    
+    if ([category length] == 0)
+    {
+        [category appendString:kRiderCategoryGeneral];
+    }
+    
+    return category;
 }
 
 @end

@@ -56,14 +56,14 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setRiders:[[RRDataManager sharedRRDataManager] allRiders]];
+    [self setRiders:[RRDataManager allRiders]];
     [self.tableView reloadData];
 }
 
 - (IBAction)createRider:(id)sender
 {
     RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
-    [viewController setRider:[[RRDataManager sharedRRDataManager] newRider]];
+    [viewController setRider:[RRDataManager newRider]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

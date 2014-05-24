@@ -10,7 +10,14 @@
 
 @interface RRRiderViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *isParentSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *isChildSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *isRoperSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *isNewRiderSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *isWaiverSignedSwitch;
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender;
 - (IBAction)saveRider:(id)sender;
@@ -33,27 +40,52 @@
 {
     [super viewWillAppear:animated];
     
-    [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[self.rider numberOfRides]]];
+    [self updateDisplayFromDataObject];
 }
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender
 {
     UIStepper *numberOfRidesStepper = (UIStepper *)sender;
-    [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[NSNumber numberWithDouble:[numberOfRidesStepper value]]]];
+    self.numberOfRidesLabel.text = [RRUtilities stringFromDouble:numberOfRidesStepper.value];
+}
+
+- (void)updateDisplayFromDataObject
+{
+    self.firstNameField.text = self.rider.firstName;
+    self.lastNameField.text = self.rider.lastName;
+    self.numberOfRidesLabel.text = [RRUtilities stringFromNumber:self.rider.numberOfRides];
+    self.isChildSwitch.on = [self.rider.isChild boolValue];
+    self.isParentSwitch.on = [self.rider.isParent boolValue];
+    self.isRoperSwitch.on = [self.rider.isRoper boolValue];
+    self.isNewRiderSwitch.on = [self.rider.isNewRider boolValue];
+    self.isWaiverSignedSwitch.on = [self.rider.isWaiverSigned boolValue];
+}
+
+- (void)updateDataObjectFromDisplay
+{
+    self.rider.firstName = self.firstNameField.text;
+    self.rider.lastName = self.lastNameField.text;
+    self.rider.numberOfRides = [RRUtilities numberFromString:self.numberOfRidesLabel.text];
+    self.rider.isChild = [NSNumber numberWithBool:self.isChildSwitch.on];
+    self.rider.isParent = [NSNumber numberWithBool:self.isParentSwitch.on];
+    self.rider.isRoper = [NSNumber numberWithBool:self.isRoperSwitch.on];
+    self.rider.isNewRider = [NSNumber numberWithBool:self.isNewRiderSwitch.on];
+    self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
 }
 
 - (IBAction)saveRider:(id)sender
 {
-    [self.rider setFirstName:@"Anthony"];
-    [self.rider setLastName:@"Picciano"];
-    [self.rider setNumberOfRides:[RRUtilities numberFromString:self.numberOfRidesLabel.text]];
-//    [self.rider setIsChild:[NSNumber numberWithBool:NO]];
-//    [self.rider setIsParent:[NSNumber numberWithBool:NO]];
-//    [self.rider setIsRoper:[NSNumber numberWithBool:NO]];
-//    [self.rider setIsNewRider:[NSNumber numberWithBool:NO]];
-//    [self.rider setIsWaiverSigned:[NSNumber numberWithBool:YES]];
+    if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter Missing Data" message:@"Please enter a first and last name." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     
-    BOOL success = [[RRDataManager sharedRRDataManager] save];
+    [self updateDataObjectFromDisplay];
+    
+    BOOL success = [RRDataManager save];
+    
     if (success) {
         [self.navigationController popViewControllerAnimated:YES];
     }

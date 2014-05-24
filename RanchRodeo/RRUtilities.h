@@ -11,6 +11,7 @@
 @interface RRUtilities : NSObject
 
 + (NSString *)stringFromNumber:(NSNumber *)number;
++ (NSString *)stringFromDouble:(double)value;
 + (NSNumber *)numberFromString:(NSString *)string;
 
 @end

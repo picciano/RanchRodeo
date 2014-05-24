@@ -11,7 +11,7 @@
 
 @interface RRDataManager ()
 
-- (NSManagedObjectContext *)managedObjectContext;
++ (NSManagedObjectContext *)managedObjectContext;
 
 @end
 
@@ -23,30 +23,30 @@ NSString * const kRRDataManagerEntityTypeRider = @"Rider";
 NSString * const kRRDataManagerEntityTypeTeam = @"Team";
 NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
-- (NSManagedObjectContext *)managedObjectContext
++ (NSManagedObjectContext *)managedObjectContext
 {
     return [(RRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
 
-- (NSArray *)allRiders
++ (NSArray *)allRiders
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
-    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;
 }
 
-- (Rider *)newRider
++ (Rider *)newRider
 {
-    Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[self managedObjectContext]];
+    Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[RRDataManager managedObjectContext]];
     return object;
 }
 
-- (BOOL)save
++ (BOOL)save
 {
     NSError *error = nil;
-    [[self managedObjectContext] save:&error];
+    [[RRDataManager managedObjectContext] save:&error];
     
     return (error == nil);
 }

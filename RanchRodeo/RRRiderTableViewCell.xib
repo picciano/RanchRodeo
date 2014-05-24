@@ -21,7 +21,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNH-z3-YIQ">
-                        <rect key="frame" x="372" y="11" width="10" height="21"/>
+                        <rect key="frame" x="372" y="11" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myu-1R-ycX">
+                        <rect key="frame" x="422" y="11" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
@@ -29,6 +35,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="categoryLabel" destination="Myu-1R-ycX" id="peE-HY-fJb"/>
                 <outlet property="nameLabel" destination="nv8-eL-MXz" id="8Eu-bB-wMH"/>
                 <outlet property="numberOfRidesLabel" destination="lNH-z3-YIQ" id="wfn-Fl-M8x"/>
             </connections>

@@ -10,6 +10,6 @@
 
 @interface Rider (Category)
 
-+ (NSString *)categoryFromRider:(Rider *)rider;
+- (NSString *)category;
 
 @end

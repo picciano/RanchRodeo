@@ -12,6 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *numberOfRidesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *categoryLabel;
 
 @end
 
@@ -39,6 +40,7 @@
     NSLog(@"%@ %@", self.rider.firstName, self.rider.lastName);
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.rider.firstName, self.rider.lastName]];
     [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[self.rider numberOfRides]]];
+    [self.categoryLabel setText:[self.rider category]];
 }
 
 @end
