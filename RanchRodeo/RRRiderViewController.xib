@@ -14,6 +14,7 @@
                 <outlet property="isWaiverSignedSwitch" destination="Lx0-JO-HL6" id="bTN-xR-xO3"/>
                 <outlet property="lastNameField" destination="V6g-He-fEX" id="z7O-df-PoR"/>
                 <outlet property="numberOfRidesLabel" destination="u3C-D2-4DV" id="F7s-sW-rRn"/>
+                <outlet property="numberOfRidesStepper" destination="kjC-AV-yhv" id="6IY-UZ-9Ip"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

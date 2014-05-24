@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *isRoperSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isNewRiderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isWaiverSignedSwitch;
+@property (weak, nonatomic) IBOutlet UIStepper *numberOfRidesStepper;
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender;
 - (IBAction)saveRider:(id)sender;
@@ -54,6 +55,7 @@
     self.firstNameField.text = self.rider.firstName;
     self.lastNameField.text = self.rider.lastName;
     self.numberOfRidesLabel.text = [RRUtilities stringFromNumber:self.rider.numberOfRides];
+    self.numberOfRidesStepper.value = [self.rider.numberOfRides doubleValue];
     self.isChildSwitch.on = [self.rider.isChild boolValue];
     self.isParentSwitch.on = [self.rider.isParent boolValue];
     self.isRoperSwitch.on = [self.rider.isRoper boolValue];
