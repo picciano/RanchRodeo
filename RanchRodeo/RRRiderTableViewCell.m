@@ -26,7 +26,7 @@
 
 - (void)updateInterface
 {
-    [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.rider.firstName, self.rider.lastName]];
+    [self.nameLabel setText:[self.rider fullName]];
     [self.numberOfRidesLabel setText:[RRUtilities stringFromNumber:[self.rider numberOfRides]]];
     [self.categoryLabel setText:[self.rider category]];
     

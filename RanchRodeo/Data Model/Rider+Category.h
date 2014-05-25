@@ -11,5 +11,6 @@
 @interface Rider (Category)
 
 - (NSString *)category;
+- (NSString *)fullName;
 
 @end

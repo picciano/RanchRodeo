@@ -37,6 +37,17 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return objects;
 }
 
++ (NSArray *)allParentRiders
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES"];
+    [fetchRequest setPredicate:predicate];
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return objects;
+}
+
 + (Rider *)createRider
 {
     Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[RRDataManager managedObjectContext]];

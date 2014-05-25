@@ -10,7 +10,7 @@
 
 @class Rider;
 
-@interface RRRiderViewController : UIViewController
+@interface RRRiderViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) Rider *rider;
 

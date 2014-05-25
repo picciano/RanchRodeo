@@ -44,4 +44,10 @@ NSString * const kRiderCategoryGeneral = @"G";
     return category;
 }
 
+
+- (NSString *)fullName
+{
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+}
+
 @end

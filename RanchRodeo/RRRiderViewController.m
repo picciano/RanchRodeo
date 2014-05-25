@@ -10,6 +10,7 @@
 
 @interface RRRiderViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
@@ -20,12 +21,18 @@
 @property (weak, nonatomic) IBOutlet UISwitch *isWaiverSignedSwitch;
 @property (weak, nonatomic) IBOutlet UIStepper *numberOfRidesStepper;
 
+@property (strong, nonatomic) NSArray *parents;
+
 - (IBAction)numberOfRidesDidUpdate:(id)sender;
 - (IBAction)saveRider:(id)sender;
+- (IBAction)isChildSwitchChanged:(id)sender;
+- (IBAction)isParentSwitchChanged:(id)sender;
 
 @end
 
 @implementation RRRiderViewController
+
+NSString * const kRParentCell = @"parentCell";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,11 +44,49 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRParentCell];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     [self updateDisplayFromDataObject];
+    [self loadData];
+}
+
+- (void)loadData
+{
+    [self setParents:[RRDataManager allParentRiders]];
+    [self.tableView reloadData];
+    [self updateDisplay];
+}
+
+- (void)updateDisplay
+{
+    
+}
+
+- (IBAction)isChildSwitchChanged:(id)sender
+{
+    self.tableView.hidden = ![self.isChildSwitch isOn];
+    
+    if ([self.isChildSwitch isOn])
+    {
+        self.isParentSwitch.on = NO;
+        [self isParentSwitchChanged:sender];
+    }
+}
+
+- (IBAction)isParentSwitchChanged:(id)sender
+{
+    if ([self.isParentSwitch isOn])
+    {
+        self.isChildSwitch.on = NO;
+        [self isChildSwitchChanged:sender];
+    }
 }
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender
@@ -61,6 +106,8 @@
     self.isRoperSwitch.on = [self.rider.isRoper boolValue];
     self.isNewRiderSwitch.on = [self.rider.isNewRider boolValue];
     self.isWaiverSignedSwitch.on = [self.rider.isWaiverSigned boolValue];
+    
+    self.tableView.hidden = ![self.rider.isChild boolValue];
 }
 
 - (void)updateDataObjectFromDisplay
@@ -103,6 +150,52 @@
     {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark - UITableViewDataSource and UITableViewDelegate methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.parents.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRParentCell forIndexPath:indexPath];
+    Rider *parent = (Rider *)self.parents[indexPath.row];
+    [cell.textLabel setText:[parent fullName]];
+    
+    if ([self.rider.parents containsObject:parent])
+    {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor clearColor];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor clearColor];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Select Parent";
 }
 
 @end
