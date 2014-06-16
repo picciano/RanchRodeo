@@ -187,12 +187,10 @@ NSString * const kRParentCell = @"parentCell";
     
     if ([self.rider.parents containsObject:parent])
     {
-        NSLog(@"Removing parent");
         [self.rider removeParentsObject:parent];
     }
     else
     {
-        NSLog(@"Adding parent");
         [self.rider addParentsObject:parent];
     }
     
