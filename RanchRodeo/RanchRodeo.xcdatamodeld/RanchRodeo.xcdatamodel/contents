@@ -14,6 +14,7 @@
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="riders" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Team" representedClassName="Team" syncable="YES">
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="riders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="teams" inverseEntity="Rider" syncable="YES"/>
         <relationship name="warnings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Warning" inverseName="team" inverseEntity="Warning" syncable="YES"/>
     </entity>
@@ -23,7 +24,7 @@
     </entity>
     <elements>
         <element name="Rider" positionX="-99" positionY="9" width="128" height="210"/>
-        <element name="Team" positionX="171" positionY="-18" width="128" height="73"/>
+        <element name="Team" positionX="171" positionY="-18" width="128" height="90"/>
         <element name="Warning" positionX="144" positionY="161" width="128" height="73"/>
     </elements>
 </model>

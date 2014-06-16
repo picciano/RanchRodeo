@@ -10,6 +10,7 @@
 #import "RRRiderViewController.h"
 #import "RRRosterViewController.h"
 #import "RRRiderTableViewCell.h"
+#import "RRTeamGenerator.h"
 
 @interface RRRegistrationViewController ()
 
@@ -87,6 +88,9 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (IBAction)viewRoster:(id)sender
 {
+    // always generate teams first
+    [RRTeamGenerator generateTeams];
+    
     RRRosterViewController *viewController = [[RRRosterViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }

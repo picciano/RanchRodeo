@@ -33,6 +33,8 @@
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
 		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
 		E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRUtilities.m */; };
+		E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */; };
+		E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EFD2F194FAC760052348C /* RRTeamGenerator.m */; };
 		E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */; };
 		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
 		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
@@ -87,6 +89,9 @@
 		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
 		E4835FD5192F8D10006F6398 /* RRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRUtilities.h; sourceTree = "<group>"; };
 		E4835FD6192F8D10006F6398 /* RRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRUtilities.m; sourceTree = "<group>"; };
+		E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRTeamCollectionViewCell.xib; sourceTree = "<group>"; };
+		E48EFD2E194FAC760052348C /* RRTeamGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRTeamGenerator.h; path = "Data Model/RRTeamGenerator.h"; sourceTree = "<group>"; };
+		E48EFD2F194FAC760052348C /* RRTeamGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRTeamGenerator.m; path = "Data Model/RRTeamGenerator.m"; sourceTree = "<group>"; };
 		E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRiderTableViewCell.h; sourceTree = "<group>"; };
 		E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRiderTableViewCell.m; sourceTree = "<group>"; };
 		E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderTableViewCell.xib; sourceTree = "<group>"; };
@@ -210,6 +215,7 @@
 				E40101EB192EA3AC009B780F /* RRRosterViewController.h */,
 				E40101EC192EA3AC009B780F /* RRRosterViewController.m */,
 				E40101ED192EA3AC009B780F /* RRRosterViewController.xib */,
+				E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -219,6 +225,8 @@
 			children = (
 				E40101FF192ED545009B780F /* RRDataManager.h */,
 				E4010200192ED545009B780F /* RRDataManager.m */,
+				E48EFD2E194FAC760052348C /* RRTeamGenerator.h */,
+				E48EFD2F194FAC760052348C /* RRTeamGenerator.m */,
 				E40101FB192EACFC009B780F /* Warning.h */,
 				E40101FC192EACFC009B780F /* Warning.m */,
 				E40101F8192EACFC009B780F /* Rider.h */,
@@ -322,6 +330,7 @@
 				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
 				E40101C8192EA004009B780F /* Images.xcassets in Resources */,
+				E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */,
 				E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +356,7 @@
 				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
 				E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */,
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
+				E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */,
 				E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */,
 				E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */,
 				E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */,

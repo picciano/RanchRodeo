@@ -13,5 +13,6 @@
 
 @dynamic riders;
 @dynamic warnings;
+@dynamic number;
 
 @end

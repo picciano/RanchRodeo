@@ -61,11 +61,23 @@ static const float kNumberOfRidersPerTeam = 4.0f;
     return numberOfRides;
 }
 
++ (int)maximumNumberOfRides:(NSArray *)riders
+{
+    int maximumNumberOfRides = 0;
+    
+    for (Rider *rider in riders)
+    {
+        maximumNumberOfRides = MAX(maximumNumberOfRides, [rider.numberOfRides intValue]);
+    }
+    
+    return maximumNumberOfRides;
+}
+
 + (int)numberOfTeams:(NSArray *)riders
 {
     float numberOfRides = [self numberOfRides:riders];
     float numberOfTeams = numberOfRides / kNumberOfRidersPerTeam;
-    return ceil(numberOfTeams);
+    return MAX(ceil(numberOfTeams), [RRUtilities maximumNumberOfRides:riders]);
 }
 
 @end

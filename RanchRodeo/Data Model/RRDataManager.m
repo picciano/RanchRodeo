@@ -12,6 +12,7 @@
 @interface RRDataManager ()
 
 + (NSManagedObjectContext *)managedObjectContext;
++ (void)deleteEntitiesOfType:(NSString *)type;
 
 @end
 
@@ -37,6 +38,15 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return objects;
 }
 
++ (NSArray *)allTeams
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeTeam];
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return objects;
+}
+
 + (NSArray *)allParentRiders
 {
     NSError *error = nil;
@@ -51,6 +61,18 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 + (Rider *)createRider
 {
     Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[RRDataManager managedObjectContext]];
+    return object;
+}
+
++ (Team *)createTeam
+{
+    Team *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeTeam inManagedObjectContext:[RRDataManager managedObjectContext]];
+    return object;
+}
+
++ (Warning *)createWarning;
+{
+    Warning *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeWarning inManagedObjectContext:[RRDataManager managedObjectContext]];
     return object;
 }
 
@@ -78,9 +100,14 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 + (void)reset
 {
+    [self deleteTeams];
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeRider];
-    [self deleteEntitiesOfType:kRRDataManagerEntityTypeTeam];
+}
+
++ (void)deleteTeams
+{
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeWarning];
+    [self deleteEntitiesOfType:kRRDataManagerEntityTypeTeam];
 }
 
 + (void)deleteEntitiesOfType:(NSString *)type

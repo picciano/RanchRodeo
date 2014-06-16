@@ -9,10 +9,14 @@
 #import "RRRosterViewController.h"
 
 @interface RRRosterViewController ()
-
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) NSArray *teams;
 @end
 
 @implementation RRRosterViewController
+
+NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
+NSInteger const kViewTagTeamNumberLabel = 101;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +26,47 @@
         [self setTitle:@"Roster"];
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    UINib *cellNib = [UINib nibWithNibName:@"RRTeamCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:kTeamCollectionViewCell];
+    
+    [self loadData];
+}
+
+- (void)loadData
+{
+    [self setTeams:[RRDataManager allTeams]];
+    [self.collectionView reloadData];
+    [self updateDisplay];
+}
+
+- (void)updateDisplay
+{
+    
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.teams.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTeamCollectionViewCell forIndexPath:indexPath];
+    
+    UILabel *teamNumberLabel = (UILabel *)[cell viewWithTag:kViewTagTeamNumberLabel];
+    Team *team = (Team *)[self.teams objectAtIndex:indexPath.row];
+    [teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
+    
+    return cell;
 }
 
 @end

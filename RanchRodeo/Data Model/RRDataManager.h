@@ -17,9 +17,13 @@
 + (void)rollback;
 + (BOOL)save;
 + (void)reset;
++ (void)deleteTeams;
 + (NSArray *)allRiders;
++ (NSArray *)allTeams;
 + (NSArray *)allParentRiders;
 + (Rider *)createRider;
++ (Team *)createTeam;
++ (Warning *)createWarning;
 + (BOOL)destroyObject:(NSManagedObject *)object;
 
 @end

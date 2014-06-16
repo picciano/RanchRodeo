@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSSet *riders;
 @property (nonatomic, retain) NSSet *warnings;
+@property (nonatomic, retain) NSNumber * number;
 @end
 
 @interface Team (CoreDataGeneratedAccessors)

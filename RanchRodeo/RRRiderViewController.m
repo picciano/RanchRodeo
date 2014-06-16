@@ -32,7 +32,7 @@
 
 @implementation RRRiderViewController
 
-NSString * const kRParentCell = @"parentCell";
+NSString * const kParentCell = @"parentCell";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +46,7 @@ NSString * const kRParentCell = @"parentCell";
 
 - (void)viewDidLoad
 {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRParentCell];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kParentCell];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -162,7 +162,7 @@ NSString * const kRParentCell = @"parentCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRParentCell forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kParentCell forIndexPath:indexPath];
     
     Rider *parent = (Rider *)self.parents[indexPath.row];
     [cell.textLabel setText:[parent fullName]];
