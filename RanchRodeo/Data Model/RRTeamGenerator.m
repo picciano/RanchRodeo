@@ -35,7 +35,7 @@
     BOOL success = [RRDataManager save];
     if (!success)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erri=or" message:@"Teams could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Teams could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alertView show];
     }
     
