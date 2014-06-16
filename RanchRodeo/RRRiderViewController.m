@@ -107,6 +107,7 @@ NSString * const kRParentCell = @"parentCell";
     self.isNewRiderSwitch.on = [self.rider.isNewRider boolValue];
     self.isWaiverSignedSwitch.on = [self.rider.isWaiverSigned boolValue];
     
+    // only show parent table if rider is a child
     self.tableView.hidden = ![self.rider.isChild boolValue];
 }
 
@@ -162,13 +163,10 @@ NSString * const kRParentCell = @"parentCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRParentCell forIndexPath:indexPath];
+    
     Rider *parent = (Rider *)self.parents[indexPath.row];
     [cell.textLabel setText:[parent fullName]];
-    
-    if ([self.rider.parents containsObject:parent])
-    {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    }
+    [cell setAccessoryType:[self.rider.parents containsObject:parent]?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone];
     
     return cell;
 }
@@ -185,7 +183,20 @@ NSString * const kRParentCell = @"parentCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    Rider *parent = (Rider *)self.parents[indexPath.row];
+    
+    if ([self.rider.parents containsObject:parent])
+    {
+        NSLog(@"Removing parent");
+        [self.rider removeParentsObject:parent];
+    }
+    else
+    {
+        NSLog(@"Adding parent");
+        [self.rider addParentsObject:parent];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -195,7 +206,7 @@ NSString * const kRParentCell = @"parentCell";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"Select Parent";
+    return @"Select Parent(s)";
 }
 
 @end
