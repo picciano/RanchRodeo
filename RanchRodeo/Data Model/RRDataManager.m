@@ -42,6 +42,16 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeTeam];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return objects;
+}
+
++ (NSArray *)allWarnings
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeWarning];
     NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;
@@ -52,6 +62,17 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES"];
+    [fetchRequest setPredicate:predicate];
+    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return objects;
+}
+
++ (NSArray *)allChildRiders
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES"];
     [fetchRequest setPredicate:predicate];
     NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     

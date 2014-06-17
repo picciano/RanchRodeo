@@ -16,5 +16,6 @@
 + (int)numberOfRides:(NSArray *)riders;
 + (int)maximumNumberOfRides:(NSArray *)riders;
 + (int)numberOfTeams:(NSArray *)riders;
++ (int)highestTeamNumberForRider:(Rider *)rider;
 
 @end

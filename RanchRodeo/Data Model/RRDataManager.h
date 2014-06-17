@@ -20,7 +20,9 @@
 + (void)deleteTeams;
 + (NSArray *)allRiders;
 + (NSArray *)allTeams;
++ (NSArray *)allWarnings;
 + (NSArray *)allParentRiders;
++ (NSArray *)allChildRiders;
 + (Rider *)createRider;
 + (Team *)createTeam;
 + (Warning *)createWarning;

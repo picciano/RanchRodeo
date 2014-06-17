@@ -17,6 +17,7 @@
 
 NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 NSInteger const kViewTagTeamNumberLabel = 101;
+NSInteger const kViewTagRiderNameLabel = 201;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,6 +66,14 @@ NSInteger const kViewTagTeamNumberLabel = 101;
     UILabel *teamNumberLabel = (UILabel *)[cell viewWithTag:kViewTagTeamNumberLabel];
     Team *team = (Team *)[self.teams objectAtIndex:indexPath.row];
     [teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
+    
+    NSArray *riders = team.riders.allObjects;
+    for (int i = 0; i < riders.count; i++)
+    {
+        Rider *rider = [riders objectAtIndex:i];
+        UILabel *riderNameLabel = (UILabel *)[cell viewWithTag:(kViewTagRiderNameLabel + i)];
+        [riderNameLabel setText:[NSString stringWithFormat:@"%@ %@", rider.firstName, rider.lastName]];
+    }
     
     return cell;
 }

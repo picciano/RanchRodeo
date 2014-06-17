@@ -80,4 +80,16 @@ static const float kNumberOfRidersPerTeam = 4.0f;
     return MAX(ceil(numberOfTeams), [RRUtilities maximumNumberOfRides:riders]);
 }
 
++ (int)highestTeamNumberForRider:(Rider *)rider
+{
+    int highestTeamNumberForRider = 0;
+    
+    for (Team *team in rider.teams.allObjects)
+    {
+        highestTeamNumberForRider = MAX(highestTeamNumberForRider, [team.number intValue]);
+    }
+    
+    return highestTeamNumberForRider;
+}
+
 @end
