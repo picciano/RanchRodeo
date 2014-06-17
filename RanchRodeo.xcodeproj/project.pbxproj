@@ -42,6 +42,7 @@
 		E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */; };
 		E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */; };
 		E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */; };
+		E4B7E9C71950E258006E53F5 /* RRPrintRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRWarningsDisplayPopoverViewController.xib; sourceTree = "<group>"; };
 		E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRTeamCollectionViewCell.h; sourceTree = "<group>"; };
 		E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRTeamCollectionViewCell.m; sourceTree = "<group>"; };
+		E4B7E9C51950E258006E53F5 /* RRPrintRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRPrintRenderer.h; sourceTree = "<group>"; };
+		E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRPrintRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,8 @@
 				E49DD2A119302E0C00A1BB9E /* Rider+Category.m */,
 				E4B7E9BA19509CB4006E53F5 /* Team+Category.h */,
 				E4B7E9BB19509CB4006E53F5 /* Team+Category.m */,
+				E4B7E9C51950E258006E53F5 /* RRPrintRenderer.h */,
+				E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
 				E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */,
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
+				E4B7E9C71950E258006E53F5 /* RRPrintRenderer.m in Sources */,
 				E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */,
 				E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */,
 				E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */,

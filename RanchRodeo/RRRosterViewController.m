@@ -9,11 +9,13 @@
 #import "RRRosterViewController.h"
 #import "RRTeamCollectionViewCell.h"
 #import "RRWarningsDisplayPopoverViewController.h"
+#import "RRPrintRenderer.h"
 
 @interface RRRosterViewController ()
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *teams;
 @property (nonatomic, strong) UIPopoverController *popOverController;
+@property (nonatomic, strong) UIBarButtonItem *printButton;
 @end
 
 @implementation RRRosterViewController
@@ -26,8 +28,46 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     if (self)
     {
         [self setTitle:@"Roster"];
+        
+        self.printButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print:)];
+        [self.navigationItem setRightBarButtonItem:self.printButton];
     }
     return self;
+}
+
+- (void)print:(id)sender
+{
+    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+    
+    void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
+    
+    ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+        
+        if(!completed && error){
+            
+            NSLog(@"FAILED! due to error in domain %@ with error code %u",
+                  
+                  error.domain, error.code);
+            
+        }
+        
+    };
+    
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    printInfo.outputType = UIPrintInfoOutputGeneral;
+    printInfo.jobName = self.title;
+    printInfo.duplex = UIPrintInfoDuplexLongEdge;
+    printInfo.orientation = UIPrintInfoOrientationLandscape;
+    
+    controller.printInfo = printInfo;
+    controller.showsPageRange = YES;
+    
+    RRPrintRenderer *printRenderer = [[RRPrintRenderer alloc] init];
+    [printRenderer setJobTitle:self.title];
+    [printRenderer setCollectionView:self.collectionView];
+    controller.printPageRenderer = printRenderer;
+    
+    [controller presentFromBarButtonItem:self.printButton animated:YES completionHandler:completionHandler];
 }
 
 - (void)viewDidLoad
