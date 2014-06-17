@@ -13,5 +13,6 @@
 - (BOOL)hasChildRider;
 - (BOOL)hasRoper;
 - (BOOL)hasNewRider;
+- (BOOL)allRidersHaveSignedWaiver;
 
 @end

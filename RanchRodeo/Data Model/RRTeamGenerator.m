@@ -13,7 +13,7 @@
 int const kMaxRidersPerTeam = 4;
 int const kMinimumWaitBetweenRides = 3;
 
-+ (NSArray *)generateTeams
++ (void)generateTeams
 {
     // delete teams
     [RRDataManager deleteTeams];
@@ -45,7 +45,8 @@ int const kMinimumWaitBetweenRides = 3;
     // add everyone else to teams
     [self processRiders:[RRDataManager allRiders]];
     
-    return [RRDataManager allWarnings];;
+    // check for team warnings
+    [self determineWarnings];
 }
 
 + (void)processRiders:(NSArray *)riders
@@ -75,7 +76,7 @@ int const kMinimumWaitBetweenRides = 3;
     BOOL success = [RRDataManager save];
     if (!success)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Teams could not be created for children." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Teams could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -155,6 +156,37 @@ int const kMinimumWaitBetweenRides = 3;
     
     return nil;
 }
+
++ (void)determineWarnings
+{
+    NSArray *teams = [RRDataManager allTeams];
+    
+    for (Team *team in teams)
+    {
+        if (team.riders.count != 4)
+        {
+            Warning *warning = [RRDataManager createWarning];
+            [warning setMessage:@"Team should have four riders."];
+            [warning setTeam:team];
+        }
+        
+        if (!team.allRidersHaveSignedWaiver)
+        {
+            Warning *warning = [RRDataManager createWarning];
+            [warning setMessage:@"All riders need to sign waiver."];
+            [warning setTeam:team];
+        }
+    }
+    
+    BOOL success = [RRDataManager save];
+    if (!success)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Warnings could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+#pragma mark - public methods
 
 + (int)numberOfRides
 {

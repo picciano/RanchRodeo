@@ -7,17 +7,18 @@
 //
 
 #import "RRRosterViewController.h"
+#import "RRTeamCollectionViewCell.h"
+#import "RRWarningsDisplayPopoverViewController.h"
 
 @interface RRRosterViewController ()
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *teams;
+@property (nonatomic, strong) UIPopoverController *popOverController;
 @end
 
 @implementation RRRosterViewController
 
 NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
-NSInteger const kViewTagTeamNumberLabel = 101;
-NSInteger const kViewTagRiderNameLabel = 201;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,9 +32,7 @@ NSInteger const kViewTagRiderNameLabel = 201;
 
 - (void)viewDidLoad
 {
-    UINib *cellNib = [UINib nibWithNibName:@"RRTeamCollectionViewCell" bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:kTeamCollectionViewCell];
-    
+    [self.collectionView registerClass:[RRTeamCollectionViewCell class] forCellWithReuseIdentifier:kTeamCollectionViewCell];
     [self loadData];
 }
 
@@ -61,29 +60,65 @@ NSInteger const kViewTagRiderNameLabel = 201;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTeamCollectionViewCell forIndexPath:indexPath];
+    RRTeamCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTeamCollectionViewCell forIndexPath:indexPath];
     
-    UILabel *teamNumberLabel = (UILabel *)[cell viewWithTag:kViewTagTeamNumberLabel];
     Team *team = (Team *)[self.teams objectAtIndex:indexPath.row];
-    [teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
+    [cell.teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
+    
+    cell.warningButton.tag = team.number.intValue - 1;
+    if (team.warnings.count == 0)
+    {
+        [cell.warningButton setImage:[UIImage imageNamed:@"Icon-Check"] forState:UIControlStateNormal];
+        [cell.warningButton removeTarget:self action:@selector(warningButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        [cell.warningButton setImage:[UIImage imageNamed:@"Icon-X"] forState:UIControlStateNormal];
+        [cell.warningButton addTarget:self action:@selector(warningButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     NSArray *riders = team.riders.allObjects;
     for (int i = 0; i < 4; i++)
     {
-        UILabel *riderNameLabel = (UILabel *)[cell viewWithTag:(kViewTagRiderNameLabel + i)];
+        UILabel *riderNameLabel = [cell riderNameLabelByNumber:i];
         if (riders.count > i)
         {
             Rider *rider = [riders objectAtIndex:i];
             //[riderNameLabel setText:rider.fullName];
             [riderNameLabel setText:rider.description];
+            if ([[rider isWaiverSigned] boolValue]) {
+                [riderNameLabel setTextColor:[UIColor blackColor]];
+            }
+            else
+            {
+                [riderNameLabel setTextColor:[UIColor redColor]];
+            }
         }
         else
         {
             [riderNameLabel setText:@"AVAILABLE"];
+            [riderNameLabel setTextColor:[UIColor redColor]];
         }
     }
     
     return cell;
+}
+
+- (void)warningButtonPressed:(id)sender
+{
+    UIButton *warningButton = (UIButton *)sender;
+    int tag = warningButton.tag;
+    
+    NSLog(@"Button with tag %i was pressed.", tag);
+    
+    CGRect superviewframe = warningButton.superview.superview.frame;
+    CGRect rect = warningButton.frame;
+    rect.origin.x += superviewframe.origin.x;
+    rect.origin.y += superviewframe.origin.y;
+    
+    RRWarningsDisplayPopoverViewController *viewController = [[RRWarningsDisplayPopoverViewController alloc] initWithTeam:[self.teams objectAtIndex:tag]];
+    self.popOverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+    [self.popOverController presentPopoverFromRect:rect inView:self.collectionView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 @end

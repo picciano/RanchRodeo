@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3aN-6U-dsp">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teamCollectionViewCell" id="3aN-6U-dsp" customClass="RRTeamCollectionViewCell">
             <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -51,10 +51,28 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" tag="301" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGc-rG-buX">
+                        <rect key="frame" x="197" y="157" width="43" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="Icon-X">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="rider1NameLabel" destination="uj1-eR-wda" id="aCZ-6W-zXf"/>
+                <outlet property="rider2NameLabel" destination="XQm-lE-UAb" id="X6o-Qz-EFy"/>
+                <outlet property="rider3NameLabel" destination="FQh-B9-OdL" id="P3Z-1Z-aMd"/>
+                <outlet property="rider4NameLabel" destination="MBl-34-gxO" id="ncg-la-Pwh"/>
+                <outlet property="teamNumberLabel" destination="Ebx-tz-4Ay" id="Bvj-hq-Z7t"/>
+                <outlet property="warningButton" destination="SGc-rG-buX" id="skH-Op-7YE"/>
+            </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Icon-X" width="43" height="43"/>
+    </resources>
 </document>

@@ -10,7 +10,7 @@
 
 @interface RRTeamGenerator : NSObject
 
-+ (NSArray *)generateTeams;
++ (void)generateTeams;
 
 + (int)numberOfRides;
 + (int)maximumNumberOfRidesPerRider;

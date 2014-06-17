@@ -39,6 +39,9 @@
 		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
 		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
 		E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BB19509CB4006E53F5 /* Team+Category.m */; };
+		E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */; };
+		E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */; };
+		E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,11 @@
 		E49DD2A119302E0C00A1BB9E /* Rider+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Rider+Category.m"; path = "Data Model/Rider+Category.m"; sourceTree = "<group>"; };
 		E4B7E9BA19509CB4006E53F5 /* Team+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Team+Category.h"; path = "Data Model/Team+Category.h"; sourceTree = "<group>"; };
 		E4B7E9BB19509CB4006E53F5 /* Team+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Team+Category.m"; path = "Data Model/Team+Category.m"; sourceTree = "<group>"; };
+		E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRWarningsDisplayPopoverViewController.h; sourceTree = "<group>"; };
+		E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRWarningsDisplayPopoverViewController.m; sourceTree = "<group>"; };
+		E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRWarningsDisplayPopoverViewController.xib; sourceTree = "<group>"; };
+		E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRTeamCollectionViewCell.h; sourceTree = "<group>"; };
+		E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRTeamCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +226,12 @@
 				E40101EB192EA3AC009B780F /* RRRosterViewController.h */,
 				E40101EC192EA3AC009B780F /* RRRosterViewController.m */,
 				E40101ED192EA3AC009B780F /* RRRosterViewController.xib */,
+				E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */,
+				E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */,
 				E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */,
+				E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */,
+				E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */,
+				E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -330,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */,
 				E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */,
 				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
 				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
@@ -355,6 +369,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */,
+				E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */,
 				E40101FD192EACFC009B780F /* Warning.m in Sources */,
 				E40101FA192EACFC009B780F /* Rider.m in Sources */,
 				E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */,

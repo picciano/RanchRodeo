@@ -82,7 +82,7 @@ NSString * const kRiderCategoryGeneral = @"G";
         preferredWaitBetweenRides += buffer[i];
     }
     
-    preferredWaitBetweenRides = (preferredWaitBetweenRides % 10) + 3;
+    preferredWaitBetweenRides = (preferredWaitBetweenRides % 11) + 3;
     
     return preferredWaitBetweenRides;
 }

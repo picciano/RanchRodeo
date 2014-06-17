@@ -46,4 +46,16 @@
     return NO;
 }
 
+- (BOOL)allRidersHaveSignedWaiver
+{
+    for (Rider *rider in self.riders.allObjects)
+    {
+        if (![[rider isWaiverSigned] boolValue])
+        {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 @end
