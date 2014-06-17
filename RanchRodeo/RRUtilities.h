@@ -13,9 +13,5 @@
 + (NSString *)stringFromNumber:(NSNumber *)number;
 + (NSString *)stringFromDouble:(double)value;
 + (NSNumber *)numberFromString:(NSString *)string;
-+ (int)numberOfRides:(NSArray *)riders;
-+ (int)maximumNumberOfRides:(NSArray *)riders;
-+ (int)numberOfTeams:(NSArray *)riders;
-+ (int)highestTeamNumberForRider:(Rider *)rider;
 
 @end

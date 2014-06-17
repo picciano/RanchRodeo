@@ -10,13 +10,17 @@
 
 @implementation RRTeamGenerator
 
+int const kMaxRidersPerTeam = 4;
+int const kMinimumWaitBetweenRides = 3;
+int const kPreferredWaitBetweenRides = 5;
+
 + (NSArray *)generateTeams
 {
     // delete teams
     [RRDataManager deleteTeams];
     
     // create teams
-    int numberOfTeams = [RRUtilities numberOfTeams:[RRDataManager allRiders]];
+    int numberOfTeams = [RRTeamGenerator calculatedNumberOfTeamsForRiders:[RRDataManager allRiders]];
     for (int i=0; i < numberOfTeams; i++)
     {
         Team *team = [RRDataManager createTeam];
@@ -73,31 +77,14 @@
 + (Team *)findTeamForRider:(Rider *)rider
 {
     NSArray *teams = [RRDataManager allTeams];
-    
-    // preferred rules
-    for (Team *team in teams)
-    {
-        if ([RRUtilities highestTeamNumberForRider:rider] > 0 && team.number.intValue - [RRUtilities highestTeamNumberForRider:rider] < 2)
-        {
-            continue;
-        }
-        
-        if (team.riders.count > 4) {
-            continue;
-        }
-        
-        if ([rider.teams containsObject:team])
-        {
-            continue;
-        }
-        
-        return team;
-    }
+    NSMutableArray *potentialTeams = [NSMutableArray arrayWithCapacity:teams.count];
+    NSMutableArray *preferredTeams = [NSMutableArray arrayWithCapacity:teams.count];
     
     // mandatory rules
     for (Team *team in teams)
     {
-        if (team.riders.count > 4) {
+        if (team.riders.count >= kMaxRidersPerTeam)
+        {
             continue;
         }
         
@@ -106,10 +93,105 @@
             continue;
         }
         
+        [potentialTeams addObject:team];
+    }
+    
+    // preferred rules
+    for (Team *team in potentialTeams)
+    {
+        if ([RRTeamGenerator highestTeamNumberForRider:rider] > 0 &&
+            team.number.intValue - [RRTeamGenerator highestTeamNumberForRider:rider] < kMinimumWaitBetweenRides)
+        {
+            continue;
+        }
+        
+        if (rider.isChild && [RRTeamGenerator hasChildOnTeam:team])
+        {
+            continue;
+        }
+        
+        [preferredTeams addObject:team];
+    }
+    
+    // optional rules
+    for (Team *team in preferredTeams)
+    {
+        if ([RRTeamGenerator highestTeamNumberForRider:rider] > 0 &&
+            team.number.intValue - [RRTeamGenerator highestTeamNumberForRider:rider] < kPreferredWaitBetweenRides)
+        {
+            continue;
+        }
+        
         return team;
     }
     
+    // teams fails optional rules, return first result from preferred teams
+    if (preferredTeams.count > 0)
+    {
+        return [preferredTeams objectAtIndex:0];
+    }
+    
+    // teams failed preferred rules, return first result from potential teams
+    if (potentialTeams.count > 0)
+    {
+        return [potentialTeams objectAtIndex:0];
+    }
+    
     return nil;
+}
+
++ (BOOL)hasChildOnTeam:(Team *)team
+{
+    for (Rider *rider in team.riders.allObjects)
+    {
+        if (rider.isChild) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (int)numberOfRides:(NSArray *)riders
+{
+    int numberOfRides = 0;
+    
+    for (Rider *rider in riders)
+    {
+        numberOfRides += [rider.numberOfRides intValue];
+    }
+    
+    return numberOfRides;
+}
+
++ (int)maximumNumberOfRides:(NSArray *)riders
+{
+    int maximumNumberOfRides = 0;
+    
+    for (Rider *rider in riders)
+    {
+        maximumNumberOfRides = MAX(maximumNumberOfRides, [rider.numberOfRides intValue]);
+    }
+    
+    return maximumNumberOfRides;
+}
+
++ (int)calculatedNumberOfTeamsForRiders:(NSArray *)riders
+{
+    float numberOfRides = [self numberOfRides:riders];
+    float numberOfTeams = numberOfRides / kMaxRidersPerTeam;
+    return MAX(ceil(numberOfTeams), [RRTeamGenerator maximumNumberOfRides:riders]);
+}
+
++ (int)highestTeamNumberForRider:(Rider *)rider
+{
+    int highestTeamNumberForRider = 0;
+    
+    for (Team *team in rider.teams.allObjects)
+    {
+        highestTeamNumberForRider = MAX(highestTeamNumberForRider, [team.number intValue]);
+    }
+    
+    return highestTeamNumberForRider;
 }
 
 @end

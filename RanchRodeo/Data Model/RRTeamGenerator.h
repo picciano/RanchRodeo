@@ -12,4 +12,9 @@
 
 + (NSArray *)generateTeams;
 
++ (int)numberOfRides:(NSArray *)riders;
++ (int)maximumNumberOfRides:(NSArray *)riders;
++ (int)calculatedNumberOfTeamsForRiders:(NSArray *)riders;
++ (int)highestTeamNumberForRider:(Rider *)rider;
+
 @end

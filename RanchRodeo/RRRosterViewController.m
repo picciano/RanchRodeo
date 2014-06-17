@@ -68,11 +68,19 @@ NSInteger const kViewTagRiderNameLabel = 201;
     [teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
     
     NSArray *riders = team.riders.allObjects;
-    for (int i = 0; i < riders.count; i++)
+    for (int i = 0; i < 4; i++)
     {
-        Rider *rider = [riders objectAtIndex:i];
         UILabel *riderNameLabel = (UILabel *)[cell viewWithTag:(kViewTagRiderNameLabel + i)];
-        [riderNameLabel setText:[NSString stringWithFormat:@"%@ %@", rider.firstName, rider.lastName]];
+        if (riders.count > i)
+        {
+            Rider *rider = [riders objectAtIndex:i];
+            //[riderNameLabel setText:[NSString stringWithFormat:@"%@ %@", rider.firstName, rider.lastName]];
+            [riderNameLabel setText:[NSString stringWithFormat:@"%@ %@ (%i)", rider.firstName, rider.lastName, rider.numberOfRides.intValue]];
+        }
+        else
+        {
+            [riderNameLabel setText:@"AVAILABLE"];
+        }
     }
     
     return cell;
