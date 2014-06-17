@@ -17,4 +17,5 @@
     #import "RRDataManager.h"
     #import "RRUtilities.h"
     #import "Rider+Category.h"
+    #import "Team+Category.h"
 #endif

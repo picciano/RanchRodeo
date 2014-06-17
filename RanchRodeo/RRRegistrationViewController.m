@@ -75,8 +75,8 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)updateDisplay
 {
     self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.riders.count];
-    self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator numberOfRides:self.riders]];
-    self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator calculatedNumberOfTeamsForRiders:self.riders]];
+    self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator numberOfRides]];
+    self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator calculatedNumberOfTeams]];
 }
 
 - (IBAction)createRider:(id)sender

@@ -31,11 +31,7 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 + (NSArray *)allRiders
 {
-    NSError *error = nil;
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
-    return objects;
+    return [RRDataManager allRidersUsingPredicate:nil];
 }
 
 + (NSArray *)allTeams
@@ -59,21 +55,36 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 + (NSArray *)allParentRiders
 {
-    NSError *error = nil;
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES"];
-    [fetchRequest setPredicate:predicate];
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
-    return objects;
+    return [RRDataManager allRidersUsingPredicate:predicate];
 }
 
 + (NSArray *)allChildRiders
 {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES"];
+    return [RRDataManager allRidersUsingPredicate:predicate];
+}
+
++ (NSArray *)allRopers
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isRoper == YES"];
+    return [RRDataManager allRidersUsingPredicate:predicate];
+}
+
++ (NSArray *)allNewRiders
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isNewRider == YES"];
+    return [RRDataManager allRidersUsingPredicate:predicate];
+}
+
++ (NSArray *)allRidersUsingPredicate:(NSPredicate *)predicate
+{
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES"];
-    [fetchRequest setPredicate:predicate];
+    if (predicate)
+    {
+        [fetchRequest setPredicate:predicate];
+    }
     NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;

@@ -74,8 +74,8 @@ NSInteger const kViewTagRiderNameLabel = 201;
         if (riders.count > i)
         {
             Rider *rider = [riders objectAtIndex:i];
-            //[riderNameLabel setText:[NSString stringWithFormat:@"%@ %@", rider.firstName, rider.lastName]];
-            [riderNameLabel setText:[NSString stringWithFormat:@"%@ %@ (%i)", rider.firstName, rider.lastName, rider.numberOfRides.intValue]];
+            //[riderNameLabel setText:rider.fullName];
+            [riderNameLabel setText:rider.description];
         }
         else
         {

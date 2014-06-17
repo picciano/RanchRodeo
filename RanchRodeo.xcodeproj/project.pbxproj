@@ -38,6 +38,7 @@
 		E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */; };
 		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
 		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
+		E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BB19509CB4006E53F5 /* Team+Category.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderTableViewCell.xib; sourceTree = "<group>"; };
 		E49DD2A019302E0C00A1BB9E /* Rider+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Rider+Category.h"; path = "Data Model/Rider+Category.h"; sourceTree = "<group>"; };
 		E49DD2A119302E0C00A1BB9E /* Rider+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Rider+Category.m"; path = "Data Model/Rider+Category.m"; sourceTree = "<group>"; };
+		E4B7E9BA19509CB4006E53F5 /* Team+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Team+Category.h"; path = "Data Model/Team+Category.h"; sourceTree = "<group>"; };
+		E4B7E9BB19509CB4006E53F5 /* Team+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Team+Category.m"; path = "Data Model/Team+Category.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,8 @@
 				E4835FD6192F8D10006F6398 /* RRUtilities.m */,
 				E49DD2A019302E0C00A1BB9E /* Rider+Category.h */,
 				E49DD2A119302E0C00A1BB9E /* Rider+Category.m */,
+				E4B7E9BA19509CB4006E53F5 /* Team+Category.h */,
+				E4B7E9BB19509CB4006E53F5 /* Team+Category.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				E4010201192ED545009B780F /* RRDataManager.m in Sources */,
 				E40101F7192EACFC009B780F /* Team.m in Sources */,
 				E40101E9192EA2F5009B780F /* RRRegistrationViewController.m in Sources */,
+				E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,8 @@
 + (NSArray *)allWarnings;
 + (NSArray *)allParentRiders;
 + (NSArray *)allChildRiders;
++ (NSArray *)allRopers;
++ (NSArray *)allNewRiders;
 + (Rider *)createRider;
 + (Team *)createTeam;
 + (Warning *)createWarning;

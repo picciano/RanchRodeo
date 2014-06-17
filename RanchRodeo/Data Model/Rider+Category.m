@@ -7,6 +7,7 @@
 //
 
 #import "Rider+Category.h"
+#import "RRTeamGenerator.h"
 
 @implementation Rider (Category)
 
@@ -44,10 +45,46 @@ NSString * const kRiderCategoryGeneral = @"G";
     return category;
 }
 
-
 - (NSString *)fullName
 {
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+}
+
+- (int)highestTeamNumber
+{
+    int highestTeamNumber = 0;
+    
+    for (Team *team in self.teams.allObjects)
+    {
+        highestTeamNumber = MAX(highestTeamNumber, [team.number intValue]);
+    }
+    
+    return highestTeamNumber;
+}
+
+- (NSString *)description
+{
+    NSString *description = [NSString stringWithFormat:@"%@ (%i %@)", self.fullName, self.numberOfRides.intValue, self.category];
+    return description;
+}
+
+- (int)preferredWaitBetweenRides
+{
+    int preferredWaitBetweenRides = 0;
+    
+    NSString *str = self.description;
+    NSUInteger len = [str length];
+    unichar buffer[len + 1];
+    [str getCharacters:buffer range:NSMakeRange(0, len)];
+    
+    for(int i = 0; i < len; i++)
+    {
+        preferredWaitBetweenRides += buffer[i];
+    }
+    
+    preferredWaitBetweenRides = (preferredWaitBetweenRides % 10) + 3;
+    
+    return preferredWaitBetweenRides;
 }
 
 @end

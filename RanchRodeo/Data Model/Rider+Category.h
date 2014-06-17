@@ -12,5 +12,7 @@
 
 - (NSString *)category;
 - (NSString *)fullName;
+- (int)highestTeamNumber;
+- (int)preferredWaitBetweenRides;
 
 @end

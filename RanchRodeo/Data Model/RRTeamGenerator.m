@@ -12,7 +12,6 @@
 
 int const kMaxRidersPerTeam = 4;
 int const kMinimumWaitBetweenRides = 3;
-int const kPreferredWaitBetweenRides = 5;
 
 + (NSArray *)generateTeams
 {
@@ -20,8 +19,8 @@ int const kPreferredWaitBetweenRides = 5;
     [RRDataManager deleteTeams];
     
     // create teams
-    int numberOfTeams = [RRTeamGenerator calculatedNumberOfTeamsForRiders:[RRDataManager allRiders]];
-    for (int i=0; i < numberOfTeams; i++)
+    int numberOfTeams = [RRTeamGenerator calculatedNumberOfTeams];
+    for (int i = 0; i < numberOfTeams; i++)
     {
         Team *team = [RRDataManager createTeam];
         [team setNumber:[NSNumber numberWithInt:i+1]];
@@ -35,34 +34,41 @@ int const kPreferredWaitBetweenRides = 5;
     }
     
     // add children and their parents to teams
-    [self processChildren];
+    [self processRiders:[RRDataManager allChildRiders]];
     
     // add ropers to teams
+    [self processRiders:[RRDataManager allRopers]];
+    
     // add new riders to teams
+    [self processRiders:[RRDataManager allNewRiders]];
+    
     // add everyone else to teams
+    [self processRiders:[RRDataManager allRiders]];
     
     return [RRDataManager allWarnings];;
 }
 
-+ (void)processChildren
++ (void)processRiders:(NSArray *)riders
 {
-    NSArray *children = [RRDataManager allChildRiders];
-    
-    for (Rider *child in children)
+    for (Rider *rider in riders)
     {
-        NSArray *parents = [child.parents sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]]];
+        NSArray *parents = [rider.parents sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]]];
         
-        for (int i = 0; i < child.numberOfRides.intValue; i++)
+        for (int i = rider.teams.count; i < rider.numberOfRides.intValue; i++)
         {
-            Team *team = [self findTeamForRider:child];
-            [team addRidersObject:child];
+            Team *team = [self findTeamForRider:rider];
+            [team addRidersObject:rider];
             
-            Rider *parent = [parents objectAtIndex:i % parents.count];
-            if (parent.teams.count >= parent.numberOfRides.intValue)
+            if ([[rider isChild] boolValue] && rider.parents.count > 0)
             {
-                continue;
+                // also add parent to same team
+                Rider *parent = [parents objectAtIndex:i % parents.count];
+                if (parent.teams.count >= parent.numberOfRides.intValue)
+                {
+                    continue;
+                }
+                [team addRidersObject:parent];
             }
-            [team addRidersObject:parent];
         }
     }
     
@@ -99,13 +105,23 @@ int const kPreferredWaitBetweenRides = 5;
     // preferred rules
     for (Team *team in potentialTeams)
     {
-        if ([RRTeamGenerator highestTeamNumberForRider:rider] > 0 &&
-            team.number.intValue - [RRTeamGenerator highestTeamNumberForRider:rider] < kMinimumWaitBetweenRides)
+        if ([rider highestTeamNumber] > 0 &&
+            team.number.intValue - [rider highestTeamNumber] < kMinimumWaitBetweenRides)
         {
             continue;
         }
         
-        if (rider.isChild && [RRTeamGenerator hasChildOnTeam:team])
+        if ([[rider isChild] boolValue] && team.hasChildRider)
+        {
+            continue;
+        }
+        
+        if ([[rider isRoper] boolValue] && team.hasRoper)
+        {
+            continue;
+        }
+        
+        if ([[rider isNewRider] boolValue] && team.hasNewRider)
         {
             continue;
         }
@@ -116,8 +132,8 @@ int const kPreferredWaitBetweenRides = 5;
     // optional rules
     for (Team *team in preferredTeams)
     {
-        if ([RRTeamGenerator highestTeamNumberForRider:rider] > 0 &&
-            team.number.intValue - [RRTeamGenerator highestTeamNumberForRider:rider] < kPreferredWaitBetweenRides)
+        if ([rider highestTeamNumber] > 0 &&
+            team.number.intValue - [rider highestTeamNumber] < rider.preferredWaitBetweenRides)
         {
             continue;
         }
@@ -140,19 +156,9 @@ int const kPreferredWaitBetweenRides = 5;
     return nil;
 }
 
-+ (BOOL)hasChildOnTeam:(Team *)team
++ (int)numberOfRides
 {
-    for (Rider *rider in team.riders.allObjects)
-    {
-        if (rider.isChild) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-+ (int)numberOfRides:(NSArray *)riders
-{
+    NSArray *riders = [RRDataManager allRiders];
     int numberOfRides = 0;
     
     for (Rider *rider in riders)
@@ -163,8 +169,9 @@ int const kPreferredWaitBetweenRides = 5;
     return numberOfRides;
 }
 
-+ (int)maximumNumberOfRides:(NSArray *)riders
++ (int)maximumNumberOfRidesPerRider
 {
+    NSArray *riders = [RRDataManager allRiders];
     int maximumNumberOfRides = 0;
     
     for (Rider *rider in riders)
@@ -175,23 +182,11 @@ int const kPreferredWaitBetweenRides = 5;
     return maximumNumberOfRides;
 }
 
-+ (int)calculatedNumberOfTeamsForRiders:(NSArray *)riders
++ (int)calculatedNumberOfTeams
 {
-    float numberOfRides = [self numberOfRides:riders];
+    float numberOfRides = [self numberOfRides];
     float numberOfTeams = numberOfRides / kMaxRidersPerTeam;
-    return MAX(ceil(numberOfTeams), [RRTeamGenerator maximumNumberOfRides:riders]);
-}
-
-+ (int)highestTeamNumberForRider:(Rider *)rider
-{
-    int highestTeamNumberForRider = 0;
-    
-    for (Team *team in rider.teams.allObjects)
-    {
-        highestTeamNumberForRider = MAX(highestTeamNumberForRider, [team.number intValue]);
-    }
-    
-    return highestTeamNumberForRider;
+    return MAX(ceil(numberOfTeams), [RRTeamGenerator maximumNumberOfRidesPerRider]);
 }
 
 @end
