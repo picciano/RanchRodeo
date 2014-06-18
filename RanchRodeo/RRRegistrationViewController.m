@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfTeamsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @property (strong, nonatomic) NSArray *riders;
 
@@ -57,6 +58,8 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
      forCellReuseIdentifier:kRRRegistrationRiderCell];
     
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    self.versionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

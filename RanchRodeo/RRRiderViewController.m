@@ -7,6 +7,7 @@
 //
 
 #import "RRRiderViewController.h"
+#import "UIControl+NextControl.h"
 
 @interface RRRiderViewController ()
 
@@ -66,7 +67,16 @@ NSString * const kParentCell = @"parentCell";
 
 - (void)updateDisplay
 {
-    
+    if ([self.firstNameField.text isEqualToString:@""])
+    {
+        [self.firstNameField becomeFirstResponder];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField transferFirstReponderToNextControl];
+    return NO;
 }
 
 - (IBAction)isChildSwitchChanged:(id)sender
