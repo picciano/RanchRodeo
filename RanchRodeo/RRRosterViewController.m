@@ -157,8 +157,6 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     UIButton *warningButton = (UIButton *)sender;
     int tag = warningButton.tag;
     
-    NSLog(@"Button with tag %i was pressed.", tag);
-    
     CGRect superviewframe = warningButton.superview.superview.frame;
     CGRect rect = warningButton.frame;
     rect.origin.x += superviewframe.origin.x;
