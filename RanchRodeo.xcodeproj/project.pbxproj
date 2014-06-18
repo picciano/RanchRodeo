@@ -32,6 +32,7 @@
 		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
 		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
+		E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4813A0B1951EB4C00DB30E0 /* Settings.bundle */; };
 		E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRUtilities.m */; };
 		E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */; };
 		E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EFD2F194FAC760052348C /* RRTeamGenerator.m */; };
@@ -92,6 +93,7 @@
 		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
 		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
 		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
+		E4813A0B1951EB4C00DB30E0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E4835FD5192F8D10006F6398 /* RRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRUtilities.h; sourceTree = "<group>"; };
 		E4835FD6192F8D10006F6398 /* RRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRUtilities.m; sourceTree = "<group>"; };
 		E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRTeamCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				E40101BB192EA004009B780F /* InfoPlist.strings */,
 				E40101BE192EA004009B780F /* main.m */,
 				E40101C0192EA004009B780F /* RanchRodeo-Prefix.pch */,
+				E4813A0B1951EB4C00DB30E0 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
 				E40101C8192EA004009B780F /* Images.xcassets in Resources */,
 				E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */,
+				E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */,
 				E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

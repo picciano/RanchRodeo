@@ -124,8 +124,16 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
         if (riders.count > i)
         {
             Rider *rider = [riders objectAtIndex:i];
-            //[riderNameLabel setText:rider.fullName];
-            [riderNameLabel setText:rider.description];
+            
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"show_rider_details"])
+            {
+                [riderNameLabel setText:rider.description];
+            }
+            else
+            {
+                [riderNameLabel setText:rider.fullName];
+            }
+            
             if ([[rider isWaiverSigned] boolValue]) {
                 [riderNameLabel setTextColor:[UIColor blackColor]];
             }
