@@ -57,7 +57,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     printInfo.outputType = UIPrintInfoOutputGeneral;
     printInfo.jobName = self.title;
     printInfo.duplex = UIPrintInfoDuplexLongEdge;
-    printInfo.orientation = UIPrintInfoOrientationLandscape;
+    printInfo.orientation = UIPrintInfoOrientationPortrait;
     
     controller.printInfo = printInfo;
     controller.showsPageRange = YES;

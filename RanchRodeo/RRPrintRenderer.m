@@ -16,8 +16,8 @@
     
     if (self)
     {
-        self.headerHeight = 100.0f;
-        self.footerHeight = 100.0f;
+        self.headerHeight = 36.0f;
+        self.footerHeight = 0.0f;
     }
     
     return self;
@@ -38,7 +38,42 @@
 
 - (void)drawContentForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)contentRect
 {
-    [self.collectionView drawViewHierarchyInRect:contentRect afterScreenUpdates:NO];
+    CGRect original = self.collectionView.frame;
+    CGRect adjusted = original;
+    
+    CGSize contentSize = self.collectionView.contentSize;
+    adjusted.size = contentSize;
+    self.collectionView.frame = adjusted;
+    
+    CGRect printRect = CGRectInset(contentRect, 18.0f, 18.0f);
+    
+    float printAreaRatio = CGRectGetWidth(printRect) / CGRectGetHeight(printRect);
+    float adjustedRatio = CGRectGetWidth(adjusted) / CGRectGetHeight(adjusted);
+    
+    if (printAreaRatio > adjustedRatio)
+    {
+        // adjust width of print area
+        float newWidth = (CGRectGetHeight(printRect) / CGRectGetHeight(adjusted)) * CGRectGetWidth(adjusted);
+        float shiftAmount = (printRect.size.width - newWidth) / 2.0f;
+        printRect.size.width = newWidth;
+        
+        // center it horizontally
+        printRect.origin.x += shiftAmount;
+    }
+    else
+    {
+        // adjust height of print area
+        float newHeight = (CGRectGetWidth(printRect) / CGRectGetWidth(adjusted)) * CGRectGetHeight(adjusted);
+        float shiftAmount = (printRect.size.height - newHeight) / 2.0f;
+        printRect.size.height = newHeight;
+        
+        // center it vertically
+        printRect.origin.y += shiftAmount;
+    }
+    
+    [self.collectionView drawViewHierarchyInRect:printRect afterScreenUpdates:YES];
+    
+    self.collectionView.frame = original;
 }
 
 @end

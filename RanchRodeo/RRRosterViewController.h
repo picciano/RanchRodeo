@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RRRosterViewController : UIViewController
+@interface RRRosterViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end
