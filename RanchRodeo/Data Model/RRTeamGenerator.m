@@ -55,7 +55,7 @@ int const kMinimumWaitBetweenRides = 3;
     {
         NSArray *parents = [rider.parents sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]]];
         
-        for (int i = rider.teams.count; i < rider.numberOfRides.intValue; i++)
+        for (NSUInteger i = rider.teams.count; i < rider.numberOfRides.intValue; i++)
         {
             Team *team = [self findTeamForRider:rider];
             [team addRidersObject:rider];

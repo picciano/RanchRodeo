@@ -45,9 +45,9 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
         
         if(!completed && error){
             
-            NSLog(@"FAILED! due to error in domain %@ with error code %u",
+            NSLog(@"FAILED! due to error in domain %@ with error code %ld",
                   
-                  error.domain, error.code);
+                  error.domain, (long)error.code);
             
         }
         
@@ -155,7 +155,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 - (void)warningButtonPressed:(id)sender
 {
     UIButton *warningButton = (UIButton *)sender;
-    int tag = warningButton.tag;
+    long tag = warningButton.tag;
     
     CGRect superviewframe = warningButton.superview.superview.frame;
     CGRect rect = warningButton.frame;
