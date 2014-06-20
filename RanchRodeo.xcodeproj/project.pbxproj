@@ -351,6 +351,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Anthony Picciano";
 				TargetAttributes = {
+					E40101AC192EA004009B780F = {
+						DevelopmentTeam = PC5SP4V242;
+					};
 					E40101CC192EA004009B780F = {
 						TestTargetID = E40101AC192EA004009B780F;
 					};
@@ -559,6 +562,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
 				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
@@ -567,7 +572,7 @@
 					"$(PROJECT_DIR)/RanchRodeo",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CD30EA69-AE74-4418-9998-D05364071B38";
+				PROVISIONING_PROFILE = "A1C54CF7-1D7F-45ED-BAC4-C354C78A4B04";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -577,6 +582,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
 				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
@@ -585,7 +592,7 @@
 					"$(PROJECT_DIR)/RanchRodeo",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CD30EA69-AE74-4418-9998-D05364071B38";
+				PROVISIONING_PROFILE = "A1C54CF7-1D7F-45ED-BAC4-C354C78A4B04";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
