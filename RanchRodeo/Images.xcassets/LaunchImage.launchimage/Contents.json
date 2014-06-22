@@ -28,6 +28,19 @@
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
+    },
+    {
+      "orientation" : "landscape",
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "filename" : "launch-image-1.png",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "landscape",
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "scale" : "2x"
     }
   ],
   "info" : {

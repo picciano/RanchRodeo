@@ -567,6 +567,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
 				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RanchRodeo",
@@ -587,6 +588,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
 				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RanchRodeo",
