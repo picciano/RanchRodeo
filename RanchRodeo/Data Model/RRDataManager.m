@@ -124,6 +124,11 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 - (BOOL)save
 {
+    if ([[self managedObjectContext] hasChanges])
+    {
+        [self setNeedsTeamGeneration:YES];
+    }
+    
     NSError *saveError = nil;
     [[self managedObjectContext] save:&saveError];
     

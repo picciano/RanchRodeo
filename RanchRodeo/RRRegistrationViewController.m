@@ -78,8 +78,8 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)updateDisplay
 {
     self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.riders.count];
-    self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator numberOfRides]];
-    self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [RRTeamGenerator calculatedNumberOfTeams]];
+    self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] numberOfRides]];
+    self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] calculatedNumberOfTeams]];
 }
 
 - (IBAction)createRider:(id)sender
@@ -91,8 +91,11 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (IBAction)viewRoster:(id)sender
 {
-    // always generate teams first
-    [RRTeamGenerator generateTeams];
+    if ([[RRDataManager sharedRRDataManager] needsTeamGeneration] ||
+        [[[RRDataManager sharedRRDataManager] allTeams] count] < [[RRTeamGenerator sharedRRTeamGenerator] calculatedNumberOfTeams])
+    {
+        [[RRTeamGenerator sharedRRTeamGenerator] generateTeams];
+    }
     
     RRRosterViewController *viewController = [[RRRosterViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];

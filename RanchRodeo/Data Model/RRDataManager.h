@@ -16,6 +16,8 @@
 
 CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
 
+@property (nonatomic) BOOL needsTeamGeneration;
+
 - (void)rollback;
 - (BOOL)save;
 - (void)reset;

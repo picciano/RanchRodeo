@@ -10,10 +10,12 @@
 
 @interface RRTeamGenerator : NSObject
 
-+ (void)generateTeams;
+CWL_DECLARE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
-+ (int)numberOfRides;
-+ (int)maximumNumberOfRidesPerRider;
-+ (int)calculatedNumberOfTeams;
+- (void)generateTeams;
+
+- (int)numberOfRides;
+- (int)maximumNumberOfRidesPerRider;
+- (int)calculatedNumberOfTeams;
 
 @end

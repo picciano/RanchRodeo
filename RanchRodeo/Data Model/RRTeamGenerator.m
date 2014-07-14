@@ -10,17 +10,19 @@
 
 @implementation RRTeamGenerator
 
+CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
+
 int const kMaxRidersPerTeam = 4;
 int const kMinimumWaitBetweenRides = 2;
 int const kPreferredWaitBetweenRides = 5;
 
-+ (void)generateTeams
+- (void)generateTeams
 {
     // delete teams
     [[RRDataManager sharedRRDataManager] deleteTeams];
     
     // create teams
-    int numberOfTeams = [RRTeamGenerator calculatedNumberOfTeams];
+    int numberOfTeams = [self calculatedNumberOfTeams];
     for (int i = 0; i < numberOfTeams; i++)
     {
         Team *team = [[RRDataManager sharedRRDataManager] createTeam];
@@ -48,9 +50,11 @@ int const kPreferredWaitBetweenRides = 5;
     
     // check for team warnings
     [self determineWarnings];
+    
+    [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:NO];
 }
 
-+ (void)processRiders:(NSArray *)riders
+- (void)processRiders:(NSArray *)riders
 {
     for (Rider *rider in riders)
     {
@@ -82,29 +86,29 @@ int const kPreferredWaitBetweenRides = 5;
     }
 }
 
-+ (Team *)findTeamForRider:(Rider *)rider
+- (Team *)findTeamForRider:(Rider *)rider
 {
     NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
     NSMutableArray *potentialTeams = [NSMutableArray arrayWithCapacity:teams.count];
     NSMutableArray *preferredTeams = [NSMutableArray arrayWithCapacity:teams.count];
     NSMutableArray *bestMatchTeams = [NSMutableArray arrayWithCapacity:teams.count];
     
-    NSString *riderName = rider.firstName;
+//    NSString *riderName = rider.firstName;
     
-    NSLog(@"----------------- Finding team for %@.", riderName);
+//    NSLog(@"----------------- Finding team for %@.", riderName);
     
     // mandatory rules
     for (Team *team in teams)
     {
         if (team.riders.count >= kMaxRidersPerTeam)
         {
-            NSLog(@"%@ team %@ is full.", riderName, team.number);
+//            NSLog(@"%@ team %@ is full.", riderName, team.number);
             continue;
         }
         
         if ([rider.teams containsObject:team])
         {
-            NSLog(@"%@ is already on team %@.", riderName, team.number);
+//            NSLog(@"%@ is already on team %@.", riderName, team.number);
             continue;
         }
         
@@ -116,25 +120,25 @@ int const kPreferredWaitBetweenRides = 5;
     {
         if ([rider hasTeamWithNumberWithin:kMinimumWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
-            NSLog(@"%@ is within %i of team %@.", riderName, kMinimumWaitBetweenRides, team.number);
+//            NSLog(@"%@ is within %i of team %@.", riderName, kMinimumWaitBetweenRides, team.number);
             continue;
         }
         
         if ([[rider isChild] boolValue] && team.hasChildRider)
         {
-            NSLog(@"%@ team %@ already has child rider.", riderName, team.number);
+//            NSLog(@"%@ team %@ already has child rider.", riderName, team.number);
             continue;
         }
         
         if ([[rider isRoper] boolValue] && team.hasRoper)
         {
-            NSLog(@"%@ team %@ already has roper rider.", riderName, team.number);
+//            NSLog(@"%@ team %@ already has roper rider.", riderName, team.number);
             continue;
         }
         
         if ([[rider isNewRider] boolValue] && team.hasNewRider)
         {
-            NSLog(@"%@ team %@ already has new rider.", riderName, team.number);
+//            NSLog(@"%@ team %@ already has new rider.", riderName, team.number);
             continue;
         }
         
@@ -146,13 +150,13 @@ int const kPreferredWaitBetweenRides = 5;
     {
         if ([rider hasRequestedExtraRides] && team.hasRiderWithExtraRides)
         {
-            NSLog(@"%@ team %@ already has rider with extra rides.", riderName, team.number);
+//            NSLog(@"%@ team %@ already has rider with extra rides.", riderName, team.number);
             continue;
         }
         
         if ([rider hasTeamWithNumberWithin:kPreferredWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
-            NSLog(@"%@ is within %i of team %@.", riderName, kPreferredWaitBetweenRides, team.number);
+//            NSLog(@"%@ is within %i of team %@.", riderName, kPreferredWaitBetweenRides, team.number);
             continue;
         }
         
@@ -162,30 +166,30 @@ int const kPreferredWaitBetweenRides = 5;
     // teams meets rules, return first result from preferred teams
     if (bestMatchTeams.count > 0)
     {
-        return [RRTeamGenerator randomTeamFromArray:bestMatchTeams];
+        return [self randomTeamFromArray:bestMatchTeams];
     }
     
     // teams fails optional rules, return first result from preferred teams
     if (preferredTeams.count > 0)
     {
-        return [RRTeamGenerator randomTeamFromArray:preferredTeams];
+        return [self randomTeamFromArray:preferredTeams];
     }
     
     // teams failed preferred rules, return first result from potential teams
     if (potentialTeams.count > 0)
     {
-        return [RRTeamGenerator randomTeamFromArray:potentialTeams];
+        return [self randomTeamFromArray:potentialTeams];
     }
     
     return nil;
 }
 
-+ (Team *)randomTeamFromArray:(NSArray *)array
+- (Team *)randomTeamFromArray:(NSArray *)array
 {
     return [array objectAtIndex:rand()%[array count]];
 }
 
-+ (void)determineWarnings
+- (void)determineWarnings
 {
     NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
     
@@ -216,7 +220,7 @@ int const kPreferredWaitBetweenRides = 5;
 
 #pragma mark - public methods
 
-+ (int)numberOfRides
+- (int)numberOfRides
 {
     NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
     int numberOfRides = 0;
@@ -229,7 +233,7 @@ int const kPreferredWaitBetweenRides = 5;
     return numberOfRides;
 }
 
-+ (int)maximumNumberOfRidesPerRider
+- (int)maximumNumberOfRidesPerRider
 {
     NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
     int maximumNumberOfRides = 0;
@@ -242,11 +246,11 @@ int const kPreferredWaitBetweenRides = 5;
     return maximumNumberOfRides;
 }
 
-+ (int)calculatedNumberOfTeams
+- (int)calculatedNumberOfTeams
 {
     float numberOfRides = [self numberOfRides];
     float numberOfTeams = numberOfRides / kMaxRidersPerTeam;
-    return MAX(ceil(numberOfTeams), [RRTeamGenerator maximumNumberOfRidesPerRider]);
+    return MAX(ceil(numberOfTeams), [self maximumNumberOfRidesPerRider]);
 }
 
 @end
