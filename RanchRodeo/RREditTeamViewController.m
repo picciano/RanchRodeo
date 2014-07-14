@@ -92,7 +92,7 @@ NSString * const kRiderCell = @"riderCell";
 - (IBAction)moveRider:(id)sender
 {
     UIButton *button = (UIButton *)sender;
-    Team *toTeam = [[RRDataManager sharedRRDataManager] teamWithNumber:button.tag];
+    Team *toTeam = [[RRDataManager sharedRRDataManager] teamWithNumber:(int)button.tag];
     [[RRDataManager sharedRRDataManager] moveRider:self.selectedRider fromTeam:self.team toTeam:toTeam];
     
     [self.navigationController popViewControllerAnimated:YES];

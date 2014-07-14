@@ -190,8 +190,6 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     UIButton *button = (UIButton *)sender;
     long tag = button.tag;
     
-    NSLog(@"edit button pressed with tag %li", tag);
-    
     RREditTeamViewController *viewController = [[RREditTeamViewController alloc] initWithNibName:nil bundle:nil];
     [viewController setTeam:[self.teams objectAtIndex:tag]];
     [self.navigationController pushViewController:viewController animated:YES];
