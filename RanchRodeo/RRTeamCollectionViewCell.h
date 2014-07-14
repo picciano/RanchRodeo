@@ -12,6 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *teamNumberLabel;
 @property (nonatomic, weak) IBOutlet UIButton *warningButton;
+@property (nonatomic, weak) IBOutlet UIButton *editButton;
 
 - (UILabel *)riderNameLabelByNumber:(int)index;
 

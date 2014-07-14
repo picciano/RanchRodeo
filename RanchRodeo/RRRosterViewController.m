@@ -11,6 +11,7 @@
 #import "RRWarningsDisplayPopoverViewController.h"
 #import "RRPrintRenderer.h"
 #import "RRTeamGenerator.h"
+#import "RREditTeamViewController.h"
 
 @interface RRRosterViewController ()
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -89,13 +90,17 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 - (void)loadData
 {
     [self setTeams:[[RRDataManager sharedRRDataManager] allTeams]];
-    [self.collectionView reloadData];
+    [self updateDisplay];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self updateDisplay];
 }
 
 - (void)updateDisplay
 {
-    
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -126,6 +131,9 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
         [cell.warningButton setImage:[UIImage imageNamed:@"Icon-X"] forState:UIControlStateNormal];
         [cell.warningButton addTarget:self action:@selector(warningButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    cell.editButton.tag = team.number.intValue - 1;
+    [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *riders = team.riders.allObjects;
     for (int i = 0; i < 4; i++)
@@ -164,17 +172,29 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 
 - (void)warningButtonPressed:(id)sender
 {
-    UIButton *warningButton = (UIButton *)sender;
-    long tag = warningButton.tag;
+    UIButton *button = (UIButton *)sender;
+    long tag = button.tag;
     
-    CGRect superviewframe = warningButton.superview.superview.frame;
-    CGRect rect = warningButton.frame;
+    CGRect superviewframe = button.superview.superview.frame;
+    CGRect rect = button.frame;
     rect.origin.x += superviewframe.origin.x;
     rect.origin.y += superviewframe.origin.y;
     
     RRWarningsDisplayPopoverViewController *viewController = [[RRWarningsDisplayPopoverViewController alloc] initWithTeam:[self.teams objectAtIndex:tag]];
     self.popOverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
     [self.popOverController presentPopoverFromRect:rect inView:self.collectionView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)editButtonPressed:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    long tag = button.tag;
+    
+    NSLog(@"edit button pressed with tag %li", tag);
+    
+    RREditTeamViewController *viewController = [[RREditTeamViewController alloc] initWithNibName:nil bundle:nil];
+    [viewController setTeam:[self.teams objectAtIndex:tag]];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

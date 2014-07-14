@@ -44,6 +44,30 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return objects;
 }
 
+- (Team *)teamWithNumber:(int)teamNumber
+{
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeTeam];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"number == %i", teamNumber];
+    [fetchRequest setPredicate:predicate];
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return objects.firstObject;
+}
+
+- (NSArray *)teamsWithMissingRiders
+{
+    NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
+    for (Team *team in self.allTeams)
+    {
+        if (team.riders.count < 4)
+        {
+            [objects addObject:team];
+        }
+    }
+    return objects;
+}
+
 - (NSArray *)allWarnings
 {
     NSError *error = nil;
@@ -123,6 +147,14 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return (saveError == nil);
 }
 
+- (void)moveRider:(Rider *)rider fromTeam:(Team *)fromTeam toTeam:(Team *)toTeam
+{
+    [fromTeam removeRidersObject:rider];
+    [toTeam addRidersObject:rider];
+    
+    [self saveAndRegenerateIfNeeded:NO];
+}
+
 - (void)rollback
 {
     [[self managedObjectContext] rollback];
@@ -130,7 +162,12 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 - (BOOL)save
 {
-    if ([[self managedObjectContext] hasChanges])
+    return [self saveAndRegenerateIfNeeded:YES];
+}
+
+- (BOOL)saveAndRegenerateIfNeeded:(BOOL)regenerateIfNeeded
+{
+    if (regenerateIfNeeded && [[self managedObjectContext] hasChanges])
     {
         [self setNeedsTeamGeneration:YES];
     }

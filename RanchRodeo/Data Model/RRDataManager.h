@@ -20,19 +20,23 @@ CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
 
 - (void)rollback;
 - (BOOL)save;
+- (BOOL)saveAndRegenerateIfNeeded:(BOOL)regenerateIfNeeded;
 - (void)reset;
 - (void)deleteTeams;
 - (NSArray *)allRiders;
 - (NSArray *)allTeams;
+- (Team *)teamWithNumber:(int)teamNumber;
 - (NSArray *)allWarnings;
 - (NSArray *)allParentRiders;
 - (NSArray *)allChildRiders;
 - (NSArray *)allRopers;
 - (NSArray *)allNewRiders;
 - (NSArray *)allRidersWithExtraRides;
+- (NSArray *)teamsWithMissingRiders;
 - (Rider *)createRider;
 - (Team *)createTeam;
 - (Warning *)createWarning;
 - (BOOL)destroyObject:(NSManagedObject *)object;
+- (void)moveRider:(Rider *)rider fromTeam:(Team *)fromTeam toTeam:(Team *)toTeam;
 
 @end

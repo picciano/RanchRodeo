@@ -96,22 +96,16 @@ int const kPreferredWaitBetweenRides = 4;
     NSMutableArray *preferredTeams = [NSMutableArray arrayWithCapacity:teams.count];
     NSMutableArray *bestMatchTeams = [NSMutableArray arrayWithCapacity:teams.count];
     
-//    NSString *riderName = rider.firstName;
-    
-//    NSLog(@"----------------- Finding team for %@.", riderName);
-    
     // mandatory rules
     for (Team *team in teams)
     {
         if (team.riders.count >= kMaxRidersPerTeam)
         {
-//            NSLog(@"%@ team %@ is full.", riderName, team.number);
             continue;
         }
         
         if ([rider.teams containsObject:team])
         {
-//            NSLog(@"%@ is already on team %@.", riderName, team.number);
             continue;
         }
         
@@ -123,25 +117,21 @@ int const kPreferredWaitBetweenRides = 4;
     {
         if ([rider hasTeamWithNumberWithin:kMinimumWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
-//            NSLog(@"%@ is within %i of team %@.", riderName, kMinimumWaitBetweenRides, team.number);
             continue;
         }
         
         if ([[rider isChild] boolValue] && team.hasChildRider)
         {
-//            NSLog(@"%@ team %@ already has child rider.", riderName, team.number);
             continue;
         }
         
         if ([[rider isRoper] boolValue] && team.hasRoper)
         {
-//            NSLog(@"%@ team %@ already has roper rider.", riderName, team.number);
             continue;
         }
         
         if ([[rider isNewRider] boolValue] && team.hasNewRider)
         {
-//            NSLog(@"%@ team %@ already has new rider.", riderName, team.number);
             continue;
         }
         
@@ -153,13 +143,11 @@ int const kPreferredWaitBetweenRides = 4;
     {
         if ([rider hasRequestedExtraRides] && team.hasRiderWithExtraRides)
         {
-//            NSLog(@"%@ team %@ already has rider with extra rides.", riderName, team.number);
             continue;
         }
         
         if ([rider hasTeamWithNumberWithin:kPreferredWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
-//            NSLog(@"%@ is within %i of team %@.", riderName, kPreferredWaitBetweenRides, team.number);
             continue;
         }
         
