@@ -32,7 +32,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
         [self setTitle:@"Roster"];
         
         self.printButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print:)];
-        self.regenerateTeamsButton = [[UIBarButtonItem alloc] initWithTitle:@"Regenerate Teams" style:UIBarButtonItemStyleBordered target:self action:@selector(regenerateTeams:)];
+        self.regenerateTeamsButton = [[UIBarButtonItem alloc] initWithTitle:@"Regenerate Teams" style:UIBarButtonItemStylePlain target:self action:@selector(regenerateTeams:)];
         
         [self.navigationItem setRightBarButtonItems:@[self.printButton, self.regenerateTeamsButton]];
     }
