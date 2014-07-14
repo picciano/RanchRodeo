@@ -45,6 +45,9 @@ int const kPreferredWaitBetweenRides = 4;
     // add new riders to teams
     [self processRiders:[[RRDataManager sharedRRDataManager] allNewRiders]];
     
+    // add riders with extra rides to teams
+    [self processRiders:[[RRDataManager sharedRRDataManager] allRidersWithExtraRides]];
+    
     // add everyone else to teams
     [self processRiders:[[RRDataManager sharedRRDataManager] allRiders]];
     

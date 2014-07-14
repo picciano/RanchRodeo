@@ -77,6 +77,12 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return [self allRidersUsingPredicate:predicate];
 }
 
+- (NSArray *)allRidersWithExtraRides
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"numberOfRides > 2"];
+    return [self allRidersUsingPredicate:predicate];
+}
+
 - (NSArray *)allRidersUsingPredicate:(NSPredicate *)predicate
 {
     NSError *error = nil;
