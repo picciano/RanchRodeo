@@ -60,7 +60,7 @@ NSString * const kParentCell = @"parentCell";
 
 - (void)loadData
 {
-    [self setParents:[RRDataManager allParentRiders]];
+    [self setParents:[[RRDataManager sharedRRDataManager] allParentRiders]];
     [self.tableView reloadData];
     [self updateDisplay];
 }
@@ -137,12 +137,12 @@ NSString * const kParentCell = @"parentCell";
 {
     if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
     {
-        [RRDataManager rollback];
+        [[RRDataManager sharedRRDataManager] rollback];
     }
     else
     {
         [self updateDataObjectFromDisplay];
-        [RRDataManager save];
+        [[RRDataManager sharedRRDataManager] save];
     }
 }
 
@@ -157,7 +157,7 @@ NSString * const kParentCell = @"parentCell";
     
     [self updateDataObjectFromDisplay];
     
-    if ([RRDataManager save])
+    if ([[RRDataManager sharedRRDataManager] save])
     {
         [self.navigationController popViewControllerAnimated:YES];
     }

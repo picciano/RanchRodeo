@@ -14,20 +14,22 @@
 
 @interface RRDataManager : NSObject
 
-+ (void)rollback;
-+ (BOOL)save;
-+ (void)reset;
-+ (void)deleteTeams;
-+ (NSArray *)allRiders;
-+ (NSArray *)allTeams;
-+ (NSArray *)allWarnings;
-+ (NSArray *)allParentRiders;
-+ (NSArray *)allChildRiders;
-+ (NSArray *)allRopers;
-+ (NSArray *)allNewRiders;
-+ (Rider *)createRider;
-+ (Team *)createTeam;
-+ (Warning *)createWarning;
-+ (BOOL)destroyObject:(NSManagedObject *)object;
+CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
+
+- (void)rollback;
+- (BOOL)save;
+- (void)reset;
+- (void)deleteTeams;
+- (NSArray *)allRiders;
+- (NSArray *)allTeams;
+- (NSArray *)allWarnings;
+- (NSArray *)allParentRiders;
+- (NSArray *)allChildRiders;
+- (NSArray *)allRopers;
+- (NSArray *)allNewRiders;
+- (Rider *)createRider;
+- (Team *)createTeam;
+- (Warning *)createWarning;
+- (BOOL)destroyObject:(NSManagedObject *)object;
 
 @end

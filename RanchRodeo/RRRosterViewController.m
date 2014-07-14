@@ -78,7 +78,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 
 - (void)loadData
 {
-    [self setTeams:[RRDataManager allTeams]];
+    [self setTeams:[[RRDataManager sharedRRDataManager] allTeams]];
     [self.collectionView reloadData];
     [self updateDisplay];
 }

@@ -70,7 +70,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (void)loadData
 {
-    [self setRiders:[RRDataManager allRiders]];
+    [self setRiders:[[RRDataManager sharedRRDataManager] allRiders]];
     [self.tableView reloadData];
     [self updateDisplay];
 }
@@ -85,7 +85,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (IBAction)createRider:(id)sender
 {
     RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
-    [viewController setRider:[RRDataManager createRider]];
+    [viewController setRider:[[RRDataManager sharedRRDataManager] createRider]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -122,7 +122,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
         return;
     }
     
-    [RRDataManager reset];
+    [[RRDataManager sharedRRDataManager] reset];
     [self loadData];
     
     UIAlertView *erasedAlertView = [[UIAlertView alloc] initWithTitle:@"Confirmation" message:@"The registration data has been erased." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -166,7 +166,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [RRDataManager destroyObject:self.riders[indexPath.row]];
+        [[RRDataManager sharedRRDataManager] destroyObject:self.riders[indexPath.row]];
         [self loadData];
     }
 }

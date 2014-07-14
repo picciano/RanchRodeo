@@ -58,4 +58,16 @@
     return YES;
 }
 
+- (BOOL)hasRiderWithExtraRides;
+{
+    for (Rider *rider in self.riders.allObjects)
+    {
+        if ([rider hasRequestedExtraRides])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

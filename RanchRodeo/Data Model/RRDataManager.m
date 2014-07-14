@@ -11,8 +11,8 @@
 
 @interface RRDataManager ()
 
-+ (NSManagedObjectContext *)managedObjectContext;
-+ (void)deleteEntitiesOfType:(NSString *)type;
+- (NSManagedObjectContext *)managedObjectContext;
+- (void)deleteEntitiesOfType:(NSString *)type;
 
 @end
 
@@ -24,60 +24,60 @@ NSString * const kRRDataManagerEntityTypeRider = @"Rider";
 NSString * const kRRDataManagerEntityTypeTeam = @"Team";
 NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
-+ (NSManagedObjectContext *)managedObjectContext
+- (NSManagedObjectContext *)managedObjectContext
 {
     return [(RRAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
 
-+ (NSArray *)allRiders
+- (NSArray *)allRiders
 {
-    return [RRDataManager allRidersUsingPredicate:nil];
+    return [self allRidersUsingPredicate:nil];
 }
 
-+ (NSArray *)allTeams
+- (NSArray *)allTeams
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeTeam];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;
 }
 
-+ (NSArray *)allWarnings
+- (NSArray *)allWarnings
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeWarning];
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;
 }
 
-+ (NSArray *)allParentRiders
+- (NSArray *)allParentRiders
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES"];
-    return [RRDataManager allRidersUsingPredicate:predicate];
+    return [self allRidersUsingPredicate:predicate];
 }
 
-+ (NSArray *)allChildRiders
+- (NSArray *)allChildRiders
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES"];
-    return [RRDataManager allRidersUsingPredicate:predicate];
+    return [self allRidersUsingPredicate:predicate];
 }
 
-+ (NSArray *)allRopers
+- (NSArray *)allRopers
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isRoper == YES"];
-    return [RRDataManager allRidersUsingPredicate:predicate];
+    return [self allRidersUsingPredicate:predicate];
 }
 
-+ (NSArray *)allNewRiders
+- (NSArray *)allNewRiders
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isNewRider == YES"];
-    return [RRDataManager allRidersUsingPredicate:predicate];
+    return [self allRidersUsingPredicate:predicate];
 }
 
-+ (NSArray *)allRidersUsingPredicate:(NSPredicate *)predicate
+- (NSArray *)allRidersUsingPredicate:(NSPredicate *)predicate
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
@@ -85,78 +85,78 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     {
         [fetchRequest setPredicate:predicate];
     }
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     return objects;
 }
 
-+ (Rider *)createRider
+- (Rider *)createRider
 {
-    Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[RRDataManager managedObjectContext]];
+    Rider *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeRider inManagedObjectContext:[self managedObjectContext]];
     return object;
 }
 
-+ (Team *)createTeam
+- (Team *)createTeam
 {
-    Team *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeTeam inManagedObjectContext:[RRDataManager managedObjectContext]];
+    Team *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeTeam inManagedObjectContext:[self managedObjectContext]];
     return object;
 }
 
-+ (Warning *)createWarning;
+- (Warning *)createWarning;
 {
-    Warning *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeWarning inManagedObjectContext:[RRDataManager managedObjectContext]];
+    Warning *object = [NSEntityDescription insertNewObjectForEntityForName:kRRDataManagerEntityTypeWarning inManagedObjectContext:[self managedObjectContext]];
     return object;
 }
 
-+ (BOOL)destroyObject:(NSManagedObject *)object
+- (BOOL)destroyObject:(NSManagedObject *)object
 {
-    [[RRDataManager managedObjectContext] deleteObject:object];
+    [[self managedObjectContext] deleteObject:object];
     NSError *saveError = nil;
-    [[RRDataManager managedObjectContext] save:&saveError];
+    [[self managedObjectContext] save:&saveError];
     
     return (saveError == nil);
 }
 
-+ (void)rollback
+- (void)rollback
 {
-    [[RRDataManager managedObjectContext] rollback];
+    [[self managedObjectContext] rollback];
 }
 
-+ (BOOL)save
+- (BOOL)save
 {
     NSError *saveError = nil;
-    [[RRDataManager managedObjectContext] save:&saveError];
+    [[self managedObjectContext] save:&saveError];
     
     return (saveError == nil);
 }
 
-+ (void)reset
+- (void)reset
 {
     [self deleteTeams];
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeRider];
 }
 
-+ (void)deleteTeams
+- (void)deleteTeams
 {
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeWarning];
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeTeam];
 }
 
-+ (void)deleteEntitiesOfType:(NSString *)type
+- (void)deleteEntitiesOfType:(NSString *)type
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:type inManagedObjectContext:[RRDataManager managedObjectContext]]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:type inManagedObjectContext:[self managedObjectContext]]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     
     NSError *error = nil;
-    NSArray *objects = [[RRDataManager managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     for (NSManagedObject *object in objects)
     {
-        [[RRDataManager managedObjectContext] deleteObject:object];
+        [[self managedObjectContext] deleteObject:object];
     }
     NSError *saveError = nil;
-    [[RRDataManager managedObjectContext] save:&saveError];
+    [[self managedObjectContext] save:&saveError];
 }
 
 @end
