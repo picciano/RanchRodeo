@@ -10,11 +10,13 @@
 #import "RRTeamCollectionViewCell.h"
 #import "RRWarningsDisplayPopoverViewController.h"
 #import "RRPrintRenderer.h"
+#import "RRTeamGenerator.h"
 
 @interface RRRosterViewController ()
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *teams;
 @property (nonatomic, strong) UIPopoverController *popOverController;
+@property (nonatomic, strong) UIBarButtonItem *regenerateTeamsButton;
 @property (nonatomic, strong) UIBarButtonItem *printButton;
 @end
 
@@ -30,9 +32,17 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
         [self setTitle:@"Roster"];
         
         self.printButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print:)];
-        [self.navigationItem setRightBarButtonItem:self.printButton];
+        self.regenerateTeamsButton = [[UIBarButtonItem alloc] initWithTitle:@"Regenerate Teams" style:UIBarButtonItemStyleBordered target:self action:@selector(regenerateTeams:)];
+        
+        [self.navigationItem setRightBarButtonItems:@[self.printButton, self.regenerateTeamsButton]];
     }
     return self;
+}
+
+- (void)regenerateTeams:(id)sender
+{
+    [[RRTeamGenerator sharedRRTeamGenerator] generateTeams];
+    [self loadData];
 }
 
 - (void)print:(id)sender

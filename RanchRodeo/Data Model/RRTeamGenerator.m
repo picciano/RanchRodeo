@@ -14,7 +14,7 @@ CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
 int const kMaxRidersPerTeam = 4;
 int const kMinimumWaitBetweenRides = 2;
-int const kPreferredWaitBetweenRides = 5;
+int const kPreferredWaitBetweenRides = 4;
 
 - (void)generateTeams
 {
