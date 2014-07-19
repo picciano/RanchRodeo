@@ -10,23 +10,26 @@
 
 @implementation RRTeamGenerator
 
-int const kMaxRidersPerTeam = 4;
-int const kMinimumWaitBetweenRides = 3;
+CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
-+ (void)generateTeams
+int const kMaxRidersPerTeam = 4;
+int const kMinimumWaitBetweenRides = 2;
+int const kPreferredWaitBetweenRides = 4;
+
+- (void)generateTeams
 {
     // delete teams
-    [RRDataManager deleteTeams];
+    [[RRDataManager sharedRRDataManager] deleteTeams];
     
     // create teams
-    int numberOfTeams = [RRTeamGenerator calculatedNumberOfTeams];
+    int numberOfTeams = [self calculatedNumberOfTeams];
     for (int i = 0; i < numberOfTeams; i++)
     {
-        Team *team = [RRDataManager createTeam];
+        Team *team = [[RRDataManager sharedRRDataManager] createTeam];
         [team setNumber:[NSNumber numberWithInt:i+1]];
     }
     
-    BOOL success = [RRDataManager save];
+    BOOL success = [[RRDataManager sharedRRDataManager] save];
     if (!success)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Teams could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -34,22 +37,27 @@ int const kMinimumWaitBetweenRides = 3;
     }
     
     // add children and their parents to teams
-    [self processRiders:[RRDataManager allChildRiders]];
+    [self processRiders:[[RRDataManager sharedRRDataManager] allChildRiders]];
     
     // add ropers to teams
-    [self processRiders:[RRDataManager allRopers]];
+    [self processRiders:[[RRDataManager sharedRRDataManager] allRopers]];
     
     // add new riders to teams
-    [self processRiders:[RRDataManager allNewRiders]];
+    [self processRiders:[[RRDataManager sharedRRDataManager] allNewRiders]];
+    
+    // add riders with extra rides to teams
+    [self processRiders:[[RRDataManager sharedRRDataManager] allRidersWithExtraRides]];
     
     // add everyone else to teams
-    [self processRiders:[RRDataManager allRiders]];
+    [self processRiders:[[RRDataManager sharedRRDataManager] allRiders]];
     
     // check for team warnings
     [self determineWarnings];
+    
+    [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:NO];
 }
 
-+ (void)processRiders:(NSArray *)riders
+- (void)processRiders:(NSArray *)riders
 {
     for (Rider *rider in riders)
     {
@@ -73,7 +81,7 @@ int const kMinimumWaitBetweenRides = 3;
         }
     }
     
-    BOOL success = [RRDataManager save];
+    BOOL success = [[RRDataManager sharedRRDataManager] save];
     if (!success)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Teams could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -81,11 +89,12 @@ int const kMinimumWaitBetweenRides = 3;
     }
 }
 
-+ (Team *)findTeamForRider:(Rider *)rider
+- (Team *)findTeamForRider:(Rider *)rider
 {
-    NSArray *teams = [RRDataManager allTeams];
+    NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
     NSMutableArray *potentialTeams = [NSMutableArray arrayWithCapacity:teams.count];
     NSMutableArray *preferredTeams = [NSMutableArray arrayWithCapacity:teams.count];
+    NSMutableArray *bestMatchTeams = [NSMutableArray arrayWithCapacity:teams.count];
     
     // mandatory rules
     for (Team *team in teams)
@@ -106,8 +115,7 @@ int const kMinimumWaitBetweenRides = 3;
     // preferred rules
     for (Team *team in potentialTeams)
     {
-        if ([rider highestTeamNumber] > 0 &&
-            team.number.intValue - [rider highestTeamNumber] < kMinimumWaitBetweenRides)
+        if ([rider hasTeamWithNumberWithin:kMinimumWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
             continue;
         }
@@ -133,52 +141,67 @@ int const kMinimumWaitBetweenRides = 3;
     // optional rules
     for (Team *team in preferredTeams)
     {
-        if ([rider highestTeamNumber] > 0 &&
-            team.number.intValue - [rider highestTeamNumber] < rider.preferredWaitBetweenRides)
+        if ([rider hasRequestedExtraRides] && team.hasRiderWithExtraRides)
         {
             continue;
         }
         
-        return team;
+        if ([rider hasTeamWithNumberWithin:kPreferredWaitBetweenRides ofTeamNumber:team.number.intValue])
+        {
+            continue;
+        }
+        
+        [bestMatchTeams addObject:team];
+    }
+    
+    // teams meets rules, return first result from preferred teams
+    if (bestMatchTeams.count > 0)
+    {
+        return [self randomTeamFromArray:bestMatchTeams];
     }
     
     // teams fails optional rules, return first result from preferred teams
     if (preferredTeams.count > 0)
     {
-        return [preferredTeams objectAtIndex:0];
+        return [self randomTeamFromArray:preferredTeams];
     }
     
     // teams failed preferred rules, return first result from potential teams
     if (potentialTeams.count > 0)
     {
-        return [potentialTeams objectAtIndex:0];
+        return [self randomTeamFromArray:potentialTeams];
     }
     
     return nil;
 }
 
-+ (void)determineWarnings
+- (Team *)randomTeamFromArray:(NSArray *)array
 {
-    NSArray *teams = [RRDataManager allTeams];
+    return [array objectAtIndex:rand()%[array count]];
+}
+
+- (void)determineWarnings
+{
+    NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
     
     for (Team *team in teams)
     {
         if (team.riders.count != 4)
         {
-            Warning *warning = [RRDataManager createWarning];
+            Warning *warning = [[RRDataManager sharedRRDataManager] createWarning];
             [warning setMessage:@"Team should have four riders."];
             [warning setTeam:team];
         }
         
         if (!team.allRidersHaveSignedWaiver)
         {
-            Warning *warning = [RRDataManager createWarning];
+            Warning *warning = [[RRDataManager sharedRRDataManager] createWarning];
             [warning setMessage:@"All riders need to sign waiver."];
             [warning setTeam:team];
         }
     }
     
-    BOOL success = [RRDataManager save];
+    BOOL success = [[RRDataManager sharedRRDataManager] save];
     if (!success)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Warnings could not be created." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -188,9 +211,9 @@ int const kMinimumWaitBetweenRides = 3;
 
 #pragma mark - public methods
 
-+ (int)numberOfRides
+- (int)numberOfRides
 {
-    NSArray *riders = [RRDataManager allRiders];
+    NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
     int numberOfRides = 0;
     
     for (Rider *rider in riders)
@@ -201,9 +224,9 @@ int const kMinimumWaitBetweenRides = 3;
     return numberOfRides;
 }
 
-+ (int)maximumNumberOfRidesPerRider
+- (int)maximumNumberOfRidesPerRider
 {
-    NSArray *riders = [RRDataManager allRiders];
+    NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
     int maximumNumberOfRides = 0;
     
     for (Rider *rider in riders)
@@ -214,11 +237,11 @@ int const kMinimumWaitBetweenRides = 3;
     return maximumNumberOfRides;
 }
 
-+ (int)calculatedNumberOfTeams
+- (int)calculatedNumberOfTeams
 {
     float numberOfRides = [self numberOfRides];
     float numberOfTeams = numberOfRides / kMaxRidersPerTeam;
-    return MAX(ceil(numberOfTeams), [RRTeamGenerator maximumNumberOfRidesPerRider]);
+    return MAX(ceil(numberOfTeams), [self maximumNumberOfRidesPerRider]);
 }
 
 @end

@@ -14,5 +14,6 @@
 - (BOOL)hasRoper;
 - (BOOL)hasNewRider;
 - (BOOL)allRidersHaveSignedWaiver;
+- (BOOL)hasRiderWithExtraRides;
 
 @end

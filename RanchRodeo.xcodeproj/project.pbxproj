@@ -43,6 +43,8 @@
 		E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */; };
 		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
 		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
+		E4AA4099197452DD007CEE65 /* RREditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */; };
+		E4AA409A197452DD007CEE65 /* RREditTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */; };
 		E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BB19509CB4006E53F5 /* Team+Category.m */; };
 		E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */; };
 		E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */; };
@@ -114,6 +116,9 @@
 		E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderTableViewCell.xib; sourceTree = "<group>"; };
 		E49DD2A019302E0C00A1BB9E /* Rider+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Rider+Category.h"; path = "Data Model/Rider+Category.h"; sourceTree = "<group>"; };
 		E49DD2A119302E0C00A1BB9E /* Rider+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Rider+Category.m"; path = "Data Model/Rider+Category.m"; sourceTree = "<group>"; };
+		E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RREditTeamViewController.h; sourceTree = "<group>"; };
+		E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RREditTeamViewController.m; sourceTree = "<group>"; };
+		E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RREditTeamViewController.xib; sourceTree = "<group>"; };
 		E4B7E9BA19509CB4006E53F5 /* Team+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Team+Category.h"; path = "Data Model/Team+Category.h"; sourceTree = "<group>"; };
 		E4B7E9BB19509CB4006E53F5 /* Team+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Team+Category.m"; path = "Data Model/Team+Category.m"; sourceTree = "<group>"; };
 		E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRWarningsDisplayPopoverViewController.h; sourceTree = "<group>"; };
@@ -254,6 +259,9 @@
 				E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */,
 				E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */,
 				E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */,
+				E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */,
+				E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */,
+				E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
 				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
+				E4AA409A197452DD007CEE65 /* RREditTeamViewController.xib in Resources */,
 				E40101C8192EA004009B780F /* Images.xcassets in Resources */,
 				E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */,
 				E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */,
@@ -442,6 +451,7 @@
 				E40101BF192EA004009B780F /* main.m in Sources */,
 				E4010201192ED545009B780F /* RRDataManager.m in Sources */,
 				E40101F7192EACFC009B780F /* Team.m in Sources */,
+				E4AA4099197452DD007CEE65 /* RREditTeamViewController.m in Sources */,
 				E40101E9192EA2F5009B780F /* RRRegistrationViewController.m in Sources */,
 				E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */,
 			);

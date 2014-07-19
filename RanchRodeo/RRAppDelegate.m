@@ -29,6 +29,9 @@
     
     [self initializeFlurry];
     
+    // Initialize random function
+    srand([[NSDate date] timeIntervalSince1970]);
+    
     return YES;
 }
 
