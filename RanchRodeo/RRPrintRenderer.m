@@ -7,8 +7,19 @@
 //
 
 #import "RRPrintRenderer.h"
+#import "RRTeamCollectionPrintViewCell.h"
+
+@interface RRPrintRenderer()
+
+@property (nonatomic, strong) NSArray *teams;
+@property (nonatomic) int currentPage;
+
+@end
 
 @implementation RRPrintRenderer
+
+static const int TEAMS_PER_PAGE = 12; // 4 rows of 3 teams
+NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
 
 - (id)init
 {
@@ -18,9 +29,23 @@
     {
         self.headerHeight = 36.0f;
         self.footerHeight = 0.0f;
+        self.currentPage = 0;
+        [self loadData];
     }
     
     return self;
+}
+
+- (void)loadData
+{
+    [self setTeams:[[RRDataManager sharedRRDataManager] allTeams]];
+}
+
+- (NSInteger)numberOfPages
+{
+    int numberOfTeams = self.teams.count;
+    int numberOfPages = ceil((float)numberOfTeams / TEAMS_PER_PAGE);
+    return numberOfPages;
 }
 
 - (void)drawHeaderForPageAtIndex:(NSInteger)pageIndex  inRect:(CGRect)headerRect
@@ -30,7 +55,7 @@
     [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
     CGSize titleSize = [self.jobTitle sizeWithAttributes:attrsDictionary];
     CGFloat drawX = CGRectGetMaxX(headerRect)/2 - titleSize.width/2;
-    CGFloat drawY = CGRectGetMaxY(headerRect) - titleSize.height;
+    CGFloat drawY = headerRect.origin.y + ((headerRect.size.height - titleSize.height) / 2.0f);
     CGPoint drawPoint = CGPointMake(drawX, drawY);
     
     [self.jobTitle drawAtPoint:drawPoint withAttributes:attrsDictionary];
@@ -38,42 +63,75 @@
 
 - (void)drawContentForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)contentRect
 {
-    CGRect original = self.collectionView.frame;
-    CGRect adjusted = original;
+    self.currentPage = pageIndex;
     
-    CGSize contentSize = self.collectionView.contentSize;
-    adjusted.size = contentSize;
-    self.collectionView.frame = adjusted;
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
+    collectionViewLayout.minimumLineSpacing = (contentRect.size.height - (160.0f * 4.0f)) / 3.0f; // change this if teams per page changes
     
-    CGRect printRect = CGRectInset(contentRect, 18.0f, 18.0f);
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:contentRect collectionViewLayout:collectionViewLayout];
+    [collectionView registerClass:[RRTeamCollectionPrintViewCell class] forCellWithReuseIdentifier:kTeamCollectionPrintViewCell];
+    collectionView.backgroundColor = [UIColor clearColor];
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
     
-    float printAreaRatio = CGRectGetWidth(printRect) / CGRectGetHeight(printRect);
-    float adjustedRatio = CGRectGetWidth(adjusted) / CGRectGetHeight(adjusted);
+    [collectionView drawViewHierarchyInRect:contentRect afterScreenUpdates:YES];
+}
+
+#pragma mark - Collection Data Source
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return MIN(self.teams.count - (self.currentPage * TEAMS_PER_PAGE), TEAMS_PER_PAGE);
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RRTeamCollectionPrintViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTeamCollectionPrintViewCell forIndexPath:indexPath];
     
-    if (printAreaRatio > adjustedRatio)
+    int teamIndex = (self.currentPage * TEAMS_PER_PAGE) + indexPath.row;
+    Team *team = (Team *)[self.teams objectAtIndex:teamIndex];
+    [cell.teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
+    
+    NSArray *riders = team.riders.allObjects;
+    for (int i = 0; i < 4; i++)
     {
-        // adjust width of print area
-        float newWidth = (CGRectGetHeight(printRect) / CGRectGetHeight(adjusted)) * CGRectGetWidth(adjusted);
-        float shiftAmount = (printRect.size.width - newWidth) / 2.0f;
-        printRect.size.width = newWidth;
-        
-        // center it horizontally
-        printRect.origin.x += shiftAmount;
-    }
-    else
-    {
-        // adjust height of print area
-        float newHeight = (CGRectGetWidth(printRect) / CGRectGetWidth(adjusted)) * CGRectGetHeight(adjusted);
-        float shiftAmount = (printRect.size.height - newHeight) / 2.0f;
-        printRect.size.height = newHeight;
-        
-        // center it vertically
-        printRect.origin.y += shiftAmount;
+        UILabel *riderNameLabel = [cell riderNameLabelByNumber:i];
+        if (riders.count > i)
+        {
+            Rider *rider = [riders objectAtIndex:i];
+            
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"show_rider_details"])
+            {
+                [riderNameLabel setText:rider.description];
+            }
+            else
+            {
+                [riderNameLabel setText:rider.fullName];
+            }
+            
+            if ([[rider isWaiverSigned] boolValue]) {
+                [riderNameLabel setTextColor:[UIColor blackColor]];
+            }
+            else
+            {
+                [riderNameLabel setTextColor:[UIColor redColor]];
+            }
+        }
+        else
+        {
+            [riderNameLabel setText:@"AVAILABLE"];
+            [riderNameLabel setTextColor:[UIColor redColor]];
+        }
     }
     
-    [self.collectionView drawViewHierarchyInRect:printRect afterScreenUpdates:YES];
-    
-    self.collectionView.frame = original;
+    return cell;
 }
 
 @end

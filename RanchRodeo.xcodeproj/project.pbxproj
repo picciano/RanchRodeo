@@ -32,6 +32,8 @@
 		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
 		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
 		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
+		E469518E19882860007352B1 /* RRTeamCollectionPrintViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */; };
+		E469518F19882860007352B1 /* RRTeamCollectionPrintViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */; };
 		E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4813A0B1951EB4C00DB30E0 /* Settings.bundle */; };
 		E4813A111951FF2C00DB30E0 /* libFlurry_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4813A101951FF2C00DB30E0 /* libFlurry_5.1.0.a */; };
 		E4813A131952000C00DB30E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4813A121952000C00DB30E0 /* Security.framework */; };
@@ -99,6 +101,9 @@
 		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
 		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
 		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
+		E469518B19882860007352B1 /* RRTeamCollectionPrintViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRTeamCollectionPrintViewCell.h; sourceTree = "<group>"; };
+		E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRTeamCollectionPrintViewCell.m; sourceTree = "<group>"; };
+		E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRTeamCollectionPrintViewCell.xib; sourceTree = "<group>"; };
 		E4813A0B1951EB4C00DB30E0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E4813A0F1951FF2C00DB30E0 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		E4813A101951FF2C00DB30E0 /* libFlurry_5.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.1.0.a; sourceTree = "<group>"; };
@@ -297,6 +302,9 @@
 				E4813A1B19520E9A00DB30E0 /* UIControl+NextControl.m */,
 				E4B7E9C51950E258006E53F5 /* RRPrintRenderer.h */,
 				E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */,
+				E469518B19882860007352B1 /* RRTeamCollectionPrintViewCell.h */,
+				E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */,
+				E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -393,6 +401,7 @@
 				E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */,
 				E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */,
 				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
+				E469518F19882860007352B1 /* RRTeamCollectionPrintViewCell.xib in Resources */,
 				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
 				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
 				E4AA409A197452DD007CEE65 /* RREditTeamViewController.xib in Resources */,
@@ -434,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E469518E19882860007352B1 /* RRTeamCollectionPrintViewCell.m in Sources */,
 				E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */,
 				E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */,
 				E40101FD192EACFC009B780F /* Warning.m in Sources */,

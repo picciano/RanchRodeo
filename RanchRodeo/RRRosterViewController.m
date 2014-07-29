@@ -75,7 +75,6 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     
     RRPrintRenderer *printRenderer = [[RRPrintRenderer alloc] init];
     [printRenderer setJobTitle:self.title];
-    [printRenderer setCollectionView:self.collectionView];
     controller.printPageRenderer = printRenderer;
     
     [controller presentFromBarButtonItem:self.printButton animated:YES completionHandler:completionHandler];

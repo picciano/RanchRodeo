@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RRPrintRenderer : UIPrintPageRenderer
+@interface RRPrintRenderer : UIPrintPageRenderer <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSString *jobTitle;
-@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
