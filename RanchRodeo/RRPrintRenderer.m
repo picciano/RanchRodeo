@@ -43,7 +43,7 @@ NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
 
 - (NSInteger)numberOfPages
 {
-    int numberOfTeams = self.teams.count;
+    int numberOfTeams = (int)self.teams.count;
     int numberOfPages = ceil((float)numberOfTeams / TEAMS_PER_PAGE);
     return numberOfPages;
 }
@@ -63,7 +63,7 @@ NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
 
 - (void)drawContentForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)contentRect
 {
-    self.currentPage = pageIndex;
+    self.currentPage = (int)pageIndex;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
@@ -95,7 +95,7 @@ NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
 {
     RRTeamCollectionPrintViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTeamCollectionPrintViewCell forIndexPath:indexPath];
     
-    int teamIndex = (self.currentPage * TEAMS_PER_PAGE) + indexPath.row;
+    int teamIndex = (int)((self.currentPage * TEAMS_PER_PAGE) + indexPath.row);
     Team *team = (Team *)[self.teams objectAtIndex:teamIndex];
     [cell.teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
     
