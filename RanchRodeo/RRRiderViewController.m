@@ -15,12 +15,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *teamNumberLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *isParentSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isChildSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isRoperSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isNewRiderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isWaiverSignedSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *isMemberOfTeamSwitch;
 @property (weak, nonatomic) IBOutlet UIStepper *numberOfRidesStepper;
+@property (weak, nonatomic) IBOutlet UIStepper *teamNumberStepper;
 
 @property (strong, nonatomic) NSArray *parents;
 
@@ -28,6 +31,7 @@
 - (IBAction)saveRider:(id)sender;
 - (IBAction)isChildSwitchChanged:(id)sender;
 - (IBAction)isParentSwitchChanged:(id)sender;
+- (IBAction)isMemberOfTeamSwitchChanged:(id)sender;
 
 @end
 
@@ -97,6 +101,10 @@ NSString * const kParentCell = @"parentCell";
         self.isChildSwitch.on = NO;
         [self isChildSwitchChanged:sender];
     }
+}
+
+- (IBAction)isMemberOfTeamSwitchChanged:(id)sender {
+    
 }
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender

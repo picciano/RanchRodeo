@@ -65,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AFE1AACF1A97DE4400C4ED46 /* RanchRodeo 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RanchRodeo 2.xcdatamodel"; sourceTree = "<group>"; };
 		E40101AD192EA004009B780F /* RanchRodeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RanchRodeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40101B0192EA004009B780F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E40101B2192EA004009B780F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -593,7 +594,7 @@
 					"$(PROJECT_DIR)/RanchRodeo",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A5CA384F-AE2B-4084-A657-FBB64F9AC445";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -614,7 +615,7 @@
 					"$(PROJECT_DIR)/RanchRodeo",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "747FC033-FF52-430E-9B45-BBE08AE4C712";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -695,6 +696,7 @@
 		E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				AFE1AACF1A97DE4400C4ED46 /* RanchRodeo 2.xcdatamodel */,
 				E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */,
 			);
 			currentVersion = E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */;
