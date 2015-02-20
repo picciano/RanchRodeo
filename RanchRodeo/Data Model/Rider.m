@@ -18,8 +18,10 @@
 @dynamic isNewRider;
 @dynamic isRoper;
 @dynamic isWaiverSigned;
+@dynamic isMemberOfTeam;
 @dynamic lastName;
 @dynamic numberOfRides;
+@dynamic teamNumber;
 @dynamic isParent;
 @dynamic children;
 @dynamic parents;

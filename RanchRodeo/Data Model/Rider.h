@@ -18,8 +18,10 @@
 @property (nonatomic, retain) NSNumber * isNewRider;
 @property (nonatomic, retain) NSNumber * isRoper;
 @property (nonatomic, retain) NSNumber * isWaiverSigned;
+@property (nonatomic, retain) NSNumber * isMemberOfTeam;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSNumber * numberOfRides;
+@property (nonatomic, retain) NSNumber * teamNumber;
 @property (nonatomic, retain) NSNumber * isParent;
 @property (nonatomic, retain) NSSet *children;
 @property (nonatomic, retain) NSSet *parents;
