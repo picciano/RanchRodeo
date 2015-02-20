@@ -15,19 +15,22 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *teamNumberLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *isParentSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isChildSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isRoperSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isNewRiderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isWaiverSignedSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *isMemberOfTeamSwitch;
+
+@property (weak, nonatomic) IBOutlet UIView *teamNumberView;
 @property (weak, nonatomic) IBOutlet UIStepper *numberOfRidesStepper;
 @property (weak, nonatomic) IBOutlet UIStepper *teamNumberStepper;
+@property (weak, nonatomic) IBOutlet UILabel *teamNumberLabel;
 
 @property (strong, nonatomic) NSArray *parents;
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender;
+- (IBAction)teamNumberDidUpdate:(id)sender;
 - (IBAction)saveRider:(id)sender;
 - (IBAction)isChildSwitchChanged:(id)sender;
 - (IBAction)isParentSwitchChanged:(id)sender;
@@ -104,7 +107,7 @@ NSString * const kParentCell = @"parentCell";
 }
 
 - (IBAction)isMemberOfTeamSwitchChanged:(id)sender {
-    
+    self.teamNumberView.hidden = ![self.isMemberOfTeamSwitch isOn];
 }
 
 - (IBAction)numberOfRidesDidUpdate:(id)sender
@@ -113,20 +116,31 @@ NSString * const kParentCell = @"parentCell";
     self.numberOfRidesLabel.text = [RRUtilities stringFromDouble:numberOfRidesStepper.value];
 }
 
+- (IBAction)teamNumberDidUpdate:(id)sender {
+    UIStepper *teamNumberStepper = (UIStepper *)sender;
+    self.teamNumberLabel.text = [RRUtilities stringFromDouble:teamNumberStepper.value];
+}
+
 - (void)updateDisplayFromDataObject
 {
     self.firstNameField.text = self.rider.firstName;
     self.lastNameField.text = self.rider.lastName;
     self.numberOfRidesLabel.text = [RRUtilities stringFromNumber:self.rider.numberOfRides];
     self.numberOfRidesStepper.value = [self.rider.numberOfRides doubleValue];
+    self.teamNumberLabel.text = [RRUtilities stringFromNumber:self.rider.teamNumber];
+    self.teamNumberStepper.value = [self.rider.teamNumber doubleValue];
     self.isChildSwitch.on = [self.rider.isChild boolValue];
     self.isParentSwitch.on = [self.rider.isParent boolValue];
     self.isRoperSwitch.on = [self.rider.isRoper boolValue];
     self.isNewRiderSwitch.on = [self.rider.isNewRider boolValue];
     self.isWaiverSignedSwitch.on = [self.rider.isWaiverSigned boolValue];
+    self.isMemberOfTeamSwitch.on = [self.rider.isMemberOfTeam boolValue];
     
     // only show parent table if rider is a child
     self.tableView.hidden = ![self.rider.isChild boolValue];
+    
+    // only show team number view is rider is a member of a team
+    self.teamNumberView.hidden = ![self.rider.isMemberOfTeam boolValue];
 }
 
 - (void)updateDataObjectFromDisplay
@@ -134,11 +148,13 @@ NSString * const kParentCell = @"parentCell";
     self.rider.firstName = self.firstNameField.text;
     self.rider.lastName = self.lastNameField.text;
     self.rider.numberOfRides = [RRUtilities numberFromString:self.numberOfRidesLabel.text];
+    self.rider.teamNumber = [RRUtilities numberFromString:self.teamNumberLabel.text];
     self.rider.isChild = [NSNumber numberWithBool:self.isChildSwitch.on];
     self.rider.isParent = [NSNumber numberWithBool:self.isParentSwitch.on];
     self.rider.isRoper = [NSNumber numberWithBool:self.isRoperSwitch.on];
     self.rider.isNewRider = [NSNumber numberWithBool:self.isNewRiderSwitch.on];
     self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
+    self.rider.isMemberOfTeam = [NSNumber numberWithBool:self.isMemberOfTeamSwitch.on];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

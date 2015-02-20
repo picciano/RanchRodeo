@@ -731,7 +731,7 @@
 				AFE1AACF1A97DE4400C4ED46 /* RanchRodeo 2.xcdatamodel */,
 				E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */,
 			);
-			currentVersion = E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */;
+			currentVersion = AFE1AACF1A97DE4400C4ED46 /* RanchRodeo 2.xcdatamodel */;
 			path = RanchRodeo.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
