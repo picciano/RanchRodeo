@@ -200,6 +200,7 @@ int const kPreferredWaitBetweenRides = 3;
 
 - (Team *)randomTeamFromArray:(NSArray *)array
 {
+    // prefer teams with the least number of current riders
     for (int i = 0; i < 4; i++) {
         NSArray *teams = [self teamsFromArray:array withNumberOfRiders:i];
         if (teams.count > 0) {
