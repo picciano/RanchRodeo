@@ -13,6 +13,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *numberOfRidesLabel;
 @property (nonatomic, weak) IBOutlet UILabel *categoryLabel;
+@property (nonatomic, weak) IBOutlet UILabel *teamLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *waiverSignedImageView;
 
 @end
@@ -40,6 +41,15 @@
         icon = [UIImage imageNamed:@"Icon-X"];
     }
     [self.waiverSignedImageView setImage:icon];
+    
+    if ([self.rider.isMemberOfTeam boolValue])
+    {
+        self.teamLabel.text = [NSString stringWithFormat:@"Team: %i", [self.rider.teamNumber intValue] + 1];
+    }
+    else
+    {
+        self.teamLabel.text = @"";
+    }
 }
 
 @end
