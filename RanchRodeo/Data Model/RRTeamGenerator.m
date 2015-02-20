@@ -13,8 +13,8 @@
 CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
 int const kMaxRidersPerTeam = 4;
-int const kMinimumWaitBetweenRides = 2;
-int const kPreferredWaitBetweenRides = 4;
+int const kMinimumWaitBetweenRides = 1;
+int const kPreferredWaitBetweenRides = 3;
 
 - (void)generateTeams
 {
@@ -36,6 +36,9 @@ int const kPreferredWaitBetweenRides = 4;
         [alertView show];
     }
     
+    // add self-determined teams
+    [self processSelfDeterminedTeam:[[RRDataManager sharedRRDataManager] allRidersWithMemberOfTeam]];
+    
     // add children and their parents to teams
     [self processRiders:[[RRDataManager sharedRRDataManager] allChildRiders]];
     
@@ -55,6 +58,17 @@ int const kPreferredWaitBetweenRides = 4;
     [self determineWarnings];
     
     [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:NO];
+}
+
+- (void)processSelfDeterminedTeam:(NSArray *)riders
+{
+    NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
+    
+    for (Rider *rider in riders)
+    {
+        Team *team = teams[[rider.teamNumber intValue]];
+        [team addRidersObject:rider];
+    }
 }
 
 - (void)processRiders:(NSArray *)riders
@@ -115,22 +129,16 @@ int const kPreferredWaitBetweenRides = 4;
     // preferred rules
     for (Team *team in potentialTeams)
     {
+        if ([rider isAlreadyOnATeamWithTheMembersOfTeam:team]) {
+            continue;
+        }
+        
         if ([rider hasTeamWithNumberWithin:kMinimumWaitBetweenRides ofTeamNumber:team.number.intValue])
         {
             continue;
         }
         
         if ([[rider isChild] boolValue] && team.hasChildRider)
-        {
-            continue;
-        }
-        
-        if ([[rider isRoper] boolValue] && team.hasRoper)
-        {
-            continue;
-        }
-        
-        if ([[rider isNewRider] boolValue] && team.hasNewRider)
         {
             continue;
         }
@@ -142,6 +150,16 @@ int const kPreferredWaitBetweenRides = 4;
     for (Team *team in preferredTeams)
     {
         if ([rider hasRequestedExtraRides] && team.hasRiderWithExtraRides)
+        {
+            continue;
+        }
+        
+        if ([[rider isRoper] boolValue] && team.hasRoper)
+        {
+            continue;
+        }
+        
+        if ([[rider isNewRider] boolValue] && team.hasNewRider)
         {
             continue;
         }
@@ -172,12 +190,36 @@ int const kPreferredWaitBetweenRides = 4;
         return [self randomTeamFromArray:potentialTeams];
     }
     
+    NSLog(@"No team found for rider: %@", rider);
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Forming Teams" message:@"Not all riders were assigned to a team. Please regenerate team again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alertView show];
+    
     return nil;
 }
 
 - (Team *)randomTeamFromArray:(NSArray *)array
 {
+    for (int i = 0; i < 4; i++) {
+        NSArray *teams = [self teamsFromArray:array withNumberOfRiders:i];
+        if (teams.count > 0) {
+            return [teams objectAtIndex:rand()%[teams count]];
+        }
+    }
+    
     return [array objectAtIndex:rand()%[array count]];
+}
+
+- (NSArray *)teamsFromArray:(NSArray *)teams withNumberOfRiders:(int)number
+{
+    NSMutableArray *results = [NSMutableArray array];
+    for (Team *team in teams)
+    {
+        if (team.riders.count == number) {
+            [results addObject:team];
+        }
+    }
+    return results;
 }
 
 - (void)determineWarnings
