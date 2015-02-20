@@ -63,6 +63,30 @@ NSString * const kRiderCategoryGeneral = @"G";
     return NO;
 }
 
+- (BOOL)isAlreadyOnATeamWithTheMembersOfTeam:(Team *)team
+{
+    for (Rider *rider in team.riders) {
+        if ([self amIOnATeamWithRider:rider]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL)amIOnATeamWithRider:(Rider *)rider
+{
+    for (Team *team in self.teams.allObjects)
+    {
+        if ([team hasRider:self])
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (BOOL)hasRequestedExtraRides
 {
     return [[self numberOfRides] intValue] > 2;

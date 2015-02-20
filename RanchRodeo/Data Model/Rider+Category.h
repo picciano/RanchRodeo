@@ -13,6 +13,7 @@
 - (NSString *)category;
 - (NSString *)fullName;
 - (BOOL)hasTeamWithNumberWithin:(int)numberOfRides ofTeamNumber:(int)teamNumber;
+- (BOOL)isAlreadyOnATeamWithTheMembersOfTeam:(Team *)team;
 - (BOOL)hasRequestedExtraRides;
 
 @end

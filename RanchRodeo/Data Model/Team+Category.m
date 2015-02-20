@@ -70,4 +70,16 @@
     return NO;
 }
 
+- (BOOL)hasRider:(Rider *)rider
+{
+    for (Rider *otherRider in self.riders.allObjects)
+    {
+        if (rider == otherRider)
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end
