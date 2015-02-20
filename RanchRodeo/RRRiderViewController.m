@@ -118,7 +118,7 @@ NSString * const kParentCell = @"parentCell";
 
 - (IBAction)teamNumberDidUpdate:(id)sender {
     UIStepper *teamNumberStepper = (UIStepper *)sender;
-    self.teamNumberLabel.text = [RRUtilities stringFromDouble:teamNumberStepper.value];
+    self.teamNumberLabel.text = [RRUtilities stringFromNumber:@(teamNumberStepper.value + 1)];
 }
 
 - (void)updateDisplayFromDataObject
@@ -127,7 +127,7 @@ NSString * const kParentCell = @"parentCell";
     self.lastNameField.text = self.rider.lastName;
     self.numberOfRidesLabel.text = [RRUtilities stringFromNumber:self.rider.numberOfRides];
     self.numberOfRidesStepper.value = [self.rider.numberOfRides doubleValue];
-    self.teamNumberLabel.text = [RRUtilities stringFromNumber:self.rider.teamNumber];
+    self.teamNumberLabel.text = [RRUtilities stringFromNumber:@([self.rider.teamNumber intValue] + 1)];
     self.teamNumberStepper.value = [self.rider.teamNumber doubleValue];
     self.isChildSwitch.on = [self.rider.isChild boolValue];
     self.isParentSwitch.on = [self.rider.isParent boolValue];
@@ -148,7 +148,7 @@ NSString * const kParentCell = @"parentCell";
     self.rider.firstName = self.firstNameField.text;
     self.rider.lastName = self.lastNameField.text;
     self.rider.numberOfRides = [RRUtilities numberFromString:self.numberOfRidesLabel.text];
-    self.rider.teamNumber = [RRUtilities numberFromString:self.teamNumberLabel.text];
+    self.rider.teamNumber = [NSNumber numberWithInt:[[RRUtilities numberFromString:self.teamNumberLabel.text] intValue] - 1];
     self.rider.isChild = [NSNumber numberWithBool:self.isChildSwitch.on];
     self.rider.isParent = [NSNumber numberWithBool:self.isParentSwitch.on];
     self.rider.isRoper = [NSNumber numberWithBool:self.isRoperSwitch.on];
