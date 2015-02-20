@@ -107,6 +107,12 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return [self allRidersUsingPredicate:predicate];
 }
 
+- (NSArray *)allRidersWithMemberOfTeam
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isMemberOfTeam == YES"];
+    return [self allRidersUsingPredicate:predicate];
+}
+
 - (NSArray *)allRidersUsingPredicate:(NSPredicate *)predicate
 {
     NSError *error = nil;
