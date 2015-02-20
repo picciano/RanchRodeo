@@ -165,6 +165,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AFE1AAD01A97DF2A00C4ED46 /* Registration View */ = {
+			isa = PBXGroup;
+			children = (
+				E40101E6192EA2F5009B780F /* RRRegistrationViewController.h */,
+				E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */,
+				E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */,
+				E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */,
+				E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */,
+				E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */,
+			);
+			name = "Registration View";
+			sourceTree = "<group>";
+		};
+		AFE1AAD11A97DF3F00C4ED46 /* Rider View */ = {
+			isa = PBXGroup;
+			children = (
+				E40101F0192EA5A6009B780F /* RRRiderViewController.h */,
+				E40101F1192EA5A6009B780F /* RRRiderViewController.m */,
+				E40101F2192EA5A6009B780F /* RRRiderViewController.xib */,
+			);
+			name = "Rider View";
+			sourceTree = "<group>";
+		};
+		AFE1AAD21A97DF4700C4ED46 /* Roster View */ = {
+			isa = PBXGroup;
+			children = (
+				E40101EB192EA3AC009B780F /* RRRosterViewController.h */,
+				E40101EC192EA3AC009B780F /* RRRosterViewController.m */,
+				E40101ED192EA3AC009B780F /* RRRosterViewController.xib */,
+				E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */,
+				E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */,
+				E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */,
+				E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */,
+				E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */,
+				E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */,
+			);
+			name = "Roster View";
+			sourceTree = "<group>";
+		};
+		AFE1AAD31A97DF5900C4ED46 /* Edit Team View */ = {
+			isa = PBXGroup;
+			children = (
+				E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */,
+				E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */,
+				E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */,
+			);
+			name = "Edit Team View";
+			sourceTree = "<group>";
+		};
 		E40101A4192EA004009B780F = {
 			isa = PBXGroup;
 			children = (
@@ -247,27 +296,10 @@
 		E40101E5192EA2CD009B780F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E40101E6192EA2F5009B780F /* RRRegistrationViewController.h */,
-				E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */,
-				E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */,
-				E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */,
-				E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */,
-				E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */,
-				E40101F0192EA5A6009B780F /* RRRiderViewController.h */,
-				E40101F1192EA5A6009B780F /* RRRiderViewController.m */,
-				E40101F2192EA5A6009B780F /* RRRiderViewController.xib */,
-				E40101EB192EA3AC009B780F /* RRRosterViewController.h */,
-				E40101EC192EA3AC009B780F /* RRRosterViewController.m */,
-				E40101ED192EA3AC009B780F /* RRRosterViewController.xib */,
-				E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */,
-				E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */,
-				E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */,
-				E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */,
-				E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */,
-				E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */,
-				E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */,
-				E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */,
-				E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */,
+				AFE1AAD01A97DF2A00C4ED46 /* Registration View */,
+				AFE1AAD11A97DF3F00C4ED46 /* Rider View */,
+				AFE1AAD21A97DF4700C4ED46 /* Roster View */,
+				AFE1AAD31A97DF5900C4ED46 /* Edit Team View */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
