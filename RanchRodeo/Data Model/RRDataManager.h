@@ -32,6 +32,7 @@ CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
 - (NSArray *)allRopers;
 - (NSArray *)allNewRiders;
 - (NSArray *)allRidersWithExtraRides;
+- (NSArray *)allRidersWithMemberOfTeam;
 - (NSArray *)teamsWithMissingRiders;
 - (Rider *)createRider;
 - (Team *)createTeam;
