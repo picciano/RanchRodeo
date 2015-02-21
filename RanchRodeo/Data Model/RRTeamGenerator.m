@@ -66,8 +66,16 @@ int const kPreferredWaitBetweenRides = 3;
     
     for (Rider *rider in riders)
     {
-        Team *team = teams[[rider.teamNumber intValue]];
-        [team addRidersObject:rider];
+        if ([rider.teamNumber intValue] < teams.count)
+        {
+            Team *team = teams[[rider.teamNumber intValue]];
+            [team addRidersObject:rider];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Forming Teams" message:@"A rider has specified a team number that is not available. Choose a lower team number." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alertView show];
+        }
     }
 }
 
@@ -232,7 +240,7 @@ int const kPreferredWaitBetweenRides = 3;
         if (team.riders.count != 4)
         {
             Warning *warning = [[RRDataManager sharedRRDataManager] createWarning];
-            [warning setMessage:@"Team should have four riders."];
+            [warning setMessage:[NSString stringWithFormat:@"Team should have four riders.\nIt currently has %lu.", (unsigned long)team.riders.count]];
             [warning setTeam:team];
         }
         
