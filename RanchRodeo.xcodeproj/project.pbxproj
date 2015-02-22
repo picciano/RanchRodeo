@@ -636,8 +636,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anthony Picciano (PC5SP4V242)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anthony Picciano (PC5SP4V242)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
 				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
@@ -647,7 +647,7 @@
 					"$(PROJECT_DIR)/RanchRodeo",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "747FC033-FF52-430E-9B45-BBE08AE4C712";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
