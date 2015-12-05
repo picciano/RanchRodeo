@@ -8,7 +8,6 @@
 
 #import "RRAppDelegate.h"
 #import "RRRegistrationViewController.h"
-#import "Flurry.h"
 
 @implementation RRAppDelegate
 
@@ -27,18 +26,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [self initializeFlurry];
-    
     // Initialize random function
     srand([[NSDate date] timeIntervalSince1970]);
     
     return YES;
-}
-
-- (void)initializeFlurry
-{
-    [Flurry setCrashReportingEnabled:YES];
-    [Flurry startSession:@"QJ3MBF3FH63DN32GWN28"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

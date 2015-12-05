@@ -2,12 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "horses_rodeo_line_up.png"
+      "filename" : "horses_rodeo_line_up.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

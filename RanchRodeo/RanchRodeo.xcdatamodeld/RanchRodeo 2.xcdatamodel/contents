@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
     <entity name="Rider" representedClassName="Rider" syncable="YES">
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="isChild" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -9,8 +9,8 @@
         <attribute name="isRoper" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isWaiverSigned" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
-        <attribute name="numberOfRides" attributeType="Integer 16" minValueString="1" maxValueString="5" defaultValueString="2" syncable="YES"/>
-        <attribute name="teamNumber" attributeType="Integer 16" minValueString="0" maxValueString="10" defaultValueString="0" syncable="YES"/>
+        <attribute name="numberOfRides" attributeType="Integer 16" minValueString="1" maxValueString="100" defaultValueString="2" syncable="YES"/>
+        <attribute name="teamNumber" attributeType="Integer 16" minValueString="0" maxValueString="99" defaultValueString="0" syncable="YES"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="parents" inverseEntity="Rider" syncable="YES"/>
         <relationship name="parents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="children" inverseEntity="Rider" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="riders" inverseEntity="Team" syncable="YES"/>

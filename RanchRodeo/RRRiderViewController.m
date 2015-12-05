@@ -54,6 +54,7 @@ NSString * const kParentCell = @"parentCell";
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kParentCell];
 }
 
@@ -159,6 +160,7 @@ NSString * const kParentCell = @"parentCell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
     {
         [[RRDataManager sharedRRDataManager] rollback];

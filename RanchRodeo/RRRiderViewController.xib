@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RRRiderViewController">
@@ -31,6 +31,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9N2-cO-RTd">
                     <rect key="frame" x="467" y="322" width="173" height="55"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <state key="normal" title="Save Rider">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,11 +42,13 @@
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter rider's first name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILp-Km-gnq">
                     <rect key="frame" x="20" y="81" width="174" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="First Name" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="aoM-Yh-Q90">
                     <rect key="frame" x="20" y="110" width="240" height="48"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                     <connections>
@@ -55,16 +58,19 @@
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter rider's last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9S-uH-MO7">
                     <rect key="frame" x="268" y="81" width="173" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of rides" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XjE-om-9rF">
                     <rect key="frame" x="516" y="81" width="124" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Last Name" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="V6g-He-fEX">
                     <rect key="frame" x="268" y="110" width="240" height="48"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                     <connections>
@@ -72,14 +78,16 @@
                         <outlet property="nextControl" destination="aoM-Yh-Q90" id="voJ-j6-Ixn"/>
                     </connections>
                 </textField>
-                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="kjC-AV-yhv">
+                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="99" translatesAutoresizingMaskIntoConstraints="NO" id="kjC-AV-yhv">
                     <rect key="frame" x="574" y="119" width="94" height="29"/>
+                    <animations/>
                     <connections>
                         <action selector="numberOfRidesDidUpdate:" destination="-1" eventType="valueChanged" id="zyn-pb-fIe"/>
                     </connections>
                 </stepper>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3C-D2-4DV">
                     <rect key="frame" x="516" y="114" width="50" height="43"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -89,37 +97,44 @@
                     <subviews>
                         <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="29" translatesAutoresizingMaskIntoConstraints="NO" id="4tx-1Z-UxQ">
                             <rect key="frame" x="158" y="51" width="94" height="29"/>
+                            <animations/>
                             <connections>
                                 <action selector="teamNumberDidUpdate:" destination="-1" eventType="valueChanged" id="gw4-Od-YVE"/>
                             </connections>
                         </stepper>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOZ-4U-I4k">
                             <rect key="frame" x="100" y="44" width="50" height="43"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWb-d4-78u">
-                            <rect key="frame" x="36" y="55" width="56" height="21"/>
+                            <rect key="frame" x="36" y="55" width="68" height="21"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.77120685577392578" green="0.77115458250045776" blue="0.77118515968322754" alpha="0.5" colorSpace="calibratedRGB"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member of Team?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTx-6E-EGh">
                     <rect key="frame" x="426" y="183" width="139" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-Lp-ZG6">
                     <rect key="frame" x="619" y="178" width="51" height="31"/>
+                    <animations/>
                     <connections>
                         <action selector="isMemberOfTeamSwitchChanged:" destination="-1" eventType="valueChanged" id="NWQ-hD-srz"/>
                     </connections>
                 </switch>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="S8Z-z2-suo">
                     <rect key="frame" x="684" y="66" width="320" height="299"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="b5B-Xe-ZQT"/>
@@ -128,54 +143,66 @@
                 </tableView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider is a roper?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXs-fq-qTi">
                     <rect key="frame" x="122" y="261" width="127" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9rZ-6V-1qu">
                     <rect key="frame" x="315" y="256" width="51" height="31"/>
+                    <animations/>
                 </switch>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider is child?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1k-Up-OIx">
                     <rect key="frame" x="122" y="222" width="109" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PFf-AJ-Swb">
                     <rect key="frame" x="315" y="217" width="51" height="31"/>
+                    <animations/>
                     <connections>
                         <action selector="isChildSwitchChanged:" destination="-1" eventType="valueChanged" id="lFy-tc-pZ0"/>
                     </connections>
                 </switch>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider signed waiver?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdt-tu-Bqm">
                     <rect key="frame" x="122" y="339" width="161" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lx0-JO-HL6">
                     <rect key="frame" x="315" y="334" width="51" height="31"/>
+                    <animations/>
                 </switch>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider is new?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-mj-gFM">
                     <rect key="frame" x="122" y="300" width="104" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eG6-Iz-CN4">
                     <rect key="frame" x="315" y="295" width="51" height="31"/>
+                    <animations/>
                 </switch>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider is a parent?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UU-fY-38z">
                     <rect key="frame" x="122" y="183" width="136" height="21"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Siz-Ru-Cvz">
                     <rect key="frame" x="315" y="178" width="51" height="31"/>
+                    <animations/>
                     <connections>
                         <action selector="isParentSwitchChanged:" destination="-1" eventType="valueChanged" id="TyQ-N7-ah3"/>
                     </connections>
                 </switch>
                 <imageView userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="glD-lN-HGn">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <animations/>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -184,9 +211,4 @@
     <resources>
         <image name="Background" width="1200" height="900"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>

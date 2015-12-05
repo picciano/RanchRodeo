@@ -38,6 +38,7 @@ NSString * const kRiderCell = @"riderCell";
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRiderCell];
 }
 

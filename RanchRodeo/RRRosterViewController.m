@@ -82,6 +82,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     [self.collectionView registerClass:[RRTeamCollectionViewCell class] forCellWithReuseIdentifier:kTeamCollectionViewCell];
     [self loadData];
 }
@@ -94,6 +95,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self updateDisplay];
 }
 
