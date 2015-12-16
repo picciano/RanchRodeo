@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+    <entity name="Rider" representedClassName="Rider" syncable="YES">
+        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="isChild" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isMemberOfTeam" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isNewRider" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isParent" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isRoper" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isWaiverSigned" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfRides" attributeType="Integer 16" minValueString="1" maxValueString="100" defaultValueString="2" syncable="YES"/>
+        <attribute name="teamNumber" attributeType="Integer 16" minValueString="0" maxValueString="99" defaultValueString="0" syncable="YES"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="parents" inverseEntity="Rider" syncable="YES"/>
+        <relationship name="parents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="children" inverseEntity="Rider" syncable="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="riders" inverseEntity="Team" syncable="YES"/>
+    </entity>
+    <entity name="Team" representedClassName="Team" syncable="YES">
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="riders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rider" inverseName="teams" inverseEntity="Rider" syncable="YES"/>
+        <relationship name="warnings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Warning" inverseName="team" inverseEntity="Warning" syncable="YES"/>
+    </entity>
+    <entity name="Warning" representedClassName="Warning" syncable="YES">
+        <attribute name="message" attributeType="String" syncable="YES"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="warnings" inverseEntity="Team" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Rider" positionX="-99" positionY="9" width="128" height="238"/>
+        <element name="Team" positionX="171" positionY="-18" width="128" height="90"/>
+        <element name="Warning" positionX="144" positionY="161" width="128" height="73"/>
+    </elements>
+</model>
