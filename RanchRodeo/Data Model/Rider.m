@@ -21,6 +21,7 @@
 @dynamic isMemberOfTeam;
 @dynamic lastName;
 @dynamic numberOfRides;
+@dynamic isEnabled;
 @dynamic teamNumber;
 @dynamic isParent;
 @dynamic children;

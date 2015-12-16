@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
     <entity name="Rider" representedClassName="Rider" syncable="YES">
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="isChild" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isEnabled" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="isMemberOfTeam" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isNewRider" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isParent" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -25,7 +26,7 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="warnings" inverseEntity="Team" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Rider" positionX="-99" positionY="9" width="128" height="238"/>
+        <element name="Rider" positionX="-99" positionY="9" width="128" height="253"/>
         <element name="Team" positionX="171" positionY="-18" width="128" height="90"/>
         <element name="Warning" positionX="144" positionY="161" width="128" height="73"/>
     </elements>
