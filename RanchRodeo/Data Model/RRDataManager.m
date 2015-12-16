@@ -181,10 +181,6 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     NSError *saveError = nil;
     [[self managedObjectContext] save:&saveError];
     
-    if (saveError) {
-        NSLog(@"Error saving: %@", saveError.localizedDescription);
-    }
-    
     return (saveError == nil);
 }
 

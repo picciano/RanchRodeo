@@ -132,21 +132,6 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
     [erasedAlertView show];
 }
 
-//- (void)enabledSwitchAction:(id)sender {
-//    UISwitch *enabledSwitch = (UISwitch *)sender;
-//    
-//    NSLog(@"Switch: %@", enabledSwitch.on?@"ON":@"OFF");
-//    
-//    NSInteger index = enabledSwitch.tag;
-//    Rider *rider = self.riders[index];
-//    rider.isEnabled = [NSNumber numberWithBool:enabledSwitch.on];
-//    
-//    NSLog(@"Rider enabled: %@", rider.isEnabled?@"ENABLED":@"DISABLED");
-//    
-//    BOOL result = [[RRDataManager sharedRRDataManager] save];
-//    NSLog(@"Save: %@", result?@"SUCCESS":@"FAIL");
-//}
-
 #pragma mark - UITableViewDataSource and UITableViewDelegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -156,17 +141,8 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RRRiderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRRRegistrationRiderCell forIndexPath:indexPath];
-    Rider *rider = self.riders[indexPath.row];
-    [cell setRider:rider];
-    
-//    NSLog(@"Rider enabled: %@", rider.isEnabled?@"ENABLED":@"DISABLED");
-    
-//    UISwitch *enabledSwitch = [[UISwitch alloc] init];
-//    enabledSwitch.on = rider.isEnabled;
-//    enabledSwitch.tag = indexPath.row;
-//    [enabledSwitch addTarget:self action:@selector(enabledSwitchAction:) forControlEvents:UIControlEventValueChanged];
-//    cell.accessoryView = enabledSwitch;
+    RRRiderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRRRegistrationRiderCell forIndexPath:indexPath];    
+    [cell setRider:self.riders[indexPath.row]];
     
     return cell;
 }
