@@ -42,20 +42,11 @@
 
 NSString * const kParentCell = @"parentCell";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        [self setTitle:@"Rider"];
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kParentCell];
+    self.title = @"Rider";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -156,6 +147,9 @@ NSString * const kParentCell = @"parentCell";
     self.rider.isNewRider = [NSNumber numberWithBool:self.isNewRiderSwitch.on];
     self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
     self.rider.isMemberOfTeam = [NSNumber numberWithBool:self.isMemberOfTeamSwitch.on];
+    
+#warning REMOVE THIS
+//    self.rider.isEnabled = [NSNumber numberWithBool:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

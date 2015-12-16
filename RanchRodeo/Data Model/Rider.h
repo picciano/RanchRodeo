@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSNumber * numberOfRides;
 @property (nonatomic, retain) NSNumber * teamNumber;
+//@property (nonatomic, retain) NSNumber * isEnabled;
 @property (nonatomic, retain) NSNumber * isParent;
 @property (nonatomic, retain) NSSet *children;
 @property (nonatomic, retain) NSSet *parents;
