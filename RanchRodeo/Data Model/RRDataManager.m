@@ -34,6 +34,12 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     return [self allRidersUsingPredicate:nil];
 }
 
+- (NSArray *)allEnabledRiders
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isEnabled == YES"];
+    return [self allRidersUsingPredicate:predicate];
+}
+
 - (NSArray *)allTeams
 {
     NSError *error = nil;
@@ -79,37 +85,37 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 - (NSArray *)allParentRiders
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isParent == YES AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
 - (NSArray *)allChildRiders
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isChild == YES AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
 - (NSArray *)allRopers
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isRoper == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isRoper == YES AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
 - (NSArray *)allNewRiders
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isNewRider == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isNewRider == YES AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
 - (NSArray *)allRidersWithExtraRides
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"numberOfRides > 2"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"numberOfRides > 2 AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
 - (NSArray *)allRidersWithMemberOfTeam
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isMemberOfTeam == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isMemberOfTeam == YES AND isEnabled == YES"];
     return [self allRidersUsingPredicate:predicate];
 }
 
@@ -180,6 +186,10 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     
     NSError *saveError = nil;
     [[self managedObjectContext] save:&saveError];
+    
+    if (saveError) {
+        NSLog(@"Error saving: %@", saveError.localizedDescription);
+    }
     
     return (saveError == nil);
 }

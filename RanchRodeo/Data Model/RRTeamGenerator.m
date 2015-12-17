@@ -52,7 +52,7 @@ int const kPreferredWaitBetweenRides = 3;
     [self processRiders:[[RRDataManager sharedRRDataManager] allRidersWithExtraRides]];
     
     // add everyone else to teams
-    [self processRiders:[[RRDataManager sharedRRDataManager] allRiders]];
+    [self processRiders:[[RRDataManager sharedRRDataManager] allEnabledRiders]];
     
     // check for team warnings
     [self determineWarnings];
@@ -264,7 +264,7 @@ int const kPreferredWaitBetweenRides = 3;
 
 - (int)numberOfRides
 {
-    NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
+    NSArray *riders = [[RRDataManager sharedRRDataManager] allEnabledRiders];
     int numberOfRides = 0;
     
     for (Rider *rider in riders)
@@ -277,7 +277,7 @@ int const kPreferredWaitBetweenRides = 3;
 
 - (int)maximumNumberOfRidesPerRider
 {
-    NSArray *riders = [[RRDataManager sharedRRDataManager] allRiders];
+    NSArray *riders = [[RRDataManager sharedRRDataManager] allEnabledRiders];
     int maximumNumberOfRides = 0;
     
     for (Rider *rider in riders)
