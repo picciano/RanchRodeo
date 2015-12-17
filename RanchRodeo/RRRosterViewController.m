@@ -137,7 +137,7 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *riders = team.riders.allObjects;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam]; i++)
     {
         UILabel *riderNameLabel = [cell riderNameLabelByNumber:i];
         if (riders.count > i)

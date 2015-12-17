@@ -8,6 +8,7 @@
 
 #import "RRDataManager.h"
 #import "RRAppDelegate.h"
+#import "RRTeamGenerator.h"
 
 @interface RRDataManager ()
 
@@ -66,7 +67,7 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
     NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
     for (Team *team in self.allTeams)
     {
-        if (team.riders.count < 4)
+        if (team.riders.count < [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam])
         {
             [objects addObject:team];
         }

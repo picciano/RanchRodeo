@@ -12,9 +12,12 @@
 
 CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
-int const kMaxRidersPerTeam = 4;
 int const kMinimumWaitBetweenRides = 2;
 int const kPreferredWaitBetweenRides = 3;
+
+- (NSInteger)ridersPerTeam {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ridersPerTeam"];
+}
 
 - (void)generateTeams
 {
@@ -121,7 +124,7 @@ int const kPreferredWaitBetweenRides = 3;
     // mandatory rules
     for (Team *team in teams)
     {
-        if (team.riders.count >= kMaxRidersPerTeam)
+        if (team.riders.count >= [self ridersPerTeam])
         {
             continue;
         }
@@ -209,7 +212,7 @@ int const kPreferredWaitBetweenRides = 3;
 - (Team *)randomTeamFromArray:(NSArray *)array
 {
     // prefer teams with the least number of current riders
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam]; i++) {
         NSArray *teams = [self teamsFromArray:array withNumberOfRiders:i];
         if (teams.count > 0) {
             return [teams objectAtIndex:rand()%[teams count]];
@@ -239,10 +242,10 @@ int const kPreferredWaitBetweenRides = 3;
     
     for (Team *team in teams)
     {
-        if (team.riders.count != 4)
+        if (team.riders.count != [self ridersPerTeam])
         {
             Warning *warning = [[RRDataManager sharedRRDataManager] createWarning];
-            [warning setMessage:[NSString stringWithFormat:@"Team should have four riders.\nIt currently has %lu.", (unsigned long)team.riders.count]];
+            [warning setMessage:[NSString stringWithFormat:@"Team should have %li riders.\nIt currently has %lu.", (long)[self ridersPerTeam], (unsigned long)team.riders.count]];
             [warning setTeam:team];
         }
         
@@ -293,7 +296,7 @@ int const kPreferredWaitBetweenRides = 3;
 - (int)calculatedNumberOfTeams
 {
     float numberOfRides = [self numberOfRides];
-    float numberOfTeams = numberOfRides / kMaxRidersPerTeam;
+    float numberOfTeams = numberOfRides / [self ridersPerTeam];
     return MAX(ceil(numberOfTeams), [self maximumNumberOfRidesPerRider]);
 }
 

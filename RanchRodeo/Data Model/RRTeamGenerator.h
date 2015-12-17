@@ -18,5 +18,6 @@ CWL_DECLARE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 - (int)maximumNumberOfRidesPerRider;
 - (int)calculatedNumberOfTeams;
 - (void)determineWarnings;
+- (NSInteger)ridersPerTeam;
 
 @end

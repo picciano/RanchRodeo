@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfRidesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfTeamsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ridersPerTeamControl;
 
 @property (strong, nonatomic) NSArray *allRiders;
 @property (strong, nonatomic) NSArray *enabledRiders;
@@ -82,6 +83,16 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
     self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.enabledRiders.count];
     self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] numberOfRides]];
     self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] calculatedNumberOfTeams]];
+    
+    NSInteger ridersPerTeam = [[NSUserDefaults standardUserDefaults] integerForKey:@"ridersPerTeam"];
+    
+    if (ridersPerTeam != 3 && ridersPerTeam != 4) {
+        ridersPerTeam = 4;
+        [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"ridersPerTeam"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    self.ridersPerTeamControl.selectedSegmentIndex = ridersPerTeam - 3;
 }
 
 - (IBAction)createRider:(id)sender
@@ -101,6 +112,15 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
     
     RRRosterViewController *viewController = [[RRRosterViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (IBAction)ridersPerTeamChanged:(id)sender {
+    UISegmentedControl *control = (UISegmentedControl *)sender;
+    [[NSUserDefaults standardUserDefaults] setInteger:control.selectedSegmentIndex + 3 forKey:@"ridersPerTeam"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:YES];
+    [self updateDisplay];
 }
 
 #pragma mark - Reset Data

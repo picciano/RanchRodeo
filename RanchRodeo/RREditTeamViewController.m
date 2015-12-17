@@ -110,7 +110,7 @@ NSString * const kActionCell = @"actionCell";
         NSArray *allTeams = [[RRDataManager sharedRRDataManager] allTeams];
         
         for (Team *team in allTeams) {
-            if (team != self.team && team.riders.count == 4 && ![team hasRider:self.selectedRider]) {
+            if (team != self.team && team.riders.count == [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam] && ![team hasRider:self.selectedRider]) {
                 for (Rider *rider in team.riders) {
                     if (rider != self.selectedRider) {
                         Action *action = [[Action alloc] init];

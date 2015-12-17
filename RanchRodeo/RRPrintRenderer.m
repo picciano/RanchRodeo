@@ -8,6 +8,7 @@
 
 #import "RRPrintRenderer.h"
 #import "RRTeamCollectionPrintViewCell.h"
+#import "RRTeamGenerator.h"
 
 @interface RRPrintRenderer()
 
@@ -100,7 +101,7 @@ NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
     [cell.teamNumberLabel setText:[NSString stringWithFormat:@"%i", team.number.intValue]];
     
     NSArray *riders = team.riders.allObjects;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam]; i++)
     {
         UILabel *riderNameLabel = [cell riderNameLabelByNumber:i];
         if (riders.count > i)
