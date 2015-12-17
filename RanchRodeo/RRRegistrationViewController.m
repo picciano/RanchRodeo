@@ -20,7 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfTeamsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
-@property (strong, nonatomic) NSArray *riders;
+@property (strong, nonatomic) NSArray *allRiders;
+@property (strong, nonatomic) NSArray *enabledRiders;
 
 - (IBAction)createRider:(id)sender;
 - (IBAction)viewRoster:(id)sender;
@@ -70,14 +71,15 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 
 - (void)loadData
 {
-    [self setRiders:[[RRDataManager sharedRRDataManager] allRiders]];
+    self.allRiders = [[RRDataManager sharedRRDataManager] allRiders];
+    self.enabledRiders = [[RRDataManager sharedRRDataManager] allEnabledRiders];
     [self.tableView reloadData];
     [self updateDisplay];
 }
 
 - (void)updateDisplay
 {
-    self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.riders.count];
+    self.numberOfRidersLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.enabledRiders.count];
     self.numberOfRidesLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] numberOfRides]];
     self.numberOfTeamsLabel.text = [NSString stringWithFormat:@"%i", [[RRTeamGenerator sharedRRTeamGenerator] calculatedNumberOfTeams]];
 }
@@ -132,17 +134,34 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
     [erasedAlertView show];
 }
 
+- (void)enabledSwitchAction:(id)sender {
+    UISwitch *enabledSwitch = (UISwitch *)sender;
+    NSInteger index = enabledSwitch.tag;
+    Rider *rider = self.allRiders[index];
+    rider.isEnabled = [NSNumber numberWithBool:enabledSwitch.on];
+    [[RRDataManager sharedRRDataManager] save];
+    
+    [self loadData];
+}
+
 #pragma mark - UITableViewDataSource and UITableViewDelegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.riders.count;
+    return self.allRiders.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RRRiderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRRRegistrationRiderCell forIndexPath:indexPath];    
-    [cell setRider:self.riders[indexPath.row]];
+    RRRiderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRRRegistrationRiderCell forIndexPath:indexPath];
+    Rider *rider = self.allRiders[indexPath.row];
+    [cell setRider:rider];
+    
+    UISwitch *enabledSwitch = [[UISwitch alloc] init];
+    enabledSwitch.on = rider.isEnabled.boolValue;
+    enabledSwitch.tag = indexPath.row;
+    [enabledSwitch addTarget:self action:@selector(enabledSwitchAction:) forControlEvents:UIControlEventValueChanged];
+    cell.accessoryView = enabledSwitch;
     
     return cell;
 }
@@ -156,7 +175,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RRRiderViewController *viewController = [[RRRiderViewController alloc] initWithNibName:nil bundle:nil];
-    [viewController setRider:self.riders[indexPath.row]];
+    [viewController setRider:self.allRiders[indexPath.row]];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -169,7 +188,7 @@ NSString * const kRRRegistrationRiderCell = @"riderCell";
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [[RRDataManager sharedRRDataManager] destroyObject:self.riders[indexPath.row]];
+        [[RRDataManager sharedRRDataManager] destroyObject:self.allRiders[indexPath.row]];
         [self loadData];
     }
 }
