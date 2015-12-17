@@ -41,6 +41,7 @@
 @implementation RRRiderViewController
 
 NSString * const kParentCell = @"parentCell";
+bool hasChanges = NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,6 +65,24 @@ NSString * const kParentCell = @"parentCell";
     
     [self updateDisplayFromDataObject];
     [self loadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
+    {
+        [[RRDataManager sharedRRDataManager] rollback];
+        return;
+    }
+    
+    [self updateDataObjectFromDisplay];
+    
+    if (hasChanges)
+    {
+        [[RRDataManager sharedRRDataManager] save];
+    }
 }
 
 - (void)loadData
@@ -146,29 +165,54 @@ NSString * const kParentCell = @"parentCell";
 
 - (void)updateDataObjectFromDisplay
 {
-    self.rider.firstName = self.firstNameField.text;
-    self.rider.lastName = self.lastNameField.text;
-    self.rider.numberOfRides = [RRUtilities numberFromString:self.numberOfRidesLabel.text];
-    self.rider.teamNumber = [NSNumber numberWithInt:[[RRUtilities numberFromString:self.teamNumberLabel.text] intValue] - 1];
-    self.rider.isChild = [NSNumber numberWithBool:self.isChildSwitch.on];
-    self.rider.isParent = [NSNumber numberWithBool:self.isParentSwitch.on];
-    self.rider.isRoper = [NSNumber numberWithBool:self.isRoperSwitch.on];
-    self.rider.isNewRider = [NSNumber numberWithBool:self.isNewRiderSwitch.on];
-    self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
-    self.rider.isMemberOfTeam = [NSNumber numberWithBool:self.isMemberOfTeamSwitch.on];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    if (self.firstNameField.text.length == 0 || self.lastNameField.text.length == 0)
-    {
-        [[RRDataManager sharedRRDataManager] rollback];
+    if (![self.rider.firstName isEqualToString:self.firstNameField.text]) {
+        self.rider.firstName = self.firstNameField.text;
+        hasChanges = YES;
     }
-    else
-    {
-        [self updateDataObjectFromDisplay];
-        [[RRDataManager sharedRRDataManager] save];
+    
+    if (![self.rider.lastName isEqualToString:self.lastNameField.text]) {
+        self.rider.lastName = self.lastNameField.text;
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.numberOfRides isEqualToNumber:[RRUtilities numberFromString:self.numberOfRidesLabel.text]]) {
+        self.rider.numberOfRides = [RRUtilities numberFromString:self.numberOfRidesLabel.text];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.teamNumber isEqualToNumber:[NSNumber numberWithInt:[[RRUtilities numberFromString:self.teamNumberLabel.text] intValue] - 1]]) {
+        self.rider.teamNumber = [NSNumber numberWithInt:[[RRUtilities numberFromString:self.teamNumberLabel.text] intValue] - 1];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isChild isEqualToNumber:[NSNumber numberWithBool:self.isChildSwitch.on]]) {
+        self.rider.isChild = [NSNumber numberWithBool:self.isChildSwitch.on];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isParent isEqualToNumber:[NSNumber numberWithBool:self.isParentSwitch.on]]) {
+        self.rider.isParent = [NSNumber numberWithBool:self.isParentSwitch.on];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isRoper isEqualToNumber:[NSNumber numberWithBool:self.isRoperSwitch.on]]) {
+        self.rider.isRoper = [NSNumber numberWithBool:self.isRoperSwitch.on];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isNewRider isEqualToNumber:[NSNumber numberWithBool:self.isNewRiderSwitch.on]]) {
+        self.rider.isNewRider = [NSNumber numberWithBool:self.isNewRiderSwitch.on];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isWaiverSigned isEqualToNumber:[NSNumber numberWithBool:self.isWaiverSignedSwitch.on]]) {
+        self.rider.isWaiverSigned = [NSNumber numberWithBool:self.isWaiverSignedSwitch.on];
+        hasChanges = YES;
+    }
+    
+    if (![self.rider.isMemberOfTeam isEqualToNumber:[NSNumber numberWithBool:self.isMemberOfTeamSwitch.on]]) {
+        self.rider.isMemberOfTeam = [NSNumber numberWithBool:self.isMemberOfTeamSwitch.on];
+        hasChanges = YES;
     }
 }
 
