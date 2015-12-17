@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFAF74E51C225C1D0033B412 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAF74E41C225C1D0033B412 /* Action.m */; };
 		E40101B1192EA004009B780F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B0192EA004009B780F /* Foundation.framework */; };
 		E40101B3192EA004009B780F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B2192EA004009B780F /* CoreGraphics.framework */; };
 		E40101B5192EA004009B780F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B4192EA004009B780F /* UIKit.framework */; };
@@ -65,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		AFAF74E21C222AC10033B412 /* RanchRodeo 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RanchRodeo 3.xcdatamodel"; sourceTree = "<group>"; };
+		AFAF74E31C225C1D0033B412 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		AFAF74E41C225C1D0033B412 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 		AFE1AACF1A97DE4400C4ED46 /* RanchRodeo 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RanchRodeo 2.xcdatamodel"; sourceTree = "<group>"; };
 		E40101AD192EA004009B780F /* RanchRodeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RanchRodeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40101B0192EA004009B780F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -207,6 +210,8 @@
 				E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */,
 				E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */,
 				E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */,
+				AFAF74E31C225C1D0033B412 /* Action.h */,
+				AFAF74E41C225C1D0033B412 /* Action.m */,
 			);
 			name = "Edit Team View";
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				E40101FA192EACFC009B780F /* Rider.m in Sources */,
 				E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */,
 				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
+				AFAF74E51C225C1D0033B412 /* Action.m in Sources */,
 				E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */,
 				E4813A1C19520E9A00DB30E0 /* UIControl+NextControl.m in Sources */,
 				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,

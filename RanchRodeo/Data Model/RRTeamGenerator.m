@@ -233,6 +233,8 @@ int const kPreferredWaitBetweenRides = 3;
 
 - (void)determineWarnings
 {
+    [[RRDataManager sharedRRDataManager] deleteWarnings];
+    
     NSArray *teams = [[RRDataManager sharedRRDataManager] allTeams];
     
     for (Team *team in teams)

@@ -7,143 +7,199 @@
 //
 
 #import "RREditTeamViewController.h"
+#import "Action.h"
+#import "RRTeamGenerator.h"
+#import "Team+Category.h"
 
 @interface RREditTeamViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *teamButton1;
-@property (nonatomic, weak) IBOutlet UIButton *teamButton2;
-@property (nonatomic, weak) IBOutlet UIButton *teamButton3;
+@property (weak, nonatomic) IBOutlet UITableView *actionTableView;
+@property (weak, nonatomic) IBOutlet UILabel *actionLabel;
 
-@property (nonatomic, strong) NSArray *teamsWithMissingRiders;
 @property (nonatomic, assign) Rider *selectedRider;
-
-- (IBAction)moveRider:(id)sender;
+@property (nonatomic, strong) NSMutableArray *actions;
+@property (nonatomic) CGFloat originalTableHeight;
 
 @end
 
 @implementation RREditTeamViewController
 
 NSString * const kRiderCell = @"riderCell";
+NSString * const kActionCell = @"actionCell";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        [self setTitle:@"Edit Team"];
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.actions = [NSMutableArray array];
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRiderCell];
+    [self.actionTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kActionCell];
+    self.title = @"Edit Team";
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self loadData];
 }
 
-- (void)loadData
-{
+- (void)loadData {
     [self.tableView reloadData];
-    [self setTeamsWithMissingRiders:[[RRDataManager sharedRRDataManager] teamsWithMissingRiders]];
     [self updateDisplay];
 }
 
-- (void)updateDisplay
-{
-    //hide all buttons
-    self.teamButton1.hidden = YES;
-    self.teamButton2.hidden = YES;
-    self.teamButton3.hidden = YES;
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     
-    if (self.selectedRider)
-    {
-        int index = 0;
-        
-        for (Team *team in self.teamsWithMissingRiders)
-        {
-            // if the team is alread ythe current team, skip
-            if (team.number.intValue == self.team.number.intValue)
-            {
-                continue;
-            }
-            
-            // if the rider is already on the other team, skip
-            if ([team.riders containsObject:self.selectedRider])
-            {
-                continue;
-            }
-            
-            UIButton *button = [self teamButtonByNumber:index];
-            [button setTitle:[NSString stringWithFormat:@"Move to team %i", team.number.intValue]  forState:UIControlStateNormal];
-            button.tag = team.number.intValue;
-            button.hidden = NO;
-            index++;
-        }
+    // Force your tableview margins (this may be a bad idea)
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    // Force your tableview margins (this may be a bad idea)
+    if ([self.actionTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.actionTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.actionTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.actionTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    self.originalTableHeight = self.actionTableView.frame.size.height;
+    [self adjustTableHeight];
+}
+
+- (void)adjustTableHeight {
+    CGRect frame = self.actionTableView.frame;
+    frame.size.height = [self tableView:self.actionTableView numberOfRowsInSection:1] * 44 - 1;
+    
+    // Adjust table height, but only smaller.
+    if (frame.size.height < self.originalTableHeight) {
+        self.actionTableView.frame = frame;
+        self.actionTableView.scrollEnabled = NO;
+    } else {
+        frame.size.height = self.originalTableHeight;
+        self.actionTableView.frame = frame;
+        self.actionTableView.scrollEnabled = YES;
     }
 }
 
-- (IBAction)moveRider:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    Team *toTeam = [[RRDataManager sharedRRDataManager] teamWithNumber:(int)button.tag];
-    [[RRDataManager sharedRRDataManager] moveRider:self.selectedRider fromTeam:self.team toTeam:toTeam];
+- (void)updateDisplay {
+    [self.actions removeAllObjects];
     
+    if (self.selectedRider) {
+        
+        NSArray *teamsWithMissingRiders = [[RRDataManager sharedRRDataManager] teamsWithMissingRiders];
+        
+        for (Team *team in teamsWithMissingRiders) {
+            if (team != self.team && ![team.riders containsObject:self.selectedRider]) {
+                Action *action = [[Action alloc] init];
+                action.type = ActionTypeMove;
+                action.riderToMove = self.selectedRider;
+                action.fromTeam = self.team;
+                action.toTeam = team;
+                [self.actions addObject:action];
+            }
+        }
+        
+        NSArray *allTeams = [[RRDataManager sharedRRDataManager] allTeams];
+        
+        for (Team *team in allTeams) {
+            if (team != self.team && team.riders.count == 4 && ![team hasRider:self.selectedRider]) {
+                for (Rider *rider in team.riders) {
+                    if (rider != self.selectedRider) {
+                        Action *action = [[Action alloc] init];
+                        action.type = ActionTypeSwap;
+                        action.riderToMove = self.selectedRider;
+                        action.otherRider = rider;
+                        action.fromTeam = self.team;
+                        action.toTeam = team;
+                        [self.actions addObject:action];
+                    }
+                }
+            }
+        }
+        
+        self.actionLabel.text = (self.actions.count == 0)?@"No Actions Available":@"Available Actions";
+    } else {
+        self.actionLabel.text = @"Select a Rider";
+    }
+    
+    self.actionTableView.hidden = self.actions.count == 0;
+    
+    [self.actionTableView reloadData];
+    [self adjustTableHeight];
+}
+
+- (void)performAction:(Action *)action {
+    [[RRDataManager sharedRRDataManager] moveRider:action.riderToMove fromTeam:action.fromTeam toTeam:action.toTeam];
+    
+    if (action.type == ActionTypeSwap) {
+        [[RRDataManager sharedRRDataManager] moveRider:action.otherRider fromTeam:action.toTeam toTeam:action.fromTeam];
+    }
+    
+    [[RRTeamGenerator sharedRRTeamGenerator] determineWarnings];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.team.riders.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.tableView) {
+        return self.team.riders.count;
+    }
+    
+    return self.actions.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRiderCell forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.tableView) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRiderCell forIndexPath:indexPath];
+        
+        Rider *rider = [self.team.riders.allObjects objectAtIndex:indexPath.row];
+        cell.textLabel.text = rider.fullName;
+        
+        return cell;
+    }
     
-    Rider *rider = (Rider *)[[self.team.riders allObjects] objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[rider fullName]];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCell forIndexPath:indexPath];
+    cell.textLabel.text = [self.actions[indexPath.row] description];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    self.selectedRider = (Rider *)[[self.team.riders allObjects] objectAtIndex:indexPath.row];
-    [self updateDisplay];
-}
-
-- (UIButton *)teamButtonByNumber:(int)index
-{
-    UIButton *teamButton = nil;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Courtesy of http://stackoverflow.com/questions/25770119/ios-8-uitableview-separator-inset-0-not-working
     
-    switch (index)
-    {
-        case 0:
-            teamButton = self.teamButton1;
-            break;
-            
-        case 1:
-            teamButton = self.teamButton2;
-            break;
-            
-        case 2:
-            teamButton = self.teamButton3;
-            break;
-            
-        default:
-            break;
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    return teamButton;
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    cell.preservesSuperviewLayoutMargins = NO;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.tableView) {
+        self.selectedRider = [self.team.riders.allObjects objectAtIndex:indexPath.row];
+        [self updateDisplay];
+        return;
+    }
+    
+    Action *action = self.actions[indexPath.row];
+    [self performAction:action];
+}
 
 @end

@@ -202,8 +202,13 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 
 - (void)deleteTeams
 {
-    [self deleteEntitiesOfType:kRRDataManagerEntityTypeWarning];
+    [self deleteWarnings];
     [self deleteEntitiesOfType:kRRDataManagerEntityTypeTeam];
+}
+
+- (void)deleteWarnings
+{
+    [self deleteEntitiesOfType:kRRDataManagerEntityTypeWarning];
 }
 
 - (void)deleteEntitiesOfType:(NSString *)type

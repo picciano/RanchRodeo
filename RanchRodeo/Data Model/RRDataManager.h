@@ -23,6 +23,7 @@ CWL_DECLARE_SINGLETON_FOR_CLASS(RRDataManager);
 - (BOOL)saveAndRegenerateIfNeeded:(BOOL)regenerateIfNeeded;
 - (void)reset;
 - (void)deleteTeams;
+- (void)deleteWarnings;
 - (NSArray *)allEnabledRiders;
 - (NSArray *)allRiders;
 - (NSArray *)allTeams;
