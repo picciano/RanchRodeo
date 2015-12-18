@@ -65,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF16FE561C249D1900B96334 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		AFAF74E21C222AC10033B412 /* RanchRodeo 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RanchRodeo 3.xcdatamodel"; sourceTree = "<group>"; };
 		AFAF74E31C225C1D0033B412 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		AFAF74E41C225C1D0033B412 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
@@ -254,6 +255,7 @@
 			children = (
 				E40101C1192EA004009B780F /* RRAppDelegate.h */,
 				E40101C2192EA004009B780F /* RRAppDelegate.m */,
+				AF16FE561C249D1900B96334 /* Common.h */,
 				E4010202192ED598009B780F /* Utilities */,
 				E40101E5192EA2CD009B780F /* View Controllers */,
 				E40101FE192EAD04009B780F /* Data model */,

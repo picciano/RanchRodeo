@@ -10,6 +10,7 @@
 #import "Action.h"
 #import "RRTeamGenerator.h"
 #import "Team+Category.h"
+#import "Common.h"
 
 @interface RREditTeamViewController ()
 
@@ -178,18 +179,19 @@ NSString * const kActionCell = @"actionCell";
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0.0")) {
+        // Prevent the cell from inheriting the Table View's margin settings
+        if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+        
+        cell.preservesSuperviewLayoutMargins = NO;
     }
     
     // Explictly set your cell's layout margins
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-    cell.preservesSuperviewLayoutMargins = NO;
-}
+    }}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
