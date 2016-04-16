@@ -14,6 +14,10 @@ CWL_SYNTHESIZE_SINGLETON_FOR_CLASS(RRTeamGenerator);
 
 int const kMinimumWaitBetweenRides = 2;
 int const kPreferredWaitBetweenRides = 3;
+int const kMaximumRetryCount = 5;
+
+int retryCount = 0;
+BOOL shouldRetry = false;
 
 - (NSInteger)ridersPerTeam {
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"ridersPerTeam"];
@@ -60,7 +64,15 @@ int const kPreferredWaitBetweenRides = 3;
     // check for team warnings
     [self determineWarnings];
     
-    [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:NO];
+    if (retryCount < kMaximumRetryCount && shouldRetry) {
+        shouldRetry = NO;
+        retryCount++;
+        [self generateTeams];
+    } else {
+        shouldRetry = NO;
+        retryCount = 0;
+        [[RRDataManager sharedRRDataManager] setNeedsTeamGeneration:NO];
+    }
 }
 
 - (void)processSelfDeterminedTeam:(NSArray *)riders
@@ -197,6 +209,8 @@ int const kPreferredWaitBetweenRides = 3;
     // teams failed preferred rules, return first result from potential teams
     if (potentialTeams.count > 0)
     {
+        shouldRetry = YES;
+        
         Team *result = [self randomTeamFromArray:potentialTeams];
         NSLog(@"Returning POTENTIAL match for %@: Team %@", rider.fullName, result.number);
         return result;
