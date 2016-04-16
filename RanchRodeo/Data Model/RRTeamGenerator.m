@@ -160,11 +160,6 @@ int const kPreferredWaitBetweenRides = 3;
     // optional rules
     for (Team *team in preferredTeams)
     {
-        if ([rider hasRequestedExtraRides] && team.hasRiderWithExtraRides)
-        {
-            continue;
-        }
-        
         if ([[rider isRoper] boolValue] && team.hasRoper)
         {
             continue;
@@ -186,19 +181,25 @@ int const kPreferredWaitBetweenRides = 3;
     // teams meets rules, return first result from preferred teams
     if (bestMatchTeams.count > 0)
     {
-        return [self randomTeamFromArray:bestMatchTeams];
+        Team *result = [self randomTeamFromArray:bestMatchTeams];
+        NSLog(@"Returning BEST match for %@: Team %@", rider.fullName, result.number);
+        return result;
     }
     
     // teams fails optional rules, return first result from preferred teams
     if (preferredTeams.count > 0)
     {
-        return [self randomTeamFromArray:preferredTeams];
+        Team *result = [self randomTeamFromArray:preferredTeams];
+        NSLog(@"Returning PREFERRED match for %@: Team %@", rider.fullName, result.number);
+        return result;
     }
     
     // teams failed preferred rules, return first result from potential teams
     if (potentialTeams.count > 0)
     {
-        return [self randomTeamFromArray:potentialTeams];
+        Team *result = [self randomTeamFromArray:potentialTeams];
+        NSLog(@"Returning POTENTIAL match for %@: Team %@", rider.fullName, result.number);
+        return result;
     }
     
     NSLog(@"No team found for rider: %@", rider);

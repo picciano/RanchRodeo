@@ -78,7 +78,7 @@ NSString * const kRiderCategoryGeneral = @"G";
 {
     for (Team *team in self.teams.allObjects)
     {
-        if ([team hasRider:self])
+        if ([team hasRider:self] && [team hasRider:rider])
         {
             return YES;
         }
