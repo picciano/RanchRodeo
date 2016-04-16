@@ -136,7 +136,9 @@ NSString * const kTeamCollectionViewCell = @"teamCollectionViewCell";
     cell.editButton.tag = team.number.intValue - 1;
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSArray *riders = team.riders.allObjects;
+    NSMutableArray *riders = team.riders.allObjects.mutableCopy;
+    [riders sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
+                                   [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]]];
     for (int i = 0; i < [[RRTeamGenerator sharedRRTeamGenerator] ridersPerTeam]; i++)
     {
         UILabel *riderNameLabel = [cell riderNameLabelByNumber:i];
