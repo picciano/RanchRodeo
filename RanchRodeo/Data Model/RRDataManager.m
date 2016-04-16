@@ -124,6 +124,8 @@ NSString * const kRRDataManagerEntityTypeWarning = @"Warning";
 {
     NSError *error = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kRRDataManagerEntityTypeRider];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES],
+                                      [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES], nil]];
     if (predicate)
     {
         [fetchRequest setPredicate:predicate];
