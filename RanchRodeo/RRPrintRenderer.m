@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSArray *teams;
 @property (nonatomic) int currentPage;
+@property (nonatomic, strong) UIImage *currentPageImage;
 
 @end
 
@@ -21,6 +22,18 @@
 
 static const int TEAMS_PER_PAGE = 12; // 4 rows of 3 teams
 NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
+
+void runOnMainQueueWithoutDeadlocking(void (^block)(void))
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
 
 - (id)init
 {
@@ -65,18 +78,32 @@ NSString * const kTeamCollectionPrintViewCell = @"teamCollectionPrintViewCell";
 - (void)drawContentForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)contentRect
 {
     self.currentPage = (int)pageIndex;
-    
-    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
-    collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
-    collectionViewLayout.minimumLineSpacing = (contentRect.size.height - (160.0f * 4.0f)) / 3.0f; // change this if teams per page changes
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:contentRect collectionViewLayout:collectionViewLayout];
-    [collectionView registerClass:[RRTeamCollectionPrintViewCell class] forCellWithReuseIdentifier:kTeamCollectionPrintViewCell];
-    collectionView.backgroundColor = [UIColor clearColor];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    
-    [collectionView drawViewHierarchyInRect:contentRect afterScreenUpdates:YES];
+    [self makeImageWithSize: contentRect];
+    [self.currentPageImage drawInRect:contentRect];
+}
+
+- (void)makeImageWithSize:(CGRect)contentRect {
+    runOnMainQueueWithoutDeadlocking(^{
+        UIGraphicsBeginImageContext(contentRect.size);
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
+        collectionViewLayout.minimumLineSpacing = (contentRect.size.height - (160.0f * 4.0f)) / 3.0f; // change this if teams per page changes
+        
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:contentRect collectionViewLayout:collectionViewLayout];
+        [collectionView registerClass:[RRTeamCollectionPrintViewCell class] forCellWithReuseIdentifier:kTeamCollectionPrintViewCell];
+        collectionView.backgroundColor = [UIColor clearColor];
+        collectionView.dataSource = self;
+        collectionView.delegate = self;
+        
+        [collectionView drawViewHierarchyInRect:contentRect afterScreenUpdates:YES];
+        
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        self.currentPageImage = image;
+    });
 }
 
 #pragma mark - Collection Data Source
