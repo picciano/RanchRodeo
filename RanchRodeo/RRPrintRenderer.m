@@ -41,7 +41,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
     
     if (self)
     {
-        self.headerHeight = 36.0f;
+        self.headerHeight = 6.0f;
         self.footerHeight = 0.0f;
         self.currentPage = 0;
         [self loadData];
@@ -88,15 +88,23 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
-        collectionViewLayout.minimumLineSpacing = (contentRect.size.height - (160.0f * 4.0f)) / 3.0f; // change this if teams per page changes
         
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:contentRect collectionViewLayout:collectionViewLayout];
+        CGRect collectionRect = CGRectMake(0, 0,
+                                           contentRect.size.width - contentRect.origin.x, // right margin
+                                           contentRect.size.height - contentRect.origin.y); // botton margin
+        
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionRect collectionViewLayout:collectionViewLayout];
         [collectionView registerClass:[RRTeamCollectionPrintViewCell class] forCellWithReuseIdentifier:kTeamCollectionPrintViewCell];
         collectionView.backgroundColor = [UIColor clearColor];
         collectionView.dataSource = self;
         collectionView.delegate = self;
         
-        [collectionView drawViewHierarchyInRect:contentRect afterScreenUpdates:YES];
+        CGRect drawRect = CGRectMake(contentRect.origin.x,
+                                     contentRect.origin.y,
+                                     collectionRect.size.width,
+                                     collectionRect.size.height);
+        
+        [collectionView drawViewHierarchyInRect:drawRect afterScreenUpdates:YES];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         
