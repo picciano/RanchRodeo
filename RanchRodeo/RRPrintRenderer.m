@@ -89,8 +89,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.itemSize = CGSizeMake(180.0f, 160.0f);
         
-        CGRect collectionRect = CGRectMake(0, 0,
-                                           contentRect.size.width - contentRect.origin.x, // right margin
+        CGRect collectionRect = CGRectMake(0, 0, contentRect.size.width - contentRect.origin.x, // right margin
                                            contentRect.size.height - contentRect.origin.y); // botton margin
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionRect collectionViewLayout:collectionViewLayout];
