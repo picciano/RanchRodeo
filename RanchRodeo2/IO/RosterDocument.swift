@@ -3,11 +3,11 @@ import SwiftData
 import UniformTypeIdentifiers
 import CoreTransferable
 
-struct RosterDocument: Codable, Sendable {
+nonisolated struct RosterDocument: Codable, Sendable {
     var version: Int = 1
     var riders: [RiderExport]
 
-    struct RiderExport: Codable, Sendable {
+    nonisolated struct RiderExport: Codable, Sendable {
         let id: UUID
         var firstName: String
         var lastName: String
@@ -20,7 +20,7 @@ struct RosterDocument: Codable, Sendable {
         var parentIDs: [UUID]
     }
 
-    struct ImportSummary {
+    nonisolated struct ImportSummary {
         let imported: Int
         let skipped: Int
     }
@@ -103,7 +103,7 @@ extension RosterDocument {
 }
 
 extension RosterDocument: Transferable {
-    static var transferRepresentation: some TransferRepresentation {
+    nonisolated static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(contentType: .json) { doc in
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
