@@ -1,0 +1,21 @@
+firstName,lastName,isChild,isParent,isRoper,isNewRider,isWaiverSigned,numberOfRides
+Sarah,Henderson,false,true,false,false,true,2
+Mike,Henderson,false,true,false,false,true,2
+Emily,Henderson,true,false,false,false,true,2
+Jenny,Walker,false,true,false,false,true,2
+Bobby,Walker,true,false,false,false,true,2
+Jake,Thompson,false,false,true,false,true,3
+Wyatt,Carter,false,false,true,false,true,2
+Caleb,Walker,false,false,true,false,true,2
+Dale,McCoy,false,false,true,false,true,2
+Travis,Lane,false,false,true,false,true,2
+Tyler,Brooks,false,false,false,true,true,2
+Maddie,Reeves,false,false,false,true,true,2
+Dustin,Pierce,false,false,false,true,true,2
+Hannah,Mills,false,false,false,false,true,2
+Sue Anne,McCoy,false,false,false,false,true,2
+Cooper,Reeves,false,false,false,false,true,2
+Lacey,Wells,false,false,false,false,true,2
+Jamie,Hart,false,false,false,false,true,2
+Frank,O'Brien,false,false,false,false,true,3
+Riley,Bennett,false,false,false,false,true,4
