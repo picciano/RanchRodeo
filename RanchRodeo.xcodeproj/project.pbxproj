@@ -3,161 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 70;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		E40101B1192EA004009B780F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B0192EA004009B780F /* Foundation.framework */; };
-		E40101B3192EA004009B780F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B2192EA004009B780F /* CoreGraphics.framework */; };
-		E40101B5192EA004009B780F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B4192EA004009B780F /* UIKit.framework */; };
-		E40101B7192EA004009B780F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B6192EA004009B780F /* CoreData.framework */; };
-		E40101BD192EA004009B780F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E40101BB192EA004009B780F /* InfoPlist.strings */; };
-		E40101BF192EA004009B780F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101BE192EA004009B780F /* main.m */; };
-		E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101C2192EA004009B780F /* RRAppDelegate.m */; };
-		E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */; };
-		E40101C8192EA004009B780F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40101C7192EA004009B780F /* Images.xcassets */; };
-		E40101CF192EA004009B780F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101CE192EA004009B780F /* XCTest.framework */; };
-		E40101D0192EA004009B780F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B0192EA004009B780F /* Foundation.framework */; };
-		E40101D1192EA004009B780F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B4192EA004009B780F /* UIKit.framework */; };
-		E40101D2192EA004009B780F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40101B6192EA004009B780F /* CoreData.framework */; };
-		E40101DA192EA004009B780F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E40101D8192EA004009B780F /* InfoPlist.strings */; };
-		E40101DC192EA004009B780F /* RanchRodeoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101DB192EA004009B780F /* RanchRodeoTests.m */; };
-		E40101E9192EA2F5009B780F /* RRRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */; };
-		E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */; };
-		E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101EC192EA3AC009B780F /* RRRosterViewController.m */; };
-		E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40101ED192EA3AC009B780F /* RRRosterViewController.xib */; };
-		E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F1192EA5A6009B780F /* RRRiderViewController.m */; };
-		E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40101F2192EA5A6009B780F /* RRRiderViewController.xib */; };
-		E40101F7192EACFC009B780F /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F6192EACFC009B780F /* Team.m */; };
-		E40101FA192EACFC009B780F /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101F9192EACFC009B780F /* Rider.m */; };
-		E40101FD192EACFC009B780F /* Warning.m in Sources */ = {isa = PBXBuildFile; fileRef = E40101FC192EACFC009B780F /* Warning.m */; };
-		E4010201192ED545009B780F /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4010200192ED545009B780F /* RRDataManager.m */; };
-		E469518E19882860007352B1 /* RRTeamCollectionPrintViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */; };
-		E469518F19882860007352B1 /* RRTeamCollectionPrintViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */; };
-		E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4813A0B1951EB4C00DB30E0 /* Settings.bundle */; };
-		E4813A111951FF2C00DB30E0 /* libFlurry_5.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4813A101951FF2C00DB30E0 /* libFlurry_5.1.0.a */; };
-		E4813A131952000C00DB30E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4813A121952000C00DB30E0 /* Security.framework */; };
-		E4813A151952001300DB30E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4813A141952001300DB30E0 /* SystemConfiguration.framework */; };
-		E4813A1C19520E9A00DB30E0 /* UIControl+NextControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E4813A1B19520E9A00DB30E0 /* UIControl+NextControl.m */; };
-		E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E4835FD6192F8D10006F6398 /* RRUtilities.m */; };
-		E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */; };
-		E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E48EFD2F194FAC760052348C /* RRTeamGenerator.m */; };
-		E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */; };
-		E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */; };
-		E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E49DD2A119302E0C00A1BB9E /* Rider+Category.m */; };
-		E4AA4099197452DD007CEE65 /* RREditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */; };
-		E4AA409A197452DD007CEE65 /* RREditTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */; };
-		E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BB19509CB4006E53F5 /* Team+Category.m */; };
-		E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */; };
-		E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */; };
-		E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */; };
-		E4B7E9C71950E258006E53F5 /* RRPrintRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
-		E40101D3192EA004009B780F /* PBXContainerItemProxy */ = {
+		7283B6862FD9CDF900F69271 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E40101A5192EA004009B780F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E40101AC192EA004009B780F;
-			remoteInfo = RanchRodeo;
+			remoteGlobalIDString = 7283B6702FD9CD1B00F69271;
+			remoteInfo = RanchRodeo2;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E40101AD192EA004009B780F /* RanchRodeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RanchRodeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7283B6712FD9CD1B00F69271 /* RanchRodeo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RanchRodeo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7283B6822FD9CDF900F69271 /* RanchRodeo2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RanchRodeo2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40101B0192EA004009B780F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E40101B2192EA004009B780F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E40101B4192EA004009B780F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E40101B6192EA004009B780F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		E40101BA192EA004009B780F /* RanchRodeo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RanchRodeo-Info.plist"; sourceTree = "<group>"; };
-		E40101BC192EA004009B780F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E40101BE192EA004009B780F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E40101C0192EA004009B780F /* RanchRodeo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RanchRodeo-Prefix.pch"; sourceTree = "<group>"; };
-		E40101C1192EA004009B780F /* RRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RRAppDelegate.h; sourceTree = "<group>"; };
-		E40101C2192EA004009B780F /* RRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RRAppDelegate.m; sourceTree = "<group>"; };
-		E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RanchRodeo.xcdatamodel; sourceTree = "<group>"; };
-		E40101C7192EA004009B780F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E40101CD192EA004009B780F /* RanchRodeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RanchRodeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40101CE192EA004009B780F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		E40101D7192EA004009B780F /* RanchRodeoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RanchRodeoTests-Info.plist"; sourceTree = "<group>"; };
-		E40101D9192EA004009B780F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E40101DB192EA004009B780F /* RanchRodeoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RanchRodeoTests.m; sourceTree = "<group>"; };
-		E40101E6192EA2F5009B780F /* RRRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRegistrationViewController.h; sourceTree = "<group>"; };
-		E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRegistrationViewController.m; sourceTree = "<group>"; };
-		E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRegistrationViewController.xib; sourceTree = "<group>"; };
-		E40101EB192EA3AC009B780F /* RRRosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRosterViewController.h; sourceTree = "<group>"; };
-		E40101EC192EA3AC009B780F /* RRRosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRosterViewController.m; sourceTree = "<group>"; };
-		E40101ED192EA3AC009B780F /* RRRosterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRosterViewController.xib; sourceTree = "<group>"; };
-		E40101F0192EA5A6009B780F /* RRRiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRiderViewController.h; sourceTree = "<group>"; };
-		E40101F1192EA5A6009B780F /* RRRiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRiderViewController.m; sourceTree = "<group>"; };
-		E40101F2192EA5A6009B780F /* RRRiderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderViewController.xib; sourceTree = "<group>"; };
-		E40101F5192EACFC009B780F /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Team.h; path = "Data Model/Team.h"; sourceTree = "<group>"; };
-		E40101F6192EACFC009B780F /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Team.m; path = "Data Model/Team.m"; sourceTree = "<group>"; };
-		E40101F8192EACFC009B780F /* Rider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rider.h; path = "Data Model/Rider.h"; sourceTree = "<group>"; };
-		E40101F9192EACFC009B780F /* Rider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rider.m; path = "Data Model/Rider.m"; sourceTree = "<group>"; };
-		E40101FB192EACFC009B780F /* Warning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Warning.h; path = "Data Model/Warning.h"; sourceTree = "<group>"; };
-		E40101FC192EACFC009B780F /* Warning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Warning.m; path = "Data Model/Warning.m"; sourceTree = "<group>"; };
-		E40101FF192ED545009B780F /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRDataManager.h; path = "Data Model/RRDataManager.h"; sourceTree = "<group>"; };
-		E4010200192ED545009B780F /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRDataManager.m; path = "Data Model/RRDataManager.m"; sourceTree = "<group>"; };
-		E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWLSynthesizeSingleton.h; sourceTree = "<group>"; };
-		E469518B19882860007352B1 /* RRTeamCollectionPrintViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRTeamCollectionPrintViewCell.h; sourceTree = "<group>"; };
-		E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRTeamCollectionPrintViewCell.m; sourceTree = "<group>"; };
-		E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRTeamCollectionPrintViewCell.xib; sourceTree = "<group>"; };
-		E4813A0B1951EB4C00DB30E0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		E4813A0F1951FF2C00DB30E0 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		E4813A101951FF2C00DB30E0 /* libFlurry_5.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.1.0.a; sourceTree = "<group>"; };
 		E4813A121952000C00DB30E0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E4813A141952001300DB30E0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		E4813A1A19520E9A00DB30E0 /* UIControl+NextControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+NextControl.h"; sourceTree = "<group>"; };
-		E4813A1B19520E9A00DB30E0 /* UIControl+NextControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+NextControl.m"; sourceTree = "<group>"; };
-		E4835FD5192F8D10006F6398 /* RRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRUtilities.h; sourceTree = "<group>"; };
-		E4835FD6192F8D10006F6398 /* RRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRUtilities.m; sourceTree = "<group>"; };
-		E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRTeamCollectionViewCell.xib; sourceTree = "<group>"; };
-		E48EFD2E194FAC760052348C /* RRTeamGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRTeamGenerator.h; path = "Data Model/RRTeamGenerator.h"; sourceTree = "<group>"; };
-		E48EFD2F194FAC760052348C /* RRTeamGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRTeamGenerator.m; path = "Data Model/RRTeamGenerator.m"; sourceTree = "<group>"; };
-		E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRiderTableViewCell.h; sourceTree = "<group>"; };
-		E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRiderTableViewCell.m; sourceTree = "<group>"; };
-		E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRRiderTableViewCell.xib; sourceTree = "<group>"; };
-		E49DD2A019302E0C00A1BB9E /* Rider+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Rider+Category.h"; path = "Data Model/Rider+Category.h"; sourceTree = "<group>"; };
-		E49DD2A119302E0C00A1BB9E /* Rider+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Rider+Category.m"; path = "Data Model/Rider+Category.m"; sourceTree = "<group>"; };
-		E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RREditTeamViewController.h; sourceTree = "<group>"; };
-		E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RREditTeamViewController.m; sourceTree = "<group>"; };
-		E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RREditTeamViewController.xib; sourceTree = "<group>"; };
-		E4B7E9BA19509CB4006E53F5 /* Team+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Team+Category.h"; path = "Data Model/Team+Category.h"; sourceTree = "<group>"; };
-		E4B7E9BB19509CB4006E53F5 /* Team+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Team+Category.m"; path = "Data Model/Team+Category.m"; sourceTree = "<group>"; };
-		E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRWarningsDisplayPopoverViewController.h; sourceTree = "<group>"; };
-		E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRWarningsDisplayPopoverViewController.m; sourceTree = "<group>"; };
-		E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRWarningsDisplayPopoverViewController.xib; sourceTree = "<group>"; };
-		E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRTeamCollectionViewCell.h; sourceTree = "<group>"; };
-		E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRTeamCollectionViewCell.m; sourceTree = "<group>"; };
-		E4B7E9C51950E258006E53F5 /* RRPrintRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRPrintRenderer.h; sourceTree = "<group>"; };
-		E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRPrintRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7283B6722FD9CD1B00F69271 /* RanchRodeo2 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RanchRodeo2; sourceTree = "<group>"; };
+		7283B6832FD9CDF900F69271 /* RanchRodeo2Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RanchRodeo2Tests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		E40101AA192EA004009B780F /* Frameworks */ = {
+		7283B66E2FD9CD1B00F69271 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4813A151952001300DB30E0 /* SystemConfiguration.framework in Frameworks */,
-				E4813A131952000C00DB30E0 /* Security.framework in Frameworks */,
-				E40101B3192EA004009B780F /* CoreGraphics.framework in Frameworks */,
-				E4813A111951FF2C00DB30E0 /* libFlurry_5.1.0.a in Frameworks */,
-				E40101B7192EA004009B780F /* CoreData.framework in Frameworks */,
-				E40101B5192EA004009B780F /* UIKit.framework in Frameworks */,
-				E40101B1192EA004009B780F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E40101CA192EA004009B780F /* Frameworks */ = {
+		7283B67F2FD9CDF900F69271 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E40101CF192EA004009B780F /* XCTest.framework in Frameworks */,
-				E40101D2192EA004009B780F /* CoreData.framework in Frameworks */,
-				E40101D1192EA004009B780F /* UIKit.framework in Frameworks */,
-				E40101D0192EA004009B780F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +54,8 @@
 		E40101A4192EA004009B780F = {
 			isa = PBXGroup;
 			children = (
-				E40101B8192EA004009B780F /* RanchRodeo */,
-				E40101D5192EA004009B780F /* RanchRodeoTests */,
+				7283B6722FD9CD1B00F69271 /* RanchRodeo2 */,
+				7283B6832FD9CDF900F69271 /* RanchRodeo2Tests */,
 				E40101AF192EA004009B780F /* Frameworks */,
 				E40101AE192EA004009B780F /* Products */,
 			);
@@ -177,8 +64,8 @@
 		E40101AE192EA004009B780F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E40101AD192EA004009B780F /* RanchRodeo.app */,
-				E40101CD192EA004009B780F /* RanchRodeoTests.xctest */,
+				7283B6712FD9CD1B00F69271 /* RanchRodeo2.app */,
+				7283B6822FD9CDF900F69271 /* RanchRodeo2Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,164 +84,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E40101B8192EA004009B780F /* RanchRodeo */ = {
-			isa = PBXGroup;
-			children = (
-				E40101C1192EA004009B780F /* RRAppDelegate.h */,
-				E40101C2192EA004009B780F /* RRAppDelegate.m */,
-				E4010202192ED598009B780F /* Utilities */,
-				E40101E5192EA2CD009B780F /* View Controllers */,
-				E40101FE192EAD04009B780F /* Data model */,
-				E40101C7192EA004009B780F /* Images.xcassets */,
-				E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */,
-				E4813A0E1951FF1F00DB30E0 /* Libraries */,
-				E40101B9192EA004009B780F /* Supporting Files */,
-			);
-			path = RanchRodeo;
-			sourceTree = "<group>";
-		};
-		E40101B9192EA004009B780F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E40101BA192EA004009B780F /* RanchRodeo-Info.plist */,
-				E40101BB192EA004009B780F /* InfoPlist.strings */,
-				E40101BE192EA004009B780F /* main.m */,
-				E40101C0192EA004009B780F /* RanchRodeo-Prefix.pch */,
-				E4813A0B1951EB4C00DB30E0 /* Settings.bundle */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E40101D5192EA004009B780F /* RanchRodeoTests */ = {
-			isa = PBXGroup;
-			children = (
-				E40101DB192EA004009B780F /* RanchRodeoTests.m */,
-				E40101D6192EA004009B780F /* Supporting Files */,
-			);
-			path = RanchRodeoTests;
-			sourceTree = "<group>";
-		};
-		E40101D6192EA004009B780F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E40101D7192EA004009B780F /* RanchRodeoTests-Info.plist */,
-				E40101D8192EA004009B780F /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E40101E5192EA2CD009B780F /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				E40101E6192EA2F5009B780F /* RRRegistrationViewController.h */,
-				E40101E7192EA2F5009B780F /* RRRegistrationViewController.m */,
-				E40101E8192EA2F5009B780F /* RRRegistrationViewController.xib */,
-				E49DD29B1930128400A1BB9E /* RRRiderTableViewCell.h */,
-				E49DD29C1930128400A1BB9E /* RRRiderTableViewCell.m */,
-				E49DD29D1930128400A1BB9E /* RRRiderTableViewCell.xib */,
-				E40101F0192EA5A6009B780F /* RRRiderViewController.h */,
-				E40101F1192EA5A6009B780F /* RRRiderViewController.m */,
-				E40101F2192EA5A6009B780F /* RRRiderViewController.xib */,
-				E40101EB192EA3AC009B780F /* RRRosterViewController.h */,
-				E40101EC192EA3AC009B780F /* RRRosterViewController.m */,
-				E40101ED192EA3AC009B780F /* RRRosterViewController.xib */,
-				E4B7E9C21950D805006E53F5 /* RRTeamCollectionViewCell.h */,
-				E4B7E9C31950D805006E53F5 /* RRTeamCollectionViewCell.m */,
-				E48EFD2C194FA6D50052348C /* RRTeamCollectionViewCell.xib */,
-				E4B7E9BD1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.h */,
-				E4B7E9BE1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m */,
-				E4B7E9BF1950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib */,
-				E4AA4096197452DD007CEE65 /* RREditTeamViewController.h */,
-				E4AA4097197452DD007CEE65 /* RREditTeamViewController.m */,
-				E4AA4098197452DD007CEE65 /* RREditTeamViewController.xib */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		E40101FE192EAD04009B780F /* Data model */ = {
-			isa = PBXGroup;
-			children = (
-				E40101FF192ED545009B780F /* RRDataManager.h */,
-				E4010200192ED545009B780F /* RRDataManager.m */,
-				E48EFD2E194FAC760052348C /* RRTeamGenerator.h */,
-				E48EFD2F194FAC760052348C /* RRTeamGenerator.m */,
-				E40101FB192EACFC009B780F /* Warning.h */,
-				E40101FC192EACFC009B780F /* Warning.m */,
-				E40101F8192EACFC009B780F /* Rider.h */,
-				E40101F9192EACFC009B780F /* Rider.m */,
-				E40101F5192EACFC009B780F /* Team.h */,
-				E40101F6192EACFC009B780F /* Team.m */,
-			);
-			name = "Data model";
-			sourceTree = "<group>";
-		};
-		E4010202192ED598009B780F /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				E4010204192ED628009B780F /* CWLSynthesizeSingleton.h */,
-				E4835FD5192F8D10006F6398 /* RRUtilities.h */,
-				E4835FD6192F8D10006F6398 /* RRUtilities.m */,
-				E49DD2A019302E0C00A1BB9E /* Rider+Category.h */,
-				E49DD2A119302E0C00A1BB9E /* Rider+Category.m */,
-				E4B7E9BA19509CB4006E53F5 /* Team+Category.h */,
-				E4B7E9BB19509CB4006E53F5 /* Team+Category.m */,
-				E4813A1A19520E9A00DB30E0 /* UIControl+NextControl.h */,
-				E4813A1B19520E9A00DB30E0 /* UIControl+NextControl.m */,
-				E4B7E9C51950E258006E53F5 /* RRPrintRenderer.h */,
-				E4B7E9C61950E258006E53F5 /* RRPrintRenderer.m */,
-				E469518B19882860007352B1 /* RRTeamCollectionPrintViewCell.h */,
-				E469518C19882860007352B1 /* RRTeamCollectionPrintViewCell.m */,
-				E469518D19882860007352B1 /* RRTeamCollectionPrintViewCell.xib */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		E4813A0E1951FF1F00DB30E0 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				E4813A0F1951FF2C00DB30E0 /* Flurry.h */,
-				E4813A101951FF2C00DB30E0 /* libFlurry_5.1.0.a */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E40101AC192EA004009B780F /* RanchRodeo */ = {
+		7283B6702FD9CD1B00F69271 /* RanchRodeo2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E40101DF192EA004009B780F /* Build configuration list for PBXNativeTarget "RanchRodeo" */;
+			buildConfigurationList = 7283B67B2FD9CD1C00F69271 /* Build configuration list for PBXNativeTarget "RanchRodeo2" */;
 			buildPhases = (
-				E40101A9192EA004009B780F /* Sources */,
-				E40101AA192EA004009B780F /* Frameworks */,
-				E40101AB192EA004009B780F /* Resources */,
-				E4813A16195200B900DB30E0 /* ShellScript */,
+				7283B66D2FD9CD1B00F69271 /* Sources */,
+				7283B66E2FD9CD1B00F69271 /* Frameworks */,
+				7283B66F2FD9CD1B00F69271 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = RanchRodeo;
-			productName = RanchRodeo;
-			productReference = E40101AD192EA004009B780F /* RanchRodeo.app */;
+			fileSystemSynchronizedGroups = (
+				7283B6722FD9CD1B00F69271 /* RanchRodeo2 */,
+			);
+			name = RanchRodeo2;
+			packageProductDependencies = (
+			);
+			productName = RanchRodeo2;
+			productReference = 7283B6712FD9CD1B00F69271 /* RanchRodeo2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E40101CC192EA004009B780F /* RanchRodeoTests */ = {
+		7283B6812FD9CDF900F69271 /* RanchRodeo2Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E40101E2192EA004009B780F /* Build configuration list for PBXNativeTarget "RanchRodeoTests" */;
+			buildConfigurationList = 7283B6882FD9CDF900F69271 /* Build configuration list for PBXNativeTarget "RanchRodeo2Tests" */;
 			buildPhases = (
-				E40101C9192EA004009B780F /* Sources */,
-				E40101CA192EA004009B780F /* Frameworks */,
-				E40101CB192EA004009B780F /* Resources */,
+				7283B67E2FD9CDF900F69271 /* Sources */,
+				7283B67F2FD9CDF900F69271 /* Frameworks */,
+				7283B6802FD9CDF900F69271 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E40101D4192EA004009B780F /* PBXTargetDependency */,
+				7283B6872FD9CDF900F69271 /* PBXTargetDependency */,
 			);
-			name = RanchRodeoTests;
-			productName = RanchRodeoTests;
-			productReference = E40101CD192EA004009B780F /* RanchRodeoTests.xctest */;
+			fileSystemSynchronizedGroups = (
+				7283B6832FD9CDF900F69271 /* RanchRodeo2Tests */,
+			);
+			name = RanchRodeo2Tests;
+			packageProductDependencies = (
+			);
+			productName = RanchRodeo2Tests;
+			productReference = 7283B6822FD9CDF900F69271 /* RanchRodeo2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -363,148 +138,313 @@
 		E40101A5192EA004009B780F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = RR;
-				LastUpgradeCheck = 0510;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
 				ORGANIZATIONNAME = "Anthony Picciano";
 				TargetAttributes = {
-					E40101AC192EA004009B780F = {
-						DevelopmentTeam = PC5SP4V242;
+					7283B6702FD9CD1B00F69271 = {
+						CreatedOnToolsVersion = 26.5;
 					};
-					E40101CC192EA004009B780F = {
-						TestTargetID = E40101AC192EA004009B780F;
+					7283B6812FD9CDF900F69271 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 7283B6702FD9CD1B00F69271;
 					};
 				};
 			};
 			buildConfigurationList = E40101A8192EA004009B780F /* Build configuration list for PBXProject "RanchRodeo" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E40101A4192EA004009B780F;
 			productRefGroup = E40101AE192EA004009B780F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E40101AC192EA004009B780F /* RanchRodeo */,
-				E40101CC192EA004009B780F /* RanchRodeoTests */,
+				7283B6702FD9CD1B00F69271 /* RanchRodeo2 */,
+				7283B6812FD9CDF900F69271 /* RanchRodeo2Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E40101AB192EA004009B780F /* Resources */ = {
+		7283B66F2FD9CD1B00F69271 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B7E9C11950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.xib in Resources */,
-				E40101EA192EA2F5009B780F /* RRRegistrationViewController.xib in Resources */,
-				E40101EF192EA3AC009B780F /* RRRosterViewController.xib in Resources */,
-				E469518F19882860007352B1 /* RRTeamCollectionPrintViewCell.xib in Resources */,
-				E49DD29F1930128400A1BB9E /* RRRiderTableViewCell.xib in Resources */,
-				E40101BD192EA004009B780F /* InfoPlist.strings in Resources */,
-				E4AA409A197452DD007CEE65 /* RREditTeamViewController.xib in Resources */,
-				E40101C8192EA004009B780F /* Images.xcassets in Resources */,
-				E48EFD2D194FA6D50052348C /* RRTeamCollectionViewCell.xib in Resources */,
-				E4813A0C1951EB4C00DB30E0 /* Settings.bundle in Resources */,
-				E40101F4192EA5A6009B780F /* RRRiderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E40101CB192EA004009B780F /* Resources */ = {
+		7283B6802FD9CDF900F69271 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E40101DA192EA004009B780F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		E4813A16195200B900DB30E0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "REV=`git rev-list HEAD | wc -l`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $REV\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		E40101A9192EA004009B780F /* Sources */ = {
+		7283B66D2FD9CD1B00F69271 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E469518E19882860007352B1 /* RRTeamCollectionPrintViewCell.m in Sources */,
-				E4B7E9C41950D805006E53F5 /* RRTeamCollectionViewCell.m in Sources */,
-				E4B7E9C01950BF33006E53F5 /* RRWarningsDisplayPopoverViewController.m in Sources */,
-				E40101FD192EACFC009B780F /* Warning.m in Sources */,
-				E40101FA192EACFC009B780F /* Rider.m in Sources */,
-				E40101C6192EA004009B780F /* RanchRodeo.xcdatamodeld in Sources */,
-				E40101C3192EA004009B780F /* RRAppDelegate.m in Sources */,
-				E4835FD7192F8D10006F6398 /* RRUtilities.m in Sources */,
-				E4813A1C19520E9A00DB30E0 /* UIControl+NextControl.m in Sources */,
-				E40101EE192EA3AC009B780F /* RRRosterViewController.m in Sources */,
-				E4B7E9C71950E258006E53F5 /* RRPrintRenderer.m in Sources */,
-				E48EFD30194FAC760052348C /* RRTeamGenerator.m in Sources */,
-				E49DD29E1930128400A1BB9E /* RRRiderTableViewCell.m in Sources */,
-				E49DD2A219302E0C00A1BB9E /* Rider+Category.m in Sources */,
-				E40101F3192EA5A6009B780F /* RRRiderViewController.m in Sources */,
-				E40101BF192EA004009B780F /* main.m in Sources */,
-				E4010201192ED545009B780F /* RRDataManager.m in Sources */,
-				E40101F7192EACFC009B780F /* Team.m in Sources */,
-				E4AA4099197452DD007CEE65 /* RREditTeamViewController.m in Sources */,
-				E40101E9192EA2F5009B780F /* RRRegistrationViewController.m in Sources */,
-				E4B7E9BC19509CB4006E53F5 /* Team+Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E40101C9192EA004009B780F /* Sources */ = {
+		7283B67E2FD9CDF900F69271 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E40101DC192EA004009B780F /* RanchRodeoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E40101D4192EA004009B780F /* PBXTargetDependency */ = {
+		7283B6872FD9CDF900F69271 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E40101AC192EA004009B780F /* RanchRodeo */;
-			targetProxy = E40101D3192EA004009B780F /* PBXContainerItemProxy */;
+			target = 7283B6702FD9CD1B00F69271 /* RanchRodeo2 */;
+			targetProxy = 7283B6862FD9CDF900F69271 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		E40101BB192EA004009B780F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E40101BC192EA004009B780F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E40101D8192EA004009B780F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E40101D9192EA004009B780F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
+		7283B6792FD9CD1C00F69271 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ranch Rodeo";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picciano.RanchRodeo2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7283B67A2FD9CD1C00F69271 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ranch Rodeo";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picciano.RanchRodeo2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7283B6892FD9CDF900F69271 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ranch Rodeo";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picciano.RanchRodeo2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RanchRodeo2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RanchRodeo2";
+			};
+			name = Debug;
+		};
+		7283B68A2FD9CDF900F69271 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ranch Rodeo";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picciano.RanchRodeo2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RanchRodeo2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RanchRodeo2";
+			};
+			name = Release;
+		};
 		E40101DD192EA004009B780F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -513,18 +453,34 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = JWXK8UMBP4;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -537,9 +493,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -552,116 +509,68 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = JWXK8UMBP4;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E40101E0192EA004009B780F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
-				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/RanchRodeo",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A5CA384F-AE2B-4084-A657-FBB64F9AC445";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		E40101E1192EA004009B780F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
-				INFOPLIST_FILE = "RanchRodeo/RanchRodeo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/RanchRodeo",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "747FC033-FF52-430E-9B45-BBE08AE4C712";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		E40101E3192EA004009B780F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RanchRodeo.app/RanchRodeo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "RanchRodeoTests/RanchRodeoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		E40101E4192EA004009B780F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RanchRodeo.app/RanchRodeo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RanchRodeo/RanchRodeo-Prefix.pch";
-				INFOPLIST_FILE = "RanchRodeoTests/RanchRodeoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7283B67B2FD9CD1C00F69271 /* Build configuration list for PBXNativeTarget "RanchRodeo2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7283B6792FD9CD1C00F69271 /* Debug */,
+				7283B67A2FD9CD1C00F69271 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7283B6882FD9CDF900F69271 /* Build configuration list for PBXNativeTarget "RanchRodeo2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7283B6892FD9CDF900F69271 /* Debug */,
+				7283B68A2FD9CDF900F69271 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E40101A8192EA004009B780F /* Build configuration list for PBXProject "RanchRodeo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -671,38 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E40101DF192EA004009B780F /* Build configuration list for PBXNativeTarget "RanchRodeo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E40101E0192EA004009B780F /* Debug */,
-				E40101E1192EA004009B780F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E40101E2192EA004009B780F /* Build configuration list for PBXNativeTarget "RanchRodeoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E40101E3192EA004009B780F /* Debug */,
-				E40101E4192EA004009B780F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E40101C4192EA004009B780F /* RanchRodeo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */,
-			);
-			currentVersion = E40101C5192EA004009B780F /* RanchRodeo.xcdatamodel */;
-			path = RanchRodeo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E40101A5192EA004009B780F /* Project object */;
 }
