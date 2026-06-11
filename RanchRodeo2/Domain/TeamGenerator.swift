@@ -6,7 +6,7 @@ enum TeamGenerationConstants {
     static let preferredWaitBetweenRides = 4
 }
 
-final class TeamGenerator<RNG: RandomNumberGenerator> {
+struct TeamGenerator<RNG: RandomNumberGenerator> {
     private var rng: RNG
 
     init(rng: RNG) {
@@ -14,7 +14,7 @@ final class TeamGenerator<RNG: RandomNumberGenerator> {
     }
 
     @discardableResult
-    func generate(riders: [GeneratorRider]) -> [GeneratorTeam] {
+    mutating func generate(riders: [GeneratorRider]) -> [GeneratorTeam] {
         let numberOfTeams = calculatedNumberOfTeams(riders: riders)
         let teams = (1...numberOfTeams).map { GeneratorTeam(number: $0) }
 
@@ -35,7 +35,7 @@ final class TeamGenerator<RNG: RandomNumberGenerator> {
         return teams
     }
 
-    private func process(riders: [GeneratorRider], teams: [GeneratorTeam]) {
+    private mutating func process(riders: [GeneratorRider], teams: [GeneratorTeam]) {
         for rider in riders {
             let parents = rider.parents.sorted { $0.firstName < $1.firstName }
 
@@ -70,7 +70,7 @@ final class TeamGenerator<RNG: RandomNumberGenerator> {
         rider.teams.removeAll { $0 === team }
     }
 
-    private func findTeam(for rider: GeneratorRider, teams: [GeneratorTeam]) -> GeneratorTeam? {
+    private mutating func findTeam(for rider: GeneratorRider, teams: [GeneratorTeam]) -> GeneratorTeam? {
         var potentialTeams: [GeneratorTeam] = []
         var preferredTeams: [GeneratorTeam] = []
         var bestMatchTeams: [GeneratorTeam] = []
@@ -109,7 +109,7 @@ final class TeamGenerator<RNG: RandomNumberGenerator> {
 
     /// Picks randomly among the least-filled teams in the candidate set, so the algorithm
     /// fills teams evenly rather than packing some to capacity before touching others.
-    private func pickLeastFilled(from teams: [GeneratorTeam]) -> GeneratorTeam? {
+    private mutating func pickLeastFilled(from teams: [GeneratorTeam]) -> GeneratorTeam? {
         guard !teams.isEmpty else { return nil }
         let minCount = teams.map { $0.riders.count }.min() ?? 0
         let leastFilled = teams.filter { $0.riders.count == minCount }
@@ -118,7 +118,7 @@ final class TeamGenerator<RNG: RandomNumberGenerator> {
 
     /// Final pass: if any rider is below quota, place them on an under-filled team —
     /// swapping an existing rider out if necessary to make room while keeping full teams full.
-    private func rebalance(riders: [GeneratorRider], teams: [GeneratorTeam]) {
+    private mutating func rebalance(riders: [GeneratorRider], teams: [GeneratorTeam]) {
         var underServed = riders.filter { $0.teams.count < $0.numberOfRides }
 
         // First pass: direct placement onto under-filled teams.

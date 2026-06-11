@@ -99,7 +99,7 @@ final class RosterStore {
             modelContext.delete(team)
         }
 
-        let generator = TeamGenerator(rng: rng)
+        var generator = TeamGenerator(rng: rng)
         let resultTeams = generator.generate(riders: Array(snapshots.values))
 
         let ridersByID = Dictionary(uniqueKeysWithValues: riders.map { ($0.persistentModelID, $0) })
