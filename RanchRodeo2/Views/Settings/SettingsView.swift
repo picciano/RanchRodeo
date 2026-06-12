@@ -17,7 +17,6 @@ struct SettingsView: View {
     @State private var activeImportKind: ImportKind = .json
     @State private var activeImportMode: ImportMode = .add
     @State private var importMessage: ImportMessage?
-    @State private var showClearConfirmation = false
     @State private var showJSONLoadDialog = false
     @State private var showCSVLoadDialog = false
 
@@ -79,19 +78,6 @@ struct SettingsView: View {
                 Text("Add keeps the riders you already have and brings in any new ones. Replace clears the current roster first, then loads the file.")
             }
 
-            Section {
-                Button(role: .destructive) {
-                    showClearConfirmation = true
-                } label: {
-                    Label("Clear All Riders", systemImage: "trash")
-                }
-                .disabled(riders.isEmpty)
-            } header: {
-                Text("Danger Zone")
-            } footer: {
-                Text("Removes every rider and team from the store. This cannot be undone.")
-            }
-
             Section("Features") {
                 Toggle("Show rider details on prints", isOn: $showRiderDetails)
                 Toggle("Track payouts", isOn: $payoutsEnabled)
@@ -112,18 +98,6 @@ struct SettingsView: View {
         }
         .alert(item: $importMessage) { message in
             Alert(title: Text(message.title), message: Text(message.body), dismissButton: .default(Text("OK")))
-        }
-        .confirmationDialog(
-            "Clear all riders and teams?",
-            isPresented: $showClearConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Clear All Riders", role: .destructive) {
-                RosterStore(modelContext: modelContext).clearRoster()
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("This removes \(riders.count) rider\(riders.count == 1 ? "" : "s") and any generated teams. This cannot be undone.")
         }
         .confirmationDialog(
             "Load Roster",

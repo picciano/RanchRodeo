@@ -9,6 +9,8 @@ struct RosterView: View {
 
     @State private var newRiderSheet: NewRiderSheet?
     @State private var pendingNewRider: Rider?
+    @State private var showClearConfirmation = false
+    @State private var editMode: EditMode = .inactive
 
     private struct NewRiderSheet: Identifiable {
         let id = UUID()
@@ -34,7 +36,19 @@ struct RosterView: View {
                             }
                         }
                         .onDelete(perform: delete)
+
+                        if editMode.isEditing {
+                            Section {
+                                Button(role: .destructive) {
+                                    showClearConfirmation = true
+                                } label: {
+                                    Label("Clear All Riders", systemImage: "trash")
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                }
+                            }
+                        }
                     }
+                    .environment(\.editMode, $editMode)
                 }
             }
             .navigationTitle("Roster")
@@ -45,11 +59,27 @@ struct RosterView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
+                    Button(editMode.isEditing ? "Done" : "Edit") {
+                        withAnimation {
+                            editMode = editMode.isEditing ? .inactive : .active
+                        }
+                    }
                 }
             }
             .sheet(item: $newRiderSheet, onDismiss: discardIfEmpty) { sheet in
                 newRiderSheetContent(for: sheet)
+            }
+            .confirmationDialog(
+                "Clear all riders and teams?",
+                isPresented: $showClearConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button("Clear All Riders", role: .destructive) {
+                    RosterStore(modelContext: modelContext).clearRoster()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("This removes \(riders.count) rider\(riders.count == 1 ? "" : "s") and any generated teams. This cannot be undone.")
             }
         }
     }
