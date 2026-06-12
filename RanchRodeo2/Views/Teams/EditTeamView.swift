@@ -72,11 +72,19 @@ struct EditTeamView: View {
         if !destination.riders.contains(where: { $0 === rider }) {
             destination.riders.append(rider)
         }
-        try? modelContext.save()
+        persist()
     }
 
     private func remove(rider: Rider) {
         team.riders.removeAll { $0 === rider }
-        try? modelContext.save()
+        persist()
+    }
+
+    private func persist() {
+        do {
+            try modelContext.save()
+        } catch {
+            assertionFailure("Failed to save team edit: \(error)")
+        }
     }
 }

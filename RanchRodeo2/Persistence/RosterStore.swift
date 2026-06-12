@@ -2,10 +2,8 @@ import Foundation
 import SwiftData
 
 @MainActor
-@Observable
 final class RosterStore {
     private let modelContext: ModelContext
-    var needsTeamGeneration: Bool = false
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -22,34 +20,7 @@ final class RosterStore {
         return (try? modelContext.fetch(descriptor)) ?? []
     }
 
-    func team(number: Int) -> Team? {
-        let descriptor = FetchDescriptor<Team>(predicate: #Predicate { $0.number == number })
-        return (try? modelContext.fetch(descriptor))?.first
-    }
-
-    func teamsWithMissingRiders() -> [Team] {
-        allTeams().filter { $0.riders.count < 4 }
-    }
-
     // MARK: - Mutation
-
-    @discardableResult
-    func createRider() -> Rider {
-        let rider = Rider()
-        modelContext.insert(rider)
-        return rider
-    }
-
-    func delete(_ object: any PersistentModel) {
-        modelContext.delete(object)
-    }
-
-    func move(rider: Rider, from source: Team, to destination: Team) {
-        source.riders.removeAll { $0 === rider }
-        if !destination.riders.contains(where: { $0 === rider }) {
-            destination.riders.append(rider)
-        }
-    }
 
     func save() {
         do {
@@ -91,6 +62,9 @@ final class RosterStore {
 
     // MARK: - Team generation
 
+    /// Snapshots let `TeamGenerator` plan without touching SwiftData models —
+    /// the algorithm stays pure and testable, and we only mutate the store after
+    /// the generator returns its result.
     func regenerateTeams<RNG: RandomNumberGenerator>(rng: RNG) {
         let riders = allRiders()
         let snapshots = buildSnapshots(from: riders)
@@ -120,7 +94,6 @@ final class RosterStore {
             }
         }
 
-        needsTeamGeneration = false
         save()
     }
 

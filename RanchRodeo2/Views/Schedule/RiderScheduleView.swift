@@ -31,10 +31,10 @@ struct RiderScheduleView: View {
                                 RiderEditorView(rider: rider)
                             } label: {
                                 RiderScheduleCard(
-                                rider: rider,
-                                teamSlots: teamSlots,
-                                reserveCategorySpace: anyRiderHasCategories
-                            )
+                                    rider: rider,
+                                    teamSlots: teamSlots,
+                                    reserveCategorySpace: anyRiderHasCategories
+                                )
                             }
                             .buttonStyle(.plain)
                         }

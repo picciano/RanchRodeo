@@ -4,6 +4,7 @@ struct SeededRandomNumberGenerator: RandomNumberGenerator {
     private var state: UInt64
 
     init(seed: UInt64) {
+        // splitmix64 degenerates to all-zeros output when seeded with 0; sub in a fixed nonzero value.
         self.state = seed == 0 ? 0xDEAD_BEEF_CAFE_F00D : seed
     }
 

@@ -11,6 +11,8 @@ struct PayoutsView: View {
 
     @State private var showPrintPreview = false
 
+    private var actionsDisabled: Bool { riders.isEmpty || teams.isEmpty }
+
     var body: some View {
         Group {
             if teams.isEmpty {
@@ -31,7 +33,7 @@ struct PayoutsView: View {
                 } label: {
                     Label("Summary", systemImage: "list.number")
                 }
-                .disabled(riders.isEmpty || teams.isEmpty)
+                .disabled(actionsDisabled)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -39,7 +41,7 @@ struct PayoutsView: View {
                 } label: {
                     Label("Print", systemImage: "printer")
                 }
-                .disabled(riders.isEmpty || teams.isEmpty)
+                .disabled(actionsDisabled)
             }
         }
         .sheet(isPresented: $showPrintPreview) {
@@ -146,8 +148,11 @@ struct PayoutsView: View {
                 }
             }
         }
-        if didCreate {
-            try? modelContext.save()
+        guard didCreate else { return }
+        do {
+            try modelContext.save()
+        } catch {
+            assertionFailure("Failed to save lazily-created payouts: \(error)")
         }
     }
 }
