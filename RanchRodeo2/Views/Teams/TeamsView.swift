@@ -11,6 +11,7 @@ struct TeamsView: View {
 
     @State private var isGenerating = false
     @State private var showEmptyRosterAlert = false
+    @State private var showRegenerateConfirmation = false
     @State private var showPrintPreview = false
 
     var body: some View {
@@ -67,6 +68,18 @@ struct TeamsView: View {
         } message: {
             Text("Add at least one rider to the roster before generating teams.")
         }
+        .confirmationDialog(
+            "Regenerate teams?",
+            isPresented: $showRegenerateConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Regenerate Teams", role: .destructive) {
+                performGenerate()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This replaces the current \(teams.count) team\(teams.count == 1 ? "" : "s") with a fresh set. Any manual edits to team assignments will be lost.")
+        }
     }
 
     private func generate() {
@@ -74,6 +87,14 @@ struct TeamsView: View {
             showEmptyRosterAlert = true
             return
         }
+        if !teams.isEmpty {
+            showRegenerateConfirmation = true
+            return
+        }
+        performGenerate()
+    }
+
+    private func performGenerate() {
         isGenerating = true
         defer { isGenerating = false }
         let store = RosterStore(modelContext: modelContext)
