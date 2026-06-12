@@ -50,7 +50,7 @@ struct TeamsView: View {
                 }
                 .disabled(isGenerating)
             }
-            ToolbarItem(placement: .secondaryAction) {
+            ToolbarItem(placement: .primaryAction) {
                 Button {
                     showPrintPreview = true
                 } label: {

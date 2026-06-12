@@ -5,12 +5,13 @@ struct RootView: View {
     @Environment(\.modelContext) private var modelContext
 
     enum Section: String, Hashable, CaseIterable, Identifiable {
-        case roster, teams, settings
+        case roster, teams, schedule, settings
         var id: String { rawValue }
         var label: String {
             switch self {
             case .roster: "Roster"
             case .teams: "Teams"
+            case .schedule: "Schedule"
             case .settings: "Settings"
             }
         }
@@ -18,6 +19,7 @@ struct RootView: View {
             switch self {
             case .roster: "person.2"
             case .teams: "square.grid.3x3"
+            case .schedule: "calendar"
             case .settings: "gearshape"
             }
         }
@@ -40,6 +42,10 @@ struct RootView: View {
             case .teams:
                 NavigationStack {
                     TeamsView()
+                }
+            case .schedule:
+                NavigationStack {
+                    RiderScheduleView()
                 }
             case .settings:
                 NavigationStack {
