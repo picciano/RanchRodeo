@@ -8,6 +8,9 @@ final class Team {
     @Relationship(inverse: \Rider.teams)
     var riders: [Rider] = []
 
+    @Relationship(deleteRule: .cascade, inverse: \Payout.team)
+    var payouts: [Payout] = []
+
     init(number: Int) {
         self.number = number
     }

@@ -11,6 +11,9 @@ final class Rider {
 
     var teams: [Team] = []
 
+    @Relationship(deleteRule: .cascade, inverse: \Payout.rider)
+    var payouts: [Payout] = []
+
     init(
         externalID: UUID = UUID(),
         firstName: String = "",

@@ -7,6 +7,6 @@ struct RanchRodeo2App: App {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: [Rider.self, Team.self])
+        .modelContainer(for: [Rider.self, Team.self, Payout.self])
     }
 }

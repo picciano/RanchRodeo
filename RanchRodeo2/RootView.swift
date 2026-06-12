@@ -4,14 +4,17 @@ import SwiftData
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
 
+    @AppStorage("payoutsEnabled") private var payoutsEnabled = false
+
     enum Section: String, Hashable, CaseIterable, Identifiable {
-        case roster, teams, schedule, settings
+        case roster, teams, schedule, payouts, settings
         var id: String { rawValue }
         var label: String {
             switch self {
             case .roster: "Roster"
             case .teams: "Teams"
             case .schedule: "Schedule"
+            case .payouts: "Payouts"
             case .settings: "Settings"
             }
         }
@@ -20,6 +23,7 @@ struct RootView: View {
             case .roster: "person.2"
             case .teams: "square.grid.3x3"
             case .schedule: "calendar"
+            case .payouts: "dollarsign.circle"
             case .settings: "gearshape"
             }
         }
@@ -27,9 +31,15 @@ struct RootView: View {
 
     @State private var selection: Section? = .roster
 
+    private var visibleSections: [Section] {
+        Section.allCases.filter { section in
+            section != .payouts || payoutsEnabled
+        }
+    }
+
     var body: some View {
         NavigationSplitView {
-            List(Section.allCases, selection: $selection) { section in
+            List(visibleSections, selection: $selection) { section in
                 NavigationLink(value: section) {
                     Label(section.label, systemImage: section.icon)
                 }
@@ -47,6 +57,10 @@ struct RootView: View {
                 NavigationStack {
                     RiderScheduleView()
                 }
+            case .payouts:
+                NavigationStack {
+                    PayoutsView()
+                }
             case .settings:
                 NavigationStack {
                     SettingsView()
@@ -63,5 +77,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .modelContainer(for: [Rider.self, Team.self], inMemory: true)
+        .modelContainer(for: [Rider.self, Team.self, Payout.self], inMemory: true)
 }

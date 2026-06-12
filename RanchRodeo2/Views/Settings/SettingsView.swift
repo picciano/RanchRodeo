@@ -8,6 +8,7 @@ struct SettingsView: View {
     @Query private var riders: [Rider]
 
     @AppStorage("showRiderDetails") private var showRiderDetails = true
+    @AppStorage("payoutsEnabled") private var payoutsEnabled = false
 
     @State private var exportName: String = ""
     @State private var jsonExportURL: URL?
@@ -36,6 +37,10 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            Section("Features") {
+                Toggle("Track payouts", isOn: $payoutsEnabled)
+            }
+
             Section("Printing") {
                 Toggle("Show rider details on prints", isOn: $showRiderDetails)
             }
