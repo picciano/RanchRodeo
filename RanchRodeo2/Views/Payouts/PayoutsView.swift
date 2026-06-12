@@ -26,6 +26,14 @@ struct PayoutsView: View {
         .navigationTitle("Payouts")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
+                NavigationLink {
+                    PayoutSummaryView()
+                } label: {
+                    Label("Summary", systemImage: "list.number")
+                }
+                .disabled(riders.isEmpty || teams.isEmpty)
+            }
+            ToolbarItem(placement: .primaryAction) {
                 Button {
                     showPrintPreview = true
                 } label: {
