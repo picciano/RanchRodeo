@@ -17,22 +17,8 @@ struct EditTeamView: View {
                 } else {
                     ForEach(team.riders) { rider in
                         HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(rider.displayName)
-                                    .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
-                                let labels = rider.categoryLabels
-                                if !labels.isEmpty {
-                                    HStack(spacing: 4) {
-                                        ForEach(labels, id: \.self) { label in
-                                            Text(label)
-                                                .font(.caption2)
-                                                .padding(.horizontal, 6)
-                                                .padding(.vertical, 2)
-                                                .background(Color.secondary.opacity(0.18), in: Capsule())
-                                        }
-                                    }
-                                }
-                            }
+                            Text(rider.displayName)
+                                .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
                             Spacer()
                             Menu {
                                 let others = allTeams.filter { $0 !== team }

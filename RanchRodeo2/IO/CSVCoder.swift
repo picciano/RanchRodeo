@@ -1,7 +1,7 @@
 import Foundation
 
 enum CSVCoder {
-    static let header = "firstName,lastName,isChild,isParent,isRoper,isNewRider,isWaiverSigned,numberOfRides"
+    static let header = "firstName,lastName,isWaiverSigned,numberOfRides"
 
     @MainActor
     static func encode(riders: [Rider]) -> String {
@@ -10,10 +10,6 @@ enum CSVCoder {
             let fields: [String] = [
                 escape(rider.firstName),
                 escape(rider.lastName),
-                String(rider.isChild),
-                String(rider.isParent),
-                String(rider.isRoper),
-                String(rider.isNewRider),
                 String(rider.isWaiverSigned),
                 String(rider.numberOfRides),
             ]
@@ -28,19 +24,14 @@ enum CSVCoder {
         var results: [RosterDocument.RiderExport] = []
         for line in lines.dropFirst() {
             let fields = parseRow(line)
-            guard fields.count >= 8 else { continue }
+            guard fields.count >= 4 else { continue }
             results.append(
                 RosterDocument.RiderExport(
                     id: UUID(),
                     firstName: fields[0],
                     lastName: fields[1],
-                    isChild: Bool(fields[2]) ?? false,
-                    isParent: Bool(fields[3]) ?? false,
-                    isRoper: Bool(fields[4]) ?? false,
-                    isNewRider: Bool(fields[5]) ?? false,
-                    isWaiverSigned: Bool(fields[6]) ?? false,
-                    numberOfRides: Int(fields[7]) ?? 2,
-                    parentIDs: []
+                    isWaiverSigned: Bool(fields[2]) ?? false,
+                    numberOfRides: Int(fields[3]) ?? 2
                 )
             )
         }

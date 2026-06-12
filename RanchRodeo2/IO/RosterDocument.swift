@@ -11,13 +11,8 @@ nonisolated struct RosterDocument: Codable, Sendable {
         let id: UUID
         var firstName: String
         var lastName: String
-        var isChild: Bool
-        var isParent: Bool
-        var isRoper: Bool
-        var isNewRider: Bool
         var isWaiverSigned: Bool
         var numberOfRides: Int
-        var parentIDs: [UUID]
     }
 
     nonisolated struct ImportSummary {
@@ -48,13 +43,8 @@ extension RosterDocument {
                 id: rider.externalID,
                 firstName: rider.firstName,
                 lastName: rider.lastName,
-                isChild: rider.isChild,
-                isParent: rider.isParent,
-                isRoper: rider.isRoper,
-                isNewRider: rider.isNewRider,
                 isWaiverSigned: rider.isWaiverSigned,
-                numberOfRides: rider.numberOfRides,
-                parentIDs: rider.parents.map(\.externalID)
+                numberOfRides: rider.numberOfRides
             )
         }
         return RosterDocument(riders: exports)
@@ -80,22 +70,11 @@ extension RosterDocument {
                 externalID: export.id,
                 firstName: export.firstName,
                 lastName: export.lastName,
-                isChild: export.isChild,
-                isParent: export.isParent,
-                isRoper: export.isRoper,
-                isNewRider: export.isNewRider,
                 isWaiverSigned: export.isWaiverSigned,
                 numberOfRides: export.numberOfRides
             )
             context.insert(rider)
             insertedByID[export.id] = rider
-        }
-        // Wire parent links — prefer newly imported rider, fall back to pre-existing rider.
-        for export in riders {
-            guard let rider = insertedByID[export.id] else { continue }
-            rider.parents = export.parentIDs.compactMap { id in
-                insertedByID[id] ?? existingByID[id]
-            }
         }
         try? context.save()
         return ImportSummary(imported: insertedByID.count, skipped: skipped)

@@ -39,7 +39,6 @@ struct TeamCard: View {
 
     private func ridesSuffix(for rider: Rider) -> String {
         guard rider.numberOfRides > 2 else { return "" }
-        let code = rider.categoryCode
-        return code.isEmpty ? " (\(rider.numberOfRides))" : " (\(rider.numberOfRides) \(code))"
+        return " (\(rider.numberOfRides))"
     }
 }

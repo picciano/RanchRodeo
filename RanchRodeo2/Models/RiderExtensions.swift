@@ -14,24 +14,6 @@ extension Rider {
         !fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
-    var categoryCode: String {
-        var code = ""
-        if isChild { code += "C" }
-        if isParent { code += "P" }
-        if isRoper { code += "R" }
-        if isNewRider { code += "N" }
-        return code
-    }
-
-    var categoryLabels: [String] {
-        var labels: [String] = []
-        if isChild { labels.append("Child") }
-        if isParent { labels.append("Parent") }
-        if isRoper { labels.append("Roper") }
-        if isNewRider { labels.append("New") }
-        return labels
-    }
-
     var hasRequestedExtraRides: Bool {
         numberOfRides > 2
     }

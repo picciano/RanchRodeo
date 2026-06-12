@@ -62,12 +62,7 @@ struct TeamPrintLayout: View {
     private func riderLine(_ rider: Rider) -> some View {
         let label: String
         if showRiderDetails {
-            let code = rider.categoryCode
-            if code.isEmpty {
-                label = "\(rider.displayName) (\(rider.numberOfRides))"
-            } else {
-                label = "\(rider.displayName) (\(rider.numberOfRides) \(code))"
-            }
+            label = "\(rider.displayName) (\(rider.numberOfRides))"
         } else {
             label = rider.displayName
         }
