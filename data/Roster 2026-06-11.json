@@ -1,0 +1,145 @@
+{
+  "riders" : [
+    {
+      "firstName" : "Caleb",
+      "id" : "190F32A6-BE3F-403F-8DB8-ABE8A25C6CBD",
+      "isWaiverSigned" : true,
+      "lastName" : "Walker",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Travis",
+      "id" : "D57FB07D-A483-47CE-9A2A-776CA0E1AFED",
+      "isWaiverSigned" : true,
+      "lastName" : "Lane",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Cooper",
+      "id" : "F228DE42-F75A-429A-9289-38976EFDFAAE",
+      "isWaiverSigned" : true,
+      "lastName" : "Reeves",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Jake",
+      "id" : "F318F648-509C-4CE8-99EA-E0187FC9E2A8",
+      "isWaiverSigned" : true,
+      "lastName" : "Thompson",
+      "numberOfRides" : 3
+    },
+    {
+      "firstName" : "Tyler",
+      "id" : "864B6A91-15EB-4FAA-B7F2-2C1B984FE60F",
+      "isWaiverSigned" : true,
+      "lastName" : "Brooks",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Jamie",
+      "id" : "9FDC7AB8-E9E2-4537-9F29-3F6522E2FB8A",
+      "isWaiverSigned" : true,
+      "lastName" : "Hart",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Maddie",
+      "id" : "54C124BB-0B8B-4206-ADC8-B2E479CC13E4",
+      "isWaiverSigned" : true,
+      "lastName" : "Reeves",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Emily",
+      "id" : "DD9746F2-EEE8-42B7-8F5D-5781BA7A519C",
+      "isWaiverSigned" : true,
+      "lastName" : "Henderson",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Riley",
+      "id" : "178EA523-2449-4646-BFBB-2B577B747E00",
+      "isWaiverSigned" : true,
+      "lastName" : "Bennett",
+      "numberOfRides" : 4
+    },
+    {
+      "firstName" : "Jenny",
+      "id" : "10DD094C-7489-4992-B3D3-46B953672E5B",
+      "isWaiverSigned" : true,
+      "lastName" : "Walker",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Sue Anne",
+      "id" : "EE935E37-3694-469D-B817-FFA5766EE618",
+      "isWaiverSigned" : true,
+      "lastName" : "McCoy",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Lacey",
+      "id" : "D8854404-912A-4E08-9F1A-B30C42DA1D1F",
+      "isWaiverSigned" : true,
+      "lastName" : "Wells",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Bobby",
+      "id" : "9CC40828-EA63-49A0-A4AB-DDA47D1E7F30",
+      "isWaiverSigned" : true,
+      "lastName" : "Walker",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Sarah",
+      "id" : "AC8554FE-1EF7-416B-AAFF-ECABBE7BE0DB",
+      "isWaiverSigned" : true,
+      "lastName" : "Henderson",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Mike",
+      "id" : "ADB0A127-E73E-44D9-B712-92EF4364F2A6",
+      "isWaiverSigned" : true,
+      "lastName" : "Henderson",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Hannah",
+      "id" : "CA315911-8479-468F-901A-F933774BCD1C",
+      "isWaiverSigned" : true,
+      "lastName" : "Mills",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Dale",
+      "id" : "9A3723AF-3216-4D9B-BEF6-F940F385848B",
+      "isWaiverSigned" : true,
+      "lastName" : "McCoy",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Frank",
+      "id" : "C7ED291F-93BF-4CBE-8BCD-157ABF0FF4F9",
+      "isWaiverSigned" : true,
+      "lastName" : "O'Brien",
+      "numberOfRides" : 3
+    },
+    {
+      "firstName" : "Wyatt",
+      "id" : "B4BCD95A-17C7-4BDC-881B-AF940111DEA0",
+      "isWaiverSigned" : true,
+      "lastName" : "Carter",
+      "numberOfRides" : 2
+    },
+    {
+      "firstName" : "Dustin",
+      "id" : "C1C1FE41-74B9-41BA-9DDE-306338EE2909",
+      "isWaiverSigned" : true,
+      "lastName" : "Pierce",
+      "numberOfRides" : 2
+    }
+  ],
+  "version" : 1
+}
