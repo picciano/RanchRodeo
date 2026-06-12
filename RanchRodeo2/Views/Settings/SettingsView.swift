@@ -37,12 +37,9 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("Features") {
-                Toggle("Track payouts", isOn: $payoutsEnabled)
-            }
-
-            Section("Printing") {
-                Toggle("Show rider details on prints", isOn: $showRiderDetails)
+            Section("About") {
+                LabeledContent("Riders", value: "\(riders.count)")
+                LabeledContent("App", value: "Ranch Rodeo 2 v\(appVersion)")
             }
 
             Section {
@@ -95,9 +92,9 @@ struct SettingsView: View {
                 Text("Removes every rider and team from the store. This cannot be undone.")
             }
 
-            Section("About") {
-                LabeledContent("Riders", value: "\(riders.count)")
-                LabeledContent("App", value: "Ranch Rodeo 2")
+            Section("Features") {
+                Toggle("Show rider details on prints", isOn: $showRiderDetails)
+                Toggle("Track payouts", isOn: $payoutsEnabled)
             }
         }
         .navigationTitle("Settings")
@@ -154,6 +151,12 @@ struct SettingsView: View {
             }
             Button("Cancel", role: .cancel) {}
         }
+    }
+
+    // MARK: - App version
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
     }
 
     // MARK: - Export naming
