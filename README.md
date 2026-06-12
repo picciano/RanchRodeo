@@ -4,9 +4,14 @@ Ranch Rodeo is an iPad and iPhone app for organizing a ranch rodeo event. It tak
 
 ## What it does
 
-**Keep your roster in one place.** Add every rider who's signing up, note whether their waiver is signed, and pick how many rides they're requesting.
+**Keep your roster in one place.** Add every rider who's signing up, mark whether they're a child or a parent, note whether their waiver is signed, and pick how many rides they're requesting.
 
-**Generate teams automatically.** Tap *Generate* and the app builds teams of four with a comfortable wait between each rider's rides, so nobody is asked to ride back-to-back.
+**Generate teams automatically.** Tap *Generate* and the app builds teams of four that follow the rules ranch rodeos run on:
+
+- Children are paired with one of their parents on each ride
+- Children are spread across teams when possible
+- Riders never ride back-to-back team numbers — a comfortable wait between rides is built in
+- Riders who asked for extra rides get them, spread across the schedule
 
 **Adjust teams by hand when you need to.** Move riders between teams, remove someone who scratched, or shuffle the lineup right up until the event starts. The app flags any team that's short a rider or has an unsigned waiver so nothing slips through.
 

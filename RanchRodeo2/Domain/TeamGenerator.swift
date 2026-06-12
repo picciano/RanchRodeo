@@ -18,8 +18,10 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
         let numberOfTeams = calculatedNumberOfTeams(riders: riders)
         let teams = (1...numberOfTeams).map { GeneratorTeam(number: $0) }
 
+        let childRiders = riders.filter { $0.isChild }
         let extraRideRiders = riders.filter { $0.hasRequestedExtraRides }
 
+        process(riders: childRiders, teams: teams)
         process(riders: extraRideRiders, teams: teams)
         process(riders: riders, teams: teams)
 
@@ -31,13 +33,25 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
 
     private mutating func process(riders: [GeneratorRider], teams: [GeneratorTeam]) {
         for rider in riders {
-            // A rider's teams.count can exceed numberOfRides because earlier phases
-            // may have placed them; guard the range to avoid trapping.
+            let parents = rider.parents.sorted { $0.firstName < $1.firstName }
+
+            // A rider's teams.count can exceed numberOfRides — for example, a parent who
+            // was attached to multiple children's teams. Guard the range to avoid trapping.
             guard rider.teams.count < rider.numberOfRides else { continue }
 
-            for _ in rider.teams.count..<rider.numberOfRides {
+            for i in rider.teams.count..<rider.numberOfRides {
                 guard let team = findTeam(for: rider, teams: teams) else { continue }
                 attach(rider: rider, to: team)
+
+                if rider.isChild && !rider.parents.isEmpty {
+                    let parent = parents[i % parents.count]
+                    // Parent-child pairing wins over the parent's ride quota — we attach
+                    // the parent every time the child lands, even if it pushes the parent
+                    // over their requested rides. Only skip a literal duplicate placement.
+                    if !team.riders.contains(where: { $0 === parent }) {
+                        attach(rider: parent, to: team)
+                    }
+                }
             }
         }
     }
@@ -65,6 +79,7 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
 
         for team in potentialTeams {
             if rider.hasTeam(within: TeamGenerationConstants.minimumWaitBetweenRides, ofTeamNumber: team.number) { continue }
+            if rider.isChild && team.hasChildRider { continue }
             preferredTeams.append(team)
         }
 

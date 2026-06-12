@@ -11,8 +11,31 @@ nonisolated struct RosterDocument: Codable, Sendable {
         let id: UUID
         var firstName: String
         var lastName: String
+        var isChild: Bool
+        var isParent: Bool
         var isWaiverSigned: Bool
         var numberOfRides: Int
+        var parentIDs: [UUID]
+
+        init(
+            id: UUID,
+            firstName: String,
+            lastName: String,
+            isChild: Bool = false,
+            isParent: Bool = false,
+            isWaiverSigned: Bool,
+            numberOfRides: Int,
+            parentIDs: [UUID] = []
+        ) {
+            self.id = id
+            self.firstName = firstName
+            self.lastName = lastName
+            self.isChild = isChild
+            self.isParent = isParent
+            self.isWaiverSigned = isWaiverSigned
+            self.numberOfRides = numberOfRides
+            self.parentIDs = parentIDs
+        }
     }
 
     nonisolated struct ImportSummary {
@@ -43,8 +66,11 @@ extension RosterDocument {
                 id: rider.externalID,
                 firstName: rider.firstName,
                 lastName: rider.lastName,
+                isChild: rider.isChild,
+                isParent: rider.isParent,
                 isWaiverSigned: rider.isWaiverSigned,
-                numberOfRides: rider.numberOfRides
+                numberOfRides: rider.numberOfRides,
+                parentIDs: rider.parents.map { $0.externalID }
             )
         }
         return RosterDocument(riders: exports)
@@ -70,13 +96,34 @@ extension RosterDocument {
                 externalID: export.id,
                 firstName: export.firstName,
                 lastName: export.lastName,
+                isChild: export.isChild,
+                isParent: export.isParent,
                 isWaiverSigned: export.isWaiverSigned,
                 numberOfRides: export.numberOfRides
             )
             context.insert(rider)
             insertedByID[export.id] = rider
         }
-        try? context.save()
+
+        // Resolve parent links after all riders are inserted, so parents declared
+        // later in the file still resolve. Look across both newly-inserted and
+        // pre-existing riders by externalID.
+        let allByID: [UUID: Rider] = existingByID.merging(insertedByID) { _, new in new }
+        for export in riders where !export.parentIDs.isEmpty {
+            guard let child = insertedByID[export.id] else { continue }
+            for parentID in export.parentIDs {
+                guard let parent = allByID[parentID] else { continue }
+                if !child.parents.contains(where: { $0 === parent }) {
+                    child.parents.append(parent)
+                }
+            }
+        }
+
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Failed to save imported roster: \(error)")
+        }
         return ImportSummary(imported: insertedByID.count, skipped: skipped)
     }
 }

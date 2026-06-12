@@ -7,11 +7,15 @@ struct TeamGeneratorTests {
     private func addRider(
         to riders: inout [GeneratorRider],
         firstName: String,
+        isChild: Bool = false,
+        isParent: Bool = false,
         isWaiverSigned: Bool = true,
         numberOfRides: Int = 2
     ) -> GeneratorRider {
         let rider = GeneratorRider(
             firstName: firstName,
+            isChild: isChild,
+            isParent: isParent,
             isWaiverSigned: isWaiverSigned,
             numberOfRides: numberOfRides
         )
@@ -75,6 +79,46 @@ struct TeamGeneratorTests {
         for team in teams {
             let ids = team.riders.map(\.id)
             #expect(Set(ids).count == ids.count, "Team \(team.number) has duplicate riders")
+        }
+    }
+
+    // MARK: - Child / parent binding
+
+    @Test func childRiderTriggersParentBindingOnSameTeam() {
+        var riders: [GeneratorRider] = []
+        let parent = addRider(to: &riders, firstName: "Parent", isParent: true, numberOfRides: 2)
+        let child = addRider(to: &riders, firstName: "Child", isChild: true, numberOfRides: 2)
+        child.parents = [parent]
+        for i in 0..<6 {
+            addRider(to: &riders, firstName: "Filler\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1))
+        _ = generator.generate(riders: riders)
+        for team in child.teams {
+            #expect(team.riders.contains { $0 === parent }, "Parent should ride on team \(team.number) with child")
+        }
+    }
+
+    @Test func parentRidesWithEveryChildEvenWhenItExceedsParentQuota() {
+        var riders: [GeneratorRider] = []
+        let parent = addRider(to: &riders, firstName: "Parent", isParent: true, numberOfRides: 2)
+        let firstChild = addRider(to: &riders, firstName: "Alice", isChild: true, numberOfRides: 2)
+        let secondChild = addRider(to: &riders, firstName: "Bob", isChild: true, numberOfRides: 2)
+        firstChild.parents = [parent]
+        secondChild.parents = [parent]
+        for i in 0..<5 {
+            addRider(to: &riders, firstName: "Filler\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1))
+        _ = generator.generate(riders: riders)
+
+        for team in firstChild.teams {
+            #expect(team.riders.contains { $0 === parent },
+                    "Parent should be on team \(team.number) with Alice")
+        }
+        for team in secondChild.teams {
+            #expect(team.riders.contains { $0 === parent },
+                    "Parent should be on team \(team.number) with Bob")
         }
     }
 

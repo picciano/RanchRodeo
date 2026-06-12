@@ -38,6 +38,13 @@ struct RiderSchedulePrintLayout: View {
                 .font(.system(size: 12, weight: .bold))
                 .foregroundStyle(rider.isWaiverSigned ? Color.black : Color.red)
                 .lineLimit(1)
+            let labels = rider.categoryLabels
+            if !labels.isEmpty {
+                Text(labels.joined(separator: ", "))
+                    .font(.system(size: 9))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
             let teamNumbers = rider.teams
                 .sorted { $0.number < $1.number }
                 .map { "\($0.number)" }

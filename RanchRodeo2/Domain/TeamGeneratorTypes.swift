@@ -3,19 +3,26 @@ import Foundation
 final class GeneratorRider {
     let id: UUID
     let firstName: String
+    let isChild: Bool
+    let isParent: Bool
     let isWaiverSigned: Bool
     let numberOfRides: Int
 
     var teams: [GeneratorTeam] = []
+    var parents: [GeneratorRider] = []
 
     init(
         id: UUID = UUID(),
         firstName: String,
+        isChild: Bool = false,
+        isParent: Bool = false,
         isWaiverSigned: Bool = true,
         numberOfRides: Int = 2
     ) {
         self.id = id
         self.firstName = firstName
+        self.isChild = isChild
+        self.isParent = isParent
         self.isWaiverSigned = isWaiverSigned
         self.numberOfRides = numberOfRides
     }
@@ -39,6 +46,7 @@ final class GeneratorTeam {
         self.number = number
     }
 
+    var hasChildRider: Bool { riders.contains { $0.isChild } }
     var hasRiderWithExtraRides: Bool { riders.contains { $0.hasRequestedExtraRides } }
     var allRidersHaveSignedWaiver: Bool { riders.allSatisfy { $0.isWaiverSigned } }
 }

@@ -129,9 +129,15 @@ final class RosterStore {
         for rider in riders {
             map[rider.persistentModelID] = GeneratorRider(
                 firstName: rider.firstName,
+                isChild: rider.isChild,
+                isParent: rider.isParent,
                 isWaiverSigned: rider.isWaiverSigned,
                 numberOfRides: rider.numberOfRides
             )
+        }
+        for rider in riders {
+            guard let snap = map[rider.persistentModelID] else { continue }
+            snap.parents = rider.parents.compactMap { map[$0.persistentModelID] }
         }
         return map
     }

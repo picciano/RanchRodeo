@@ -11,6 +11,10 @@ struct RiderScheduleView: View {
         max(2, riders.map { $0.teams.count }.max() ?? 0)
     }
 
+    private var anyRiderHasCategories: Bool {
+        riders.contains { !$0.categoryLabels.isEmpty }
+    }
+
     var body: some View {
         Group {
             if riders.isEmpty {
@@ -26,7 +30,11 @@ struct RiderScheduleView: View {
                             NavigationLink {
                                 RiderEditorView(rider: rider)
                             } label: {
-                                RiderScheduleCard(rider: rider, teamSlots: teamSlots)
+                                RiderScheduleCard(
+                                rider: rider,
+                                teamSlots: teamSlots,
+                                reserveCategorySpace: anyRiderHasCategories
+                            )
                             }
                             .buttonStyle(.plain)
                         }
