@@ -7,6 +7,7 @@ final class GeneratorRider {
     let isParent: Bool
     let isWaiverSigned: Bool
     let numberOfRides: Int
+    let preferredTeamNumber: Int?
 
     var teams: [GeneratorTeam] = []
     var parents: [GeneratorRider] = []
@@ -17,7 +18,8 @@ final class GeneratorRider {
         isChild: Bool = false,
         isParent: Bool = false,
         isWaiverSigned: Bool = true,
-        numberOfRides: Int = 2
+        numberOfRides: Int = 2,
+        preferredTeamNumber: Int? = nil
     ) {
         self.id = id
         self.firstName = firstName
@@ -25,6 +27,7 @@ final class GeneratorRider {
         self.isParent = isParent
         self.isWaiverSigned = isWaiverSigned
         self.numberOfRides = numberOfRides
+        self.preferredTeamNumber = preferredTeamNumber
     }
 
     var hasRequestedExtraRides: Bool { numberOfRides > 2 }

@@ -7,6 +7,8 @@ struct RosterView: View {
     @Query(sort: [SortDescriptor(\Rider.firstName), SortDescriptor(\Rider.lastName)])
     private var riders: [Rider]
 
+    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+
     @State private var newRiderSheet: NewRiderSheet?
     @State private var pendingNewRider: Rider?
     @State private var showClearConfirmation = false
@@ -28,6 +30,12 @@ struct RosterView: View {
                     )
                 } else {
                     List {
+                        Section("Summary") {
+                            LabeledContent("Number of Riders", value: "\(riders.count)")
+                            LabeledContent("Total Rides", value: "\(riders.totalRides)")
+                            LabeledContent("Number of Teams", value: "\(riders.numberOfTeams(teamSize: teamSize))")
+                        }
+
                         ForEach(riders) { rider in
                             NavigationLink {
                                 RiderEditorView(rider: rider)

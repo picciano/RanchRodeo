@@ -16,6 +16,7 @@ nonisolated struct RosterDocument: Codable, Sendable {
         var isWaiverSigned: Bool
         var numberOfRides: Int
         var parentIDs: [UUID]
+        var preferredTeamNumber: Int?
 
         init(
             id: UUID,
@@ -25,7 +26,8 @@ nonisolated struct RosterDocument: Codable, Sendable {
             isParent: Bool = false,
             isWaiverSigned: Bool,
             numberOfRides: Int,
-            parentIDs: [UUID] = []
+            parentIDs: [UUID] = [],
+            preferredTeamNumber: Int? = nil
         ) {
             self.id = id
             self.firstName = firstName
@@ -35,6 +37,7 @@ nonisolated struct RosterDocument: Codable, Sendable {
             self.isWaiverSigned = isWaiverSigned
             self.numberOfRides = numberOfRides
             self.parentIDs = parentIDs
+            self.preferredTeamNumber = preferredTeamNumber
         }
     }
 
@@ -70,7 +73,8 @@ extension RosterDocument {
                 isParent: rider.isParent,
                 isWaiverSigned: rider.isWaiverSigned,
                 numberOfRides: rider.numberOfRides,
-                parentIDs: rider.parents.map { $0.externalID }
+                parentIDs: rider.parents.map { $0.externalID },
+                preferredTeamNumber: rider.preferredTeamNumber
             )
         }
         return RosterDocument(riders: exports)
@@ -99,7 +103,8 @@ extension RosterDocument {
                 isChild: export.isChild,
                 isParent: export.isParent,
                 isWaiverSigned: export.isWaiverSigned,
-                numberOfRides: export.numberOfRides
+                numberOfRides: export.numberOfRides,
+                preferredTeamNumber: export.preferredTeamNumber
             )
             context.insert(rider)
             insertedByID[export.id] = rider

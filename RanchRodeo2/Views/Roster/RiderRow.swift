@@ -23,11 +23,9 @@ struct RiderRow: View {
                 }
             }
             Spacer()
-            if rider.numberOfRides != 2 {
-                Text("\(rider.numberOfRides) rides")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+            Text("\(rider.numberOfRides) rides")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
         .padding(.vertical, 2)
     }

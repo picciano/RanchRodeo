@@ -4,11 +4,21 @@ import SwiftData
 struct RiderEditorView: View {
     @Bindable var rider: Rider
 
+    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+
     @Query(
         filter: #Predicate<Rider> { $0.isParent },
         sort: [SortDescriptor(\Rider.firstName), SortDescriptor(\Rider.lastName)]
     )
     private var parentOptions: [Rider]
+
+    @Query private var allRiders: [Rider]
+
+    /// The number of teams the current roster will produce at the configured size,
+    /// used to bound the preferred-team picker. At least 1 so a preference can be set.
+    private var teamCount: Int {
+        max(1, allRiders.numberOfTeams(teamSize: teamSize))
+    }
 
     var body: some View {
         Form {
@@ -34,6 +44,19 @@ struct RiderEditorView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+            }
+
+            Section {
+                Picker("Preferred team", selection: $rider.preferredTeamNumber) {
+                    Text("No preference").tag(Int?.none)
+                    ForEach(1...teamCount, id: \.self) { number in
+                        Text("Team \(number)").tag(Int?(number))
+                    }
+                }
+            } header: {
+                Text("Preferred Team")
+            } footer: {
+                Text("Seats this rider on the chosen team first, before other rules. If the team is full or no longer exists when teams are generated, the rider is assigned normally.")
             }
 
             if rider.isChild {

@@ -43,8 +43,8 @@ struct SettingsView: View {
         Form {
             Section("About") {
                 LabeledContent("Riders", value: "\(riders.count)")
-                LabeledContent("Total Rides", value: "\(totalRides)")
-                LabeledContent("Number of Teams", value: "\(numberOfTeams)")
+                LabeledContent("Total Rides", value: "\(riders.totalRides)")
+                LabeledContent("Number of Teams", value: "\(riders.numberOfTeams(teamSize: teamSize))")
                 LabeledContent("App", value: "Ranch Rodeo 2 v\(appVersion)")
             }
 
@@ -184,19 +184,6 @@ struct SettingsView: View {
                 }
             }
         )
-    }
-
-    // MARK: - Roster totals
-
-    /// Sum of every rider's requested rides.
-    private var totalRides: Int {
-        riders.reduce(0) { $0 + $1.numberOfRides }
-    }
-
-    /// Teams needed to seat all rides at the configured team size, rounded up.
-    private var numberOfTeams: Int {
-        guard teamSize > 0 else { return 0 }
-        return Int((Double(totalRides) / Double(teamSize)).rounded(.up))
     }
 
     // MARK: - App version

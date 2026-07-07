@@ -1,5 +1,19 @@
 import Foundation
 
+extension Collection where Element == Rider {
+    /// Sum of every rider's requested rides.
+    var totalRides: Int {
+        reduce(0) { $0 + $1.numberOfRides }
+    }
+
+    /// Teams needed to seat all rides at the given size, rounded up to the next whole
+    /// team. Zero when there are no rides. Mirrors the generator's capacity calculation.
+    func numberOfTeams(teamSize: Int = TeamSettings.teamSize) -> Int {
+        guard teamSize > 0 else { return 0 }
+        return Int((Double(totalRides) / Double(teamSize)).rounded(.up))
+    }
+}
+
 extension Rider {
     var fullName: String {
         "\(firstName) \(lastName)"

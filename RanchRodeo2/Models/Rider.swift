@@ -11,6 +11,11 @@ final class Rider {
     var isWaiverSigned: Bool
     var numberOfRides: Int
 
+    /// A team number the rider asked to be seated on first, before the usual placement
+    /// rules run. `nil` means no preference. Ignored at generation time if the number
+    /// exceeds the teams actually created or that team is already full.
+    var preferredTeamNumber: Int?
+
     var teams: [Team] = []
 
     var children: [Rider] = []
@@ -28,7 +33,8 @@ final class Rider {
         isChild: Bool = false,
         isParent: Bool = false,
         isWaiverSigned: Bool = false,
-        numberOfRides: Int = 2
+        numberOfRides: Int = 2,
+        preferredTeamNumber: Int? = nil
     ) {
         self.externalID = externalID
         self.firstName = firstName
@@ -37,5 +43,6 @@ final class Rider {
         self.isParent = isParent
         self.isWaiverSigned = isWaiverSigned
         self.numberOfRides = numberOfRides
+        self.preferredTeamNumber = preferredTeamNumber
     }
 }

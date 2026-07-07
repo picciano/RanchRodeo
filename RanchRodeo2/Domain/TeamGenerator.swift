@@ -20,6 +20,8 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
         let numberOfTeams = calculatedNumberOfTeams(riders: riders)
         let teams = (1...numberOfTeams).map { GeneratorTeam(number: $0) }
 
+        placePreferredTeams(riders: riders, teams: teams)
+
         let childRiders = riders.filter { $0.isChild }
         let extraRideRiders = riders.filter { $0.hasRequestedExtraRides }
 
@@ -31,6 +33,26 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
 
         determineWarnings(teams: teams)
         return teams
+    }
+
+    /// Phase zero: seat riders who requested a specific team onto it before any other
+    /// rule runs, using one of their rides. This deliberately ignores the gap, child,
+    /// and extra-ride preferences. A team is filled only up to `teamSize`; riders who
+    /// don't fit (or whose requested team number wasn't created) are left for the normal
+    /// phases. Riders are processed in a stable name order so overflow is deterministic.
+    private func placePreferredTeams(riders: [GeneratorRider], teams: [GeneratorTeam]) {
+        let requesting = riders
+            .filter { $0.preferredTeamNumber != nil }
+            .sorted { $0.firstName < $1.firstName }
+
+        for rider in requesting {
+            guard
+                let number = rider.preferredTeamNumber,
+                let team = teams.first(where: { $0.number == number }),
+                team.riders.count < teamSize
+            else { continue }
+            attach(rider: rider, to: team)
+        }
     }
 
     private mutating func process(riders: [GeneratorRider], teams: [GeneratorTeam]) {

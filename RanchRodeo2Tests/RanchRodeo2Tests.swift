@@ -10,14 +10,16 @@ struct TeamGeneratorTests {
         isChild: Bool = false,
         isParent: Bool = false,
         isWaiverSigned: Bool = true,
-        numberOfRides: Int = 2
+        numberOfRides: Int = 2,
+        preferredTeamNumber: Int? = nil
     ) -> GeneratorRider {
         let rider = GeneratorRider(
             firstName: firstName,
             isChild: isChild,
             isParent: isParent,
             isWaiverSigned: isWaiverSigned,
-            numberOfRides: numberOfRides
+            numberOfRides: numberOfRides,
+            preferredTeamNumber: preferredTeamNumber
         )
         riders.append(rider)
         return rider
@@ -182,6 +184,58 @@ struct TeamGeneratorTests {
         let teams = generator.generate(riders: riders)
         let allWarnings = teams.flatMap(\.warnings)
         #expect(allWarnings.contains("Team should have 3 riders."))
+    }
+
+    // MARK: - Preferred team
+
+    @Test func preferredTeamSeatsRiderOnRequestedTeam() {
+        var riders: [GeneratorRider] = []
+        let picky = addRider(to: &riders, firstName: "Picky", preferredTeamNumber: 2)
+        for i in 0..<7 {
+            addRider(to: &riders, firstName: "R\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1))
+        let teams = generator.generate(riders: riders)
+
+        let team2 = teams.first { $0.number == 2 }
+        #expect(team2?.riders.contains { $0 === picky } == true)
+        #expect(picky.teams.count == picky.numberOfRides)
+    }
+
+    @Test func preferredTeamFillsToSizeThenOverflowFallsBack() {
+        var riders: [GeneratorRider] = []
+        var requesters: [GeneratorRider] = []
+        for i in 0..<4 {
+            requesters.append(addRider(to: &riders, firstName: "P\(i)", preferredTeamNumber: 1))
+        }
+        for i in 0..<5 {
+            addRider(to: &riders, firstName: "F\(i)")
+        }
+        // 9 riders × 2 rides = 18 ÷ 3 = 6 teams; only 3 of the 4 requesters fit team 1.
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1), teamSize: 3)
+        let teams = generator.generate(riders: riders)
+
+        let team1 = teams.first { $0.number == 1 }
+        #expect(team1?.riders.count == 3)
+        let seated = requesters.filter { r in team1?.riders.contains { $0 === r } == true }
+        #expect(seated.count == 3)
+        // Everyone still receives their full ride quota, including the overflowed rider.
+        for rider in requesters {
+            #expect(rider.teams.count == rider.numberOfRides)
+        }
+    }
+
+    @Test func outOfRangePreferredTeamIsIgnored() {
+        var riders: [GeneratorRider] = []
+        let hopeful = addRider(to: &riders, firstName: "Hopeful", preferredTeamNumber: 99)
+        for i in 0..<7 {
+            addRider(to: &riders, firstName: "R\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1))
+        let teams = generator.generate(riders: riders)
+
+        #expect(teams.count == 4)
+        #expect(hopeful.teams.count == hopeful.numberOfRides)
     }
 
     // MARK: - Warning generation

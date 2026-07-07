@@ -114,7 +114,8 @@ final class RosterStore {
                 isChild: rider.isChild,
                 isParent: rider.isParent,
                 isWaiverSigned: rider.isWaiverSigned,
-                numberOfRides: rider.numberOfRides
+                numberOfRides: rider.numberOfRides,
+                preferredTeamNumber: rider.preferredTeamNumber
             )
         }
         for rider in riders {
