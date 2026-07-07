@@ -39,7 +39,7 @@ struct TeamPrintLayout: View {
             Text("Team \(team.number)")
                 .font(.system(size: 13, weight: .bold))
             Divider()
-            ForEach(0..<4, id: \.self) { i in
+            ForEach(0..<max(TeamSettings.teamSize, team.riders.count), id: \.self) { i in
                 if i < team.riders.count {
                     riderLine(team.riders[i])
                 } else {

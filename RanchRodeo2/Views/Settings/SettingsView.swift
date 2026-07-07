@@ -6,9 +6,14 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
 
     @Query private var riders: [Rider]
+    @Query private var teams: [Team]
 
     @AppStorage("showRiderDetails") private var showRiderDetails = true
     @AppStorage("payoutsEnabled") private var payoutsEnabled = false
+    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+
+    @State private var showTeamSizeConfirmation = false
+    @State private var proposedTeamSize = TeamSettings.defaultTeamSize
 
     @State private var exportName: String = ""
     @State private var jsonExportURL: URL?
@@ -38,7 +43,27 @@ struct SettingsView: View {
         Form {
             Section("About") {
                 LabeledContent("Riders", value: "\(riders.count)")
+                LabeledContent("Total Rides", value: "\(totalRides)")
+                LabeledContent("Number of Teams", value: "\(numberOfTeams)")
                 LabeledContent("App", value: "Ranch Rodeo 2 v\(appVersion)")
+            }
+
+            Section {
+                HStack {
+                    Text("Riders per team")
+                    Spacer()
+                    Picker("Riders per team", selection: teamSizeBinding) {
+                        Text("3").tag(3)
+                        Text("4").tag(4)
+                    }
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
+                    .frame(maxWidth: 120)
+                }
+            } header: {
+                Text("Team Size")
+            } footer: {
+                Text("Choose how many riders make up each team. Changing this clears any generated teams so you can regenerate them.")
             }
 
             Section {
@@ -125,6 +150,53 @@ struct SettingsView: View {
             }
             Button("Cancel", role: .cancel) {}
         }
+        .confirmationDialog(
+            "Change team size?",
+            isPresented: $showTeamSizeConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Change and Clear Teams", role: .destructive) {
+                teamSize = proposedTeamSize
+                RosterStore(modelContext: modelContext).clearTeams()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Changing team size removes the current \(teams.count) team\(teams.count == 1 ? "" : "s"). You'll need to regenerate them.")
+        }
+    }
+
+    // MARK: - Team size
+
+    /// Intercepts picker changes: when teams already exist, defer the change behind a
+    /// confirmation instead of writing the new value immediately. Because the getter keeps
+    /// returning the current `teamSize`, the segmented control visually snaps back until the
+    /// user confirms — no manual revert needed.
+    private var teamSizeBinding: Binding<Int> {
+        Binding(
+            get: { teamSize },
+            set: { newValue in
+                guard newValue != teamSize else { return }
+                if teams.isEmpty {
+                    teamSize = newValue
+                } else {
+                    proposedTeamSize = newValue
+                    showTeamSizeConfirmation = true
+                }
+            }
+        )
+    }
+
+    // MARK: - Roster totals
+
+    /// Sum of every rider's requested rides.
+    private var totalRides: Int {
+        riders.reduce(0) { $0 + $1.numberOfRides }
+    }
+
+    /// Teams needed to seat all rides at the configured team size, rounded up.
+    private var numberOfTeams: Int {
+        guard teamSize > 0 else { return 0 }
+        return Int((Double(totalRides) / Double(teamSize)).rounded(.up))
     }
 
     // MARK: - App version

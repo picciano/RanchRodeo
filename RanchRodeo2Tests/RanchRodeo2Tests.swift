@@ -141,6 +141,49 @@ struct TeamGeneratorTests {
         }
     }
 
+    // MARK: - Configurable team size
+
+    @Test func threePersonTeamsFillCompletely() {
+        var riders: [GeneratorRider] = []
+        for i in 0..<9 {
+            addRider(to: &riders, firstName: "R\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1), teamSize: 3)
+        let teams = generator.generate(riders: riders)
+
+        // 9 riders × 2 rides = 18 ride-slots ÷ 3 per team = 6 teams.
+        #expect(teams.count == 6)
+        for team in teams {
+            #expect(team.riders.count == 3, "Team \(team.number) has \(team.riders.count) riders, expected 3")
+        }
+        for rider in riders {
+            #expect(rider.teams.count == 2, "\(rider.firstName) got \(rider.teams.count) rides, expected 2")
+        }
+    }
+
+    @Test func threePersonTeamNeverExceedsThreeRiders() {
+        var riders: [GeneratorRider] = []
+        for i in 0..<11 {
+            addRider(to: &riders, firstName: "R\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 7), teamSize: 3)
+        let teams = generator.generate(riders: riders)
+        for team in teams {
+            #expect(team.riders.count <= 3, "Team \(team.number) exceeded the team size of 3")
+        }
+    }
+
+    @Test func warningUsesConfiguredTeamSize() {
+        var riders: [GeneratorRider] = []
+        for i in 0..<2 {
+            addRider(to: &riders, firstName: "R\(i)")
+        }
+        var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1), teamSize: 3)
+        let teams = generator.generate(riders: riders)
+        let allWarnings = teams.flatMap(\.warnings)
+        #expect(allWarnings.contains("Team should have 3 riders."))
+    }
+
     // MARK: - Warning generation
 
     @Test func warningIsCreatedForTeamWithFewerThanFourRiders() {
@@ -151,7 +194,7 @@ struct TeamGeneratorTests {
         var generator = TeamGenerator(rng: SeededRandomNumberGenerator(seed: 1))
         let teams = generator.generate(riders: riders)
         let allWarnings = teams.flatMap(\.warnings)
-        #expect(allWarnings.contains("Team should have four riders."))
+        #expect(allWarnings.contains("Team should have 4 riders."))
     }
 
     @Test func warningIsCreatedForUnsignedWaiver() {

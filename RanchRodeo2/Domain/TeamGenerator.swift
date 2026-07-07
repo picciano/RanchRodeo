@@ -1,16 +1,18 @@
 import Foundation
 
 enum TeamGenerationConstants {
-    static let maxRidersPerTeam = 4
+    static let defaultTeamSize = 4
     static let minimumWaitBetweenRides = 2
     static let preferredWaitBetweenRides = 4
 }
 
 struct TeamGenerator<RNG: RandomNumberGenerator> {
     private var rng: RNG
+    private let teamSize: Int
 
-    init(rng: RNG) {
+    init(rng: RNG, teamSize: Int = TeamGenerationConstants.defaultTeamSize) {
         self.rng = rng
+        self.teamSize = teamSize
     }
 
     @discardableResult
@@ -72,7 +74,7 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
         var bestMatchTeams: [GeneratorTeam] = []
 
         for team in teams {
-            if team.riders.count >= TeamGenerationConstants.maxRidersPerTeam { continue }
+            if team.riders.count >= teamSize { continue }
             if rider.teams.contains(where: { $0 === team }) { continue }
             potentialTeams.append(team)
         }
@@ -119,7 +121,7 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
         for rider in underServed where rider.teams.count < rider.numberOfRides {
             while rider.teams.count < rider.numberOfRides {
                 let candidates = teams.filter { team in
-                    team.riders.count < TeamGenerationConstants.maxRidersPerTeam &&
+                    team.riders.count < teamSize &&
                     !rider.teams.contains(where: { $0 === team })
                 }
                 guard let team = pickLeastFilled(from: candidates) else { break }
@@ -151,10 +153,10 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
         // containing some rider `X` who could be moved to an under-filled team `toTeam`
         // that does not yet contain X.
         let fullTeams = teams.filter { team in
-            team.riders.count >= TeamGenerationConstants.maxRidersPerTeam &&
+            team.riders.count >= teamSize &&
             !shortRider.teams.contains(where: { $0 === team })
         }
-        let underFilled = teams.filter { $0.riders.count < TeamGenerationConstants.maxRidersPerTeam }
+        let underFilled = teams.filter { $0.riders.count < teamSize }
 
         for fromTeam in fullTeams {
             for candidate in fromTeam.riders {
@@ -169,8 +171,8 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
 
     private func determineWarnings(teams: [GeneratorTeam]) {
         for team in teams {
-            if team.riders.count != 4 {
-                team.warnings.append("Team should have four riders.")
+            if team.riders.count != teamSize {
+                team.warnings.append("Team should have \(teamSize) riders.")
             }
             if !team.allRidersHaveSignedWaiver {
                 team.warnings.append("All riders need to sign waiver.")
@@ -181,7 +183,7 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
     private func calculatedNumberOfTeams(riders: [GeneratorRider]) -> Int {
         let totalRides = riders.reduce(0) { $0 + $1.numberOfRides }
         let maxPerRider = riders.map(\.numberOfRides).max() ?? 0
-        let byCapacity = Int((Double(totalRides) / Double(TeamGenerationConstants.maxRidersPerTeam)).rounded(.up))
+        let byCapacity = Int((Double(totalRides) / Double(teamSize)).rounded(.up))
         return max(byCapacity, maxPerRider)
     }
 }

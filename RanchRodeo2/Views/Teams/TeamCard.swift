@@ -3,6 +3,14 @@ import SwiftUI
 struct TeamCard: View {
     let team: Team
 
+    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+
+    // Show at least the configured team size, but expand if a team was hand-edited
+    // to hold more riders so none are hidden.
+    private var slotCount: Int {
+        max(teamSize, team.riders.count)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
@@ -16,7 +24,7 @@ struct TeamCard: View {
                 }
             }
             Divider()
-            ForEach(0..<4, id: \.self) { i in
+            ForEach(0..<slotCount, id: \.self) { i in
                 if i < team.riders.count {
                     riderLine(team.riders[i])
                 } else {

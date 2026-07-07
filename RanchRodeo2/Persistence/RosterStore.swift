@@ -41,6 +41,15 @@ final class RosterStore {
         save()
     }
 
+    /// Removes all generated teams (and their cascaded payouts) while leaving riders intact.
+    /// Used when the team-size setting changes, forcing a regenerate.
+    func clearTeams() {
+        for team in allTeams() {
+            modelContext.delete(team)
+        }
+        save()
+    }
+
     /// Ensures every rider has a distinct `externalID`. Existing riders that were migrated
     /// from a schema without `externalID` all share the same default UUID; this fixes that
     /// so dedup-on-import works.
@@ -73,7 +82,7 @@ final class RosterStore {
             modelContext.delete(team)
         }
 
-        var generator = TeamGenerator(rng: rng)
+        var generator = TeamGenerator(rng: rng, teamSize: TeamSettings.teamSize)
         let resultTeams = generator.generate(riders: Array(snapshots.values))
 
         let ridersByID = Dictionary(uniqueKeysWithValues: riders.map { ($0.persistentModelID, $0) })

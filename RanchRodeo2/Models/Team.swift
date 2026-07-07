@@ -19,8 +19,9 @@ final class Team {
     /// when a rider's flags change without needing to regenerate teams.
     var warnings: [String] {
         var result: [String] = []
-        if riders.count != 4 {
-            result.append("Team should have four riders.")
+        let expectedSize = TeamSettings.teamSize
+        if riders.count != expectedSize {
+            result.append("Team should have \(expectedSize) riders.")
         }
         if !allRidersHaveSignedWaiver {
             result.append("All riders need to sign waiver.")
