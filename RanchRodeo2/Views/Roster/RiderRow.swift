@@ -23,6 +23,11 @@ struct RiderRow: View {
                 }
             }
             Spacer()
+            if let preferredTeam = rider.preferredTeamNumber {
+                Text("Team \(preferredTeam)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             Text("\(rider.numberOfRides) rides")
                 .font(.caption)
                 .foregroundStyle(.secondary)
