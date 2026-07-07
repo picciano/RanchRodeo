@@ -7,17 +7,19 @@ struct RiderScheduleView: View {
 
     @State private var showPrintPreview = false
 
+    private var activeRiders: [Rider] { riders.activeRiders }
+
     private var teamSlots: Int {
-        max(2, riders.map { $0.teams.count }.max() ?? 0)
+        max(2, activeRiders.map { $0.teams.count }.max() ?? 0)
     }
 
     private var anyRiderHasCategories: Bool {
-        riders.contains { !$0.categoryLabels.isEmpty }
+        activeRiders.contains { !$0.categoryLabels.isEmpty }
     }
 
     var body: some View {
         Group {
-            if riders.isEmpty {
+            if activeRiders.isEmpty {
                 ContentUnavailableView(
                     "No Riders",
                     systemImage: "calendar",
@@ -26,7 +28,7 @@ struct RiderScheduleView: View {
             } else {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
-                        ForEach(riders) { rider in
+                        ForEach(activeRiders) { rider in
                             NavigationLink {
                                 RiderEditorView(rider: rider)
                             } label: {
@@ -51,11 +53,11 @@ struct RiderScheduleView: View {
                 } label: {
                     Label("Print", systemImage: "printer")
                 }
-                .disabled(riders.isEmpty)
+                .disabled(activeRiders.isEmpty)
             }
         }
         .sheet(isPresented: $showPrintPreview) {
-            SchedulePrintPreviewView(riders: riders)
+            SchedulePrintPreviewView(riders: activeRiders)
         }
     }
 }

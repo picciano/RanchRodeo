@@ -18,6 +18,7 @@ struct TeamGenerator<RNG: RandomNumberGenerator> {
     @discardableResult
     mutating func generate(riders: [GeneratorRider]) -> [GeneratorTeam] {
         let numberOfTeams = calculatedNumberOfTeams(riders: riders)
+        guard numberOfTeams > 0 else { return [] }
         let teams = (1...numberOfTeams).map { GeneratorTeam(number: $0) }
 
         placePreferredTeams(riders: riders, teams: teams)

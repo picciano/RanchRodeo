@@ -66,7 +66,7 @@ struct TeamsView: View {
         .alert("Add Riders First", isPresented: $showEmptyRosterAlert) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("Add at least one rider to the roster before generating teams.")
+            Text("Add at least one active rider to the roster before generating teams.")
         }
         .confirmationDialog(
             "Regenerate teams?",
@@ -83,7 +83,7 @@ struct TeamsView: View {
     }
 
     private func generate() {
-        guard !allRiders.isEmpty else {
+        guard !allRiders.activeRiders.isEmpty else {
             showEmptyRosterAlert = true
             return
         }

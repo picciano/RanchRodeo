@@ -17,6 +17,8 @@ nonisolated struct RosterDocument: Codable, Sendable {
         var numberOfRides: Int
         var parentIDs: [UUID]
         var preferredTeamNumber: Int?
+        // Optional so rosters saved before this field existed still decode (nil = active).
+        var isActive: Bool?
 
         init(
             id: UUID,
@@ -27,7 +29,8 @@ nonisolated struct RosterDocument: Codable, Sendable {
             isWaiverSigned: Bool,
             numberOfRides: Int,
             parentIDs: [UUID] = [],
-            preferredTeamNumber: Int? = nil
+            preferredTeamNumber: Int? = nil,
+            isActive: Bool? = nil
         ) {
             self.id = id
             self.firstName = firstName
@@ -38,6 +41,7 @@ nonisolated struct RosterDocument: Codable, Sendable {
             self.numberOfRides = numberOfRides
             self.parentIDs = parentIDs
             self.preferredTeamNumber = preferredTeamNumber
+            self.isActive = isActive
         }
     }
 
@@ -74,7 +78,8 @@ extension RosterDocument {
                 isWaiverSigned: rider.isWaiverSigned,
                 numberOfRides: rider.numberOfRides,
                 parentIDs: rider.parents.map { $0.externalID },
-                preferredTeamNumber: rider.preferredTeamNumber
+                preferredTeamNumber: rider.preferredTeamNumber,
+                isActive: rider.isActive
             )
         }
         return RosterDocument(riders: exports)
@@ -104,7 +109,8 @@ extension RosterDocument {
                 isParent: export.isParent,
                 isWaiverSigned: export.isWaiverSigned,
                 numberOfRides: export.numberOfRides,
-                preferredTeamNumber: export.preferredTeamNumber
+                preferredTeamNumber: export.preferredTeamNumber,
+                isActive: export.isActive ?? true
             )
             context.insert(rider)
             insertedByID[export.id] = rider

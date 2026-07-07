@@ -11,7 +11,9 @@ struct PayoutsView: View {
 
     @State private var showPrintPreview = false
 
-    private var actionsDisabled: Bool { riders.isEmpty || teams.isEmpty }
+    private var activeRiders: [Rider] { riders.activeRiders }
+
+    private var actionsDisabled: Bool { activeRiders.isEmpty || teams.isEmpty }
 
     var body: some View {
         Group {
@@ -45,7 +47,7 @@ struct PayoutsView: View {
             }
         }
         .sheet(isPresented: $showPrintPreview) {
-            PayoutsPrintPreviewView(riders: riders)
+            PayoutsPrintPreviewView(riders: activeRiders)
         }
         .task { ensureAllPayoutsExist() }
     }
@@ -55,7 +57,7 @@ struct PayoutsView: View {
             Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 6) {
                 headerRow
                 Divider().gridCellColumns(8)
-                ForEach(riders) { rider in
+                ForEach(activeRiders) { rider in
                     ForEach(Array(sortedTeams(of: rider).enumerated()), id: \.element.id) { index, team in
                         if let payout = payout(for: rider, team: team) {
                             PayoutGridRow(
@@ -134,12 +136,12 @@ struct PayoutsView: View {
     }
 
     private var grandTotal: Int {
-        riders.reduce(0) { $0 + riderTotal($1) }
+        activeRiders.reduce(0) { $0 + riderTotal($1) }
     }
 
     private func ensureAllPayoutsExist() {
         var didCreate = false
-        for rider in riders {
+        for rider in activeRiders {
             for team in rider.teams {
                 if !rider.payouts.contains(where: { $0.team === team }) {
                     let payout = Payout(rider: rider, team: team)

@@ -11,6 +11,10 @@ final class Rider {
     var isWaiverSigned: Bool
     var numberOfRides: Int
 
+    /// Inactive riders stay on the roster (struck through) but are excluded from team
+    /// generation, every count, and all printouts. New riders default to active.
+    var isActive: Bool = true
+
     /// A team number the rider asked to be seated on first, before the usual placement
     /// rules run. `nil` means no preference. Ignored at generation time if the number
     /// exceeds the teams actually created or that team is already full.
@@ -34,7 +38,8 @@ final class Rider {
         isParent: Bool = false,
         isWaiverSigned: Bool = false,
         numberOfRides: Int = 2,
-        preferredTeamNumber: Int? = nil
+        preferredTeamNumber: Int? = nil,
+        isActive: Bool = true
     ) {
         self.externalID = externalID
         self.firstName = firstName
@@ -44,5 +49,6 @@ final class Rider {
         self.isWaiverSigned = isWaiverSigned
         self.numberOfRides = numberOfRides
         self.preferredTeamNumber = preferredTeamNumber
+        self.isActive = isActive
     }
 }

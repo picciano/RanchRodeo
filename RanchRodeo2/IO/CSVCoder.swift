@@ -1,7 +1,7 @@
 import Foundation
 
 enum CSVCoder {
-    static let header = "firstName,lastName,isChild,isParent,isWaiverSigned,numberOfRides,preferredTeamNumber"
+    static let header = "firstName,lastName,isChild,isParent,isWaiverSigned,numberOfRides,preferredTeamNumber,isActive"
 
     @MainActor
     static func encode(riders: [Rider]) -> String {
@@ -15,6 +15,7 @@ enum CSVCoder {
                 String(rider.isWaiverSigned),
                 String(rider.numberOfRides),
                 rider.preferredTeamNumber.map(String.init) ?? "",
+                String(rider.isActive),
             ]
             lines.append(fields.joined(separator: ","))
         }
@@ -28,8 +29,10 @@ enum CSVCoder {
         for line in lines.dropFirst() {
             let fields = parseRow(line)
             guard fields.count >= 6 else { continue }
-            // The preferred-team column is optional so 6-column files still import.
+            // The preferred-team and active columns are optional so 6- and 7-column
+            // files still import (a missing active column means the rider is active).
             let preferredTeamNumber = fields.count >= 7 ? Int(fields[6]) : nil
+            let isActive = fields.count >= 8 ? (Bool(fields[7]) ?? true) : true
             results.append(
                 RosterDocument.RiderExport(
                     id: UUID(),
@@ -39,7 +42,8 @@ enum CSVCoder {
                     isParent: Bool(fields[3]) ?? false,
                     isWaiverSigned: Bool(fields[4]) ?? false,
                     numberOfRides: Int(fields[5]) ?? 2,
-                    preferredTeamNumber: preferredTeamNumber
+                    preferredTeamNumber: preferredTeamNumber,
+                    isActive: isActive
                 )
             )
         }

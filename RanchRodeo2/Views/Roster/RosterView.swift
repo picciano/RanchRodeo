@@ -31,7 +31,7 @@ struct RosterView: View {
                 } else {
                     List {
                         Section("Summary") {
-                            LabeledContent("Number of Riders", value: "\(riders.count)")
+                            LabeledContent("Number of Riders", value: "\(riders.activeRiders.count)")
                             LabeledContent("Total Rides", value: "\(riders.totalRides)")
                             LabeledContent("Number of Teams", value: "\(riders.numberOfTeams(teamSize: teamSize))")
                         }
@@ -41,6 +41,18 @@ struct RosterView: View {
                                 RiderEditorView(rider: rider)
                             } label: {
                                 RiderRow(rider: rider)
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    RosterStore(modelContext: modelContext).setActive(!rider.isActive, for: rider)
+                                } label: {
+                                    if rider.isActive {
+                                        Label("Deactivate", systemImage: "person.slash")
+                                    } else {
+                                        Label("Activate", systemImage: "person.fill.checkmark")
+                                    }
+                                }
+                                .tint(rider.isActive ? .orange : .green)
                             }
                         }
                         .onDelete(perform: delete)

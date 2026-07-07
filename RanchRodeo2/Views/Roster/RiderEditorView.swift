@@ -4,6 +4,8 @@ import SwiftData
 struct RiderEditorView: View {
     @Bindable var rider: Rider
 
+    @Environment(\.modelContext) private var modelContext
+
     @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
 
     @Query(
@@ -27,6 +29,12 @@ struct RiderEditorView: View {
                     .textInputAutocapitalization(.words)
                 TextField("Last name", text: $rider.lastName)
                     .textInputAutocapitalization(.words)
+            }
+
+            Section {
+                Toggle("Active", isOn: activeBinding)
+            } footer: {
+                Text("Inactive riders stay on the roster but are left out of team generation, the totals, and all printouts.")
             }
 
             Section("Status") {
@@ -81,6 +89,15 @@ struct RiderEditorView: View {
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    /// Routes the Active toggle through RosterStore so deactivating also clears the
+    /// rider's team assignments and payouts.
+    private var activeBinding: Binding<Bool> {
+        Binding(
+            get: { rider.isActive },
+            set: { RosterStore(modelContext: modelContext).setActive($0, for: rider) }
+        )
     }
 
     private func parentToggleRow(_ parent: Rider) -> some View {

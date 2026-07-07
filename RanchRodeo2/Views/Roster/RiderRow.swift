@@ -8,7 +8,8 @@ struct RiderRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(rider.displayName)
                     .font(.body)
-                    .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
+                    .strikethrough(!rider.isActive)
+                    .foregroundStyle(nameColor)
                 let labels = rider.categoryLabels
                 if !labels.isEmpty {
                     HStack(spacing: 4) {
@@ -33,5 +34,11 @@ struct RiderRow: View {
                 .foregroundStyle(.secondary)
         }
         .padding(.vertical, 2)
+    }
+
+    /// Inactive riders are de-emphasized; active riders keep the waiver-status cue.
+    private var nameColor: Color {
+        guard rider.isActive else { return .secondary }
+        return rider.isWaiverSigned ? .primary : .red
     }
 }

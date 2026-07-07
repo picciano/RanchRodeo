@@ -9,7 +9,7 @@ struct PayoutSummaryView: View {
     /// Riders paired with their total payout, sorted by total descending.
     /// Ties are broken alphabetically by display name to keep the order stable.
     private var sortedEntries: [(rider: Rider, total: Int)] {
-        riders
+        riders.activeRiders
             .map { ($0, $0.payouts.reduce(0) { $0 + $1.total }) }
             .sorted { lhs, rhs in
                 if lhs.total != rhs.total { return lhs.total > rhs.total }
@@ -23,7 +23,7 @@ struct PayoutSummaryView: View {
 
     var body: some View {
         Group {
-            if riders.isEmpty {
+            if sortedEntries.isEmpty {
                 ContentUnavailableView(
                     "No Riders",
                     systemImage: "list.number",
@@ -76,7 +76,7 @@ struct PayoutSummaryView: View {
                 } label: {
                     Label("Print", systemImage: "printer")
                 }
-                .disabled(riders.isEmpty)
+                .disabled(sortedEntries.isEmpty)
             }
         }
         .sheet(isPresented: $showPrintPreview) {

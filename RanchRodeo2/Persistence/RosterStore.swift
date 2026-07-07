@@ -74,8 +74,22 @@ final class RosterStore {
     /// Snapshots let `TeamGenerator` plan without touching SwiftData models —
     /// the algorithm stays pure and testable, and we only mutate the store after
     /// the generator returns its result.
+    /// Toggles a rider's active state. Deactivating pulls the rider off every team they're
+    /// currently on (opening a slot until the next regenerate) and deletes their payouts,
+    /// since those were tied to team assignments that no longer apply.
+    func setActive(_ isActive: Bool, for rider: Rider) {
+        rider.isActive = isActive
+        if !isActive {
+            rider.teams = []
+            for payout in rider.payouts {
+                modelContext.delete(payout)
+            }
+        }
+        save()
+    }
+
     func regenerateTeams<RNG: RandomNumberGenerator>(rng: RNG) {
-        let riders = allRiders()
+        let riders = allRiders().filter { $0.isActive }
         let snapshots = buildSnapshots(from: riders)
 
         for team in allTeams() {
