@@ -3,6 +3,7 @@
     {
       "firstName" : "Sarah",
       "id" : "11111111-0000-0000-0000-000000000001",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : true,
       "isWaiverSigned" : true,
@@ -15,6 +16,7 @@
     {
       "firstName" : "Mike",
       "id" : "11111111-0000-0000-0000-000000000002",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : true,
       "isWaiverSigned" : true,
@@ -27,6 +29,7 @@
     {
       "firstName" : "Emily",
       "id" : "11111111-0000-0000-0000-000000000003",
+      "isActive" : true,
       "isChild" : true,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -40,6 +43,7 @@
     {
       "firstName" : "Jenny",
       "id" : "22222222-0000-0000-0000-000000000001",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : true,
       "isWaiverSigned" : true,
@@ -52,6 +56,7 @@
     {
       "firstName" : "Bobby",
       "id" : "22222222-0000-0000-0000-000000000002",
+      "isActive" : true,
       "isChild" : true,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -64,6 +69,7 @@
     {
       "firstName" : "Jake",
       "id" : "33333333-0000-0000-0000-000000000001",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -76,6 +82,7 @@
     {
       "firstName" : "Wyatt",
       "id" : "33333333-0000-0000-0000-000000000002",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -88,6 +95,7 @@
     {
       "firstName" : "Caleb",
       "id" : "33333333-0000-0000-0000-000000000003",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -100,6 +108,7 @@
     {
       "firstName" : "Dale",
       "id" : "33333333-0000-0000-0000-000000000004",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -112,6 +121,7 @@
     {
       "firstName" : "Travis",
       "id" : "33333333-0000-0000-0000-000000000005",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -124,6 +134,7 @@
     {
       "firstName" : "Tyler",
       "id" : "33333333-0000-0000-0000-000000000006",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -131,11 +142,13 @@
       "numberOfRides" : 2,
       "parentIDs" : [
 
-      ]
+      ],
+      "preferredTeamNumber" : 2
     },
     {
       "firstName" : "Maddie",
       "id" : "33333333-0000-0000-0000-000000000007",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -148,6 +161,7 @@
     {
       "firstName" : "Dustin",
       "id" : "33333333-0000-0000-0000-000000000008",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -160,6 +174,7 @@
     {
       "firstName" : "Hannah",
       "id" : "33333333-0000-0000-0000-000000000009",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -172,6 +187,7 @@
     {
       "firstName" : "Sue Anne",
       "id" : "33333333-0000-0000-0000-00000000000A",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -184,6 +200,7 @@
     {
       "firstName" : "Cooper",
       "id" : "33333333-0000-0000-0000-00000000000B",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -191,11 +208,13 @@
       "numberOfRides" : 2,
       "parentIDs" : [
 
-      ]
+      ],
+      "preferredTeamNumber" : 2
     },
     {
       "firstName" : "Lacey",
       "id" : "33333333-0000-0000-0000-00000000000C",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -208,6 +227,7 @@
     {
       "firstName" : "Jamie",
       "id" : "33333333-0000-0000-0000-00000000000D",
+      "isActive" : false,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -220,6 +240,7 @@
     {
       "firstName" : "Frank",
       "id" : "33333333-0000-0000-0000-00000000000E",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
@@ -232,6 +253,7 @@
     {
       "firstName" : "Riley",
       "id" : "33333333-0000-0000-0000-00000000000F",
+      "isActive" : true,
       "isChild" : false,
       "isParent" : false,
       "isWaiverSigned" : true,
