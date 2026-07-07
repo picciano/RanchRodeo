@@ -7,7 +7,7 @@ struct RiderRow: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(rider.displayName)
-                    .font(.body)
+                    .font(.body.weight(.semibold))
                     .strikethrough(!rider.isActive)
                     .foregroundStyle(nameColor)
                 let labels = rider.categoryLabels
@@ -26,12 +26,12 @@ struct RiderRow: View {
             Spacer()
             if let preferredTeam = rider.preferredTeamNumber {
                 Text("Team \(preferredTeam)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
             }
             Text("\(rider.numberOfRides) rides")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.body.weight(.semibold))
+                .foregroundStyle(.primary)
         }
         .padding(.vertical, 2)
     }

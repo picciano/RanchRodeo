@@ -31,9 +31,9 @@ struct RosterView: View {
                 } else {
                     List {
                         Section("Summary") {
-                            LabeledContent("Number of Riders", value: "\(riders.activeRiders.count)")
-                            LabeledContent("Total Rides", value: "\(riders.totalRides)")
-                            LabeledContent("Number of Teams", value: "\(riders.numberOfTeams(teamSize: teamSize))")
+                            summaryRow("Number of Riders", value: riders.activeRiders.count)
+                            summaryRow("Total Rides", value: riders.totalRides)
+                            summaryRow("Number of Teams", value: riders.numberOfTeams(teamSize: teamSize))
                         }
 
                         ForEach(riders) { rider in
@@ -101,6 +101,14 @@ struct RosterView: View {
             } message: {
                 Text("This removes \(riders.count) rider\(riders.count == 1 ? "" : "s") and any generated teams. This cannot be undone.")
             }
+        }
+    }
+
+    private func summaryRow(_ title: String, value: Int) -> some View {
+        LabeledContent(title) {
+            Text("\(value)")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(.primary)
         }
     }
 
