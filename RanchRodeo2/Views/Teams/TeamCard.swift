@@ -41,13 +41,12 @@ struct TeamCard: View {
 
     @ViewBuilder
     private func riderLine(_ rider: Rider) -> some View {
-        Text(rider.displayName + ridesSuffix(for: rider))
+        Text(rider.displayName + categorySuffix(for: rider))
             .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
     }
 
-    private func ridesSuffix(for rider: Rider) -> String {
-        guard rider.numberOfRides > 2 else { return "" }
+    private func categorySuffix(for rider: Rider) -> String {
         let code = rider.categoryCode
-        return code.isEmpty ? " (\(rider.numberOfRides))" : " (\(rider.numberOfRides) \(code))"
+        return code.isEmpty ? "" : " (\(code))"
     }
 }

@@ -45,23 +45,23 @@ struct RiderSchedulePrintLayout: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
-            let teamNumbers = rider.teams
-                .sorted { $0.number < $1.number }
-                .map { "\($0.number)" }
-            if teamNumbers.isEmpty {
+            let sortedTeams = rider.teams.sorted { $0.number < $1.number }
+            if sortedTeams.isEmpty {
                 Text("No teams")
                     .font(.system(size: 10))
                     .italic()
                     .foregroundStyle(.secondary)
             } else {
-                Text("Teams: " + teamNumbers.joined(separator: ", "))
-                    .font(.system(size: 10))
-                    .foregroundStyle(.black)
+                ForEach(sortedTeams) { team in
+                    Text("Team \(team.number)")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.black)
+                }
             }
             Spacer(minLength: 0)
         }
         .padding(8)
-        .frame(height: 64, alignment: .topLeading)
+        .frame(minHeight: 64, alignment: .topLeading)
         .frame(maxWidth: .infinity, alignment: .leading)
         .overlay(
             RoundedRectangle(cornerRadius: 4)

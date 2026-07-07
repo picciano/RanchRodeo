@@ -36,7 +36,7 @@ struct RiderEditorView: View {
             }
 
             Section("Rides") {
-                Stepper(value: $rider.numberOfRides, in: 2...5) {
+                Stepper(value: $rider.numberOfRides, in: 1...99) {
                     HStack {
                         Text("Number of rides")
                         Spacer()
