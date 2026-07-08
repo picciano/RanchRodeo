@@ -115,7 +115,7 @@ struct RosterView: View {
     @ViewBuilder
     private func newRiderSheetContent(for sheet: NewRiderSheet) -> some View {
         let stack = NavigationStack {
-            RiderEditorView(rider: sheet.rider)
+            RiderEditorView(rider: sheet.rider, focusNameOnAppear: true)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Done") {
