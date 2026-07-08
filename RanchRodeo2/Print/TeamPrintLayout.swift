@@ -42,7 +42,7 @@ struct TeamPrintLayout: View {
             Divider()
             ForEach(0..<max(TeamSettings.teamSize, team.riders.count), id: \.self) { i in
                 if i < team.riders.count {
-                    riderLine(team.riders[i])
+                    riderLine(team.riders[i], isRoundRobin: team.group != nil)
                 } else {
                     Text("AVAILABLE")
                         .font(.system(size: 11, weight: .medium))
@@ -60,10 +60,11 @@ struct TeamPrintLayout: View {
         )
     }
 
-    private func riderLine(_ rider: Rider) -> some View {
+    private func riderLine(_ rider: Rider, isRoundRobin: Bool) -> some View {
         let label: String
         let code = rider.categoryCode
-        if showRiderDetails && !code.isEmpty {
+        // Round-robin ignores parent/child, so don't tag riders with (P)/(C).
+        if showRiderDetails && !isRoundRobin && !code.isEmpty {
             label = "\(rider.displayName) (\(code))"
         } else {
             label = rider.displayName

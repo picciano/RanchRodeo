@@ -98,6 +98,14 @@ final class RosterStore {
             modelContext.delete(team)
         }
 
+        // Round-robin payouts live on the rider (not on the deleted teams), so clear them
+        // here; standard per-team payouts are removed by the team-delete cascade above.
+        for rider in allRiders() {
+            rider.groupPayoutA = 0
+            rider.groupPayoutB = 0
+            rider.groupPayoutC = 0
+        }
+
         if TeamSettings.eventFormat.isRoundRobin {
             regenerateRoundRobin(active: riders, rng: rng)
         } else {

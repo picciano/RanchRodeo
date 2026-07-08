@@ -46,6 +46,8 @@ struct TeamCard: View {
     }
 
     private func categorySuffix(for rider: Rider) -> String {
+        // Round-robin ignores parent/child, so don't tag riders with (P)/(C).
+        guard team.group == nil else { return "" }
         let code = rider.categoryCode
         return code.isEmpty ? "" : " (\(code))"
     }
