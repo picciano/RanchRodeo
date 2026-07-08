@@ -194,7 +194,7 @@ private struct AmountCell: View {
             .keyboardType(.numberPad)
             .multilineTextAlignment(.trailing)
             .textFieldStyle(.roundedBorder)
-            .frame(width: 90)
+            .frame(width: 64)
             .focused($isFocused)
             .onChange(of: isFocused) { _, focused in
                 guard focused else { return }
