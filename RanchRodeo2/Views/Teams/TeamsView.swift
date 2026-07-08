@@ -25,17 +25,23 @@ struct TeamsView: View {
                     systemImage: "square.grid.3x3",
                     description: Text("Tap Generate to build teams from the roster.")
                 )
-            } else {
+            } else if isGrouped {
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
-                        ForEach(teams) { team in
-                            NavigationLink(value: team.id) {
-                                TeamCard(team: team)
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(presentGroups) { group in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(group.label)
+                                    .font(.title2.bold())
+                                    .padding(.horizontal)
+                                teamGrid(teams.filter { $0.group == group.rawValue })
                             }
-                            .buttonStyle(.plain)
                         }
                     }
-                    .padding()
+                    .padding(.vertical)
+                }
+            } else {
+                ScrollView {
+                    teamGrid(teams).padding()
                 }
             }
         }
@@ -88,6 +94,29 @@ struct TeamsView: View {
         } message: {
             Text("This replaces the current \(teams.count) team\(teams.count == 1 ? "" : "s") with a fresh set. Any manual edits to team assignments will be lost.")
         }
+    }
+
+    /// Round-robin teams carry a group label; standard teams don't.
+    private var isGrouped: Bool {
+        teams.contains { $0.group != nil }
+    }
+
+    private var presentGroups: [RoundRobinDesign.Group] {
+        RoundRobinDesign.Group.allCases.filter { group in
+            teams.contains { $0.group == group.rawValue }
+        }
+    }
+
+    private func teamGrid(_ teams: [Team]) -> some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
+            ForEach(teams) { team in
+                NavigationLink(value: team.id) {
+                    TeamCard(team: team)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal)
     }
 
     private func generate() {
