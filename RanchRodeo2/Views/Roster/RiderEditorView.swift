@@ -3,10 +3,13 @@ import SwiftData
 
 struct RiderEditorView: View {
     @Bindable var rider: Rider
+    var focusNameOnAppear: Bool = false
 
     @Environment(\.modelContext) private var modelContext
 
     @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
+    @FocusState private var nameFieldFocused: Bool
 
     @Query(
         filter: #Predicate<Rider> { $0.isParent },
@@ -27,6 +30,7 @@ struct RiderEditorView: View {
             Section("Name") {
                 TextField("First name", text: $rider.firstName)
                     .textInputAutocapitalization(.words)
+                    .focused($nameFieldFocused)
                 TextField("Last name", text: $rider.lastName)
                     .textInputAutocapitalization(.words)
             }
@@ -89,6 +93,11 @@ struct RiderEditorView: View {
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            guard focusNameOnAppear else { return }
+            // Defer until the sheet finishes presenting so focus reliably takes.
+            DispatchQueue.main.async { nameFieldFocused = true }
+        }
     }
 
     /// Routes the Active toggle through RosterStore so deactivating also clears the
