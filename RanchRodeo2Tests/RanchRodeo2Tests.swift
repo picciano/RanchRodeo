@@ -292,3 +292,92 @@ struct TeamGeneratorTests {
         #expect(first == second)
     }
 }
+
+struct RoundRobinTests {
+
+    // MARK: - The fixed design
+
+    @Test func designHasExpectedShape() {
+        #expect(RoundRobinDesign.teams.count == 63)
+        #expect(RoundRobinDesign.teams.allSatisfy { $0.slots.count == 4 })
+        // all slots are valid rider indices 0..<28
+        for team in RoundRobinDesign.teams {
+            #expect(Set(team.slots).count == 4)
+            #expect(team.slots.allSatisfy { (0..<28).contains($0) })
+        }
+    }
+
+    @Test func eachRiderAppearsOnNineTeams() {
+        var counts = [Int](repeating: 0, count: 28)
+        for team in RoundRobinDesign.teams {
+            for s in team.slots { counts[s] += 1 }
+        }
+        #expect(counts.allSatisfy { $0 == 9 })
+    }
+
+    @Test func everyPairSharesExactlyOneTeam() {
+        var pairCount: [Int: Int] = [:]
+        for team in RoundRobinDesign.teams {
+            let s = team.slots.sorted()
+            for i in 0..<s.count {
+                for j in (i + 1)..<s.count {
+                    pairCount[s[i] * 28 + s[j], default: 0] += 1
+                }
+            }
+        }
+        // all 378 pairs present, each exactly once
+        #expect(pairCount.count == 28 * 27 / 2)
+        #expect(pairCount.values.allSatisfy { $0 == 1 })
+    }
+
+    @Test func eachGroupIsBalanced() {
+        for group in RoundRobinDesign.Group.allCases {
+            let teams = RoundRobinDesign.teams.filter { $0.group == group }
+            #expect(teams.count == 21)
+            var counts = [Int](repeating: 0, count: 28)
+            for team in teams {
+                for s in team.slots { counts[s] += 1 }
+            }
+            #expect(counts.allSatisfy { $0 == 3 })
+        }
+    }
+
+    // MARK: - The generator
+
+    @Test func generatorPreservesDesignPropertiesUnderShuffle() {
+        var generator = RoundRobinGenerator(rng: SeededRandomNumberGenerator(seed: 42))
+        let teams = generator.generate(riderCount: 28)
+
+        #expect(teams.count == 63)
+        // each rider index 0..<28 appears 9 times
+        var deg = [Int](repeating: 0, count: 28)
+        for t in teams { for r in t.riderIndices { deg[r] += 1 } }
+        #expect(deg.allSatisfy { $0 == 9 })
+        // every pair exactly once
+        var pairCount: [Int: Int] = [:]
+        for t in teams {
+            let s = t.riderIndices.sorted()
+            for i in 0..<4 { for j in (i + 1)..<4 { pairCount[s[i] * 28 + s[j], default: 0] += 1 } }
+        }
+        #expect(pairCount.count == 378 && pairCount.values.allSatisfy { $0 == 1 })
+        // groups still balanced
+        for group in RoundRobinDesign.Group.allCases {
+            let gteams = teams.filter { $0.group == group }
+            #expect(gteams.count == 21)
+        }
+    }
+
+    @Test func sameSeedIsReproducible() {
+        var g1 = RoundRobinGenerator(rng: SeededRandomNumberGenerator(seed: 7))
+        var g2 = RoundRobinGenerator(rng: SeededRandomNumberGenerator(seed: 7))
+        let a = g1.generate(riderCount: 28).map { $0.riderIndices }
+        let b = g2.generate(riderCount: 28).map { $0.riderIndices }
+        #expect(a == b)
+    }
+
+    @Test func riderCountValidation() {
+        #expect(RoundRobinGenerator<SeededRandomNumberGenerator>.isValidRiderCount(28))
+        #expect(!RoundRobinGenerator<SeededRandomNumberGenerator>.isValidRiderCount(27))
+        #expect(!RoundRobinGenerator<SeededRandomNumberGenerator>.isValidRiderCount(29))
+    }
+}
