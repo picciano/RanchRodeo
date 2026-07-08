@@ -143,7 +143,11 @@ struct RosterView: View {
     private func addRider() {
         let rider = Rider()
         modelContext.insert(rider)
-        try? modelContext.save()
+        do {
+            try modelContext.save()
+        } catch {
+            assertionFailure("Failed to save new rider: \(error)")
+        }
         pendingNewRider = rider
         newRiderSheet = NewRiderSheet(rider: rider)
     }
