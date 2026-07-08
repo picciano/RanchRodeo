@@ -84,6 +84,9 @@ final class RosterStore {
             for payout in rider.payouts {
                 modelContext.delete(payout)
             }
+            rider.groupPayoutA = 0
+            rider.groupPayoutB = 0
+            rider.groupPayoutC = 0
         }
         save()
     }

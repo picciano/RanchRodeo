@@ -71,7 +71,8 @@ struct EditTeamView: View {
                 WarningsListView(team: team)
             }
 
-            if payoutsEnabled {
+            // Round-robin payouts are per group (entered in the Payouts tab), not per team.
+            if payoutsEnabled && team.group == nil {
                 Section {
                     if horizontalSizeClass == .compact {
                         VStack(spacing: 16) {

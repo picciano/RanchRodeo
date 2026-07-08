@@ -20,6 +20,26 @@ extension Collection where Element == Rider {
 }
 
 extension Rider {
+    /// Read/write a round-robin group payout by group.
+    func groupPayout(_ group: RoundRobinDesign.Group) -> Int {
+        switch group {
+        case .a: groupPayoutA
+        case .b: groupPayoutB
+        case .c: groupPayoutC
+        }
+    }
+
+    func setGroupPayout(_ amount: Int, for group: RoundRobinDesign.Group) {
+        switch group {
+        case .a: groupPayoutA = amount
+        case .b: groupPayoutB = amount
+        case .c: groupPayoutC = amount
+        }
+    }
+
+    /// Sum of the rider's three group payouts.
+    var totalGroupPayout: Int { groupPayoutA + groupPayoutB + groupPayoutC }
+
     var fullName: String {
         "\(firstName) \(lastName)"
     }

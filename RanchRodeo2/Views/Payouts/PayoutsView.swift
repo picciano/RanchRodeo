@@ -9,6 +9,8 @@ struct PayoutsView: View {
 
     @Query private var teams: [Team]
 
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
     @State private var showPrintPreview = false
 
     private var activeRiders: [Rider] { riders.activeRiders }
@@ -23,6 +25,8 @@ struct PayoutsView: View {
                     systemImage: "dollarsign.circle",
                     description: Text("Generate teams in the Teams tab before recording payouts.")
                 )
+            } else if eventFormat.isRoundRobin {
+                roundRobinContent
             } else {
                 tableContent
             }
@@ -37,19 +41,58 @@ struct PayoutsView: View {
                 }
                 .disabled(actionsDisabled)
             }
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    showPrintPreview = true
-                } label: {
-                    Label("Print", systemImage: "printer")
+            if !eventFormat.isRoundRobin {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        showPrintPreview = true
+                    } label: {
+                        Label("Print", systemImage: "printer")
+                    }
+                    .disabled(actionsDisabled)
                 }
-                .disabled(actionsDisabled)
             }
         }
         .sheet(isPresented: $showPrintPreview) {
             PayoutsPrintPreviewView(riders: activeRiders)
         }
-        .task { ensureAllPayoutsExist() }
+        .task {
+            if !eventFormat.isRoundRobin { ensureAllPayoutsExist() }
+        }
+    }
+
+    // MARK: - Round robin (one amount per rider per group)
+
+    private var roundRobinContent: some View {
+        ScrollView([.horizontal, .vertical]) {
+            Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 6) {
+                GridRow {
+                    Text("Name").bold()
+                    Text("Group A").bold()
+                    Text("Group B").bold()
+                    Text("Group C").bold()
+                    Text("Total").bold()
+                }
+                Divider().gridCellColumns(5)
+                ForEach(activeRiders) { rider in
+                    GroupPayoutRow(rider: rider)
+                }
+                Divider().gridCellColumns(5)
+                GridRow {
+                    Text("Grand Total").bold().font(.title3)
+                    Text("")
+                    Text("")
+                    Text("")
+                    Text(roundRobinGrandTotal, format: .currency(code: "USD").precision(.fractionLength(0)))
+                        .bold()
+                        .font(.title3)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private var roundRobinGrandTotal: Int {
+        activeRiders.reduce(0) { $0 + $1.totalGroupPayout }
     }
 
     private var tableContent: some View {
@@ -181,6 +224,22 @@ private struct PayoutGridRow: View {
             AmountCell(value: $payout.penning)
             AmountCell(value: $payout.avg)
             Text("")
+        }
+    }
+}
+
+private struct GroupPayoutRow: View {
+    @Bindable var rider: Rider
+
+    var body: some View {
+        GridRow {
+            Text(rider.displayName)
+                .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
+            AmountCell(value: $rider.groupPayoutA)
+            AmountCell(value: $rider.groupPayoutB)
+            AmountCell(value: $rider.groupPayoutC)
+            Text(rider.totalGroupPayout, format: .currency(code: "USD").precision(.fractionLength(0)))
+                .bold()
         }
     }
 }
