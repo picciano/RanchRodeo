@@ -79,15 +79,13 @@ struct PayoutSummaryView: View {
         }
         .navigationTitle("Payout Summary")
         .toolbar {
-            if !eventFormat.isRoundRobin {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showPrintPreview = true
-                    } label: {
-                        Label("Print", systemImage: "printer")
-                    }
-                    .disabled(sortedEntries.isEmpty)
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showPrintPreview = true
+                } label: {
+                    Label("Print", systemImage: "printer")
                 }
+                .disabled(sortedEntries.isEmpty)
             }
         }
         .sheet(isPresented: $showPrintPreview) {

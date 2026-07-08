@@ -8,11 +8,12 @@ struct TeamPrintLayout: View {
 
     let teams: [Team]
     let showRiderDetails: Bool
+    var heading: String = "Ranch Rodeo Teams"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Ranch Rodeo Teams")
+                Text(heading)
                     .font(.system(size: 12, weight: .semibold))
                 Spacer()
                 Text(Date.now.formatted(date: .abbreviated, time: .omitted))

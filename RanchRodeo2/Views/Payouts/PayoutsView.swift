@@ -41,15 +41,13 @@ struct PayoutsView: View {
                 }
                 .disabled(actionsDisabled)
             }
-            if !eventFormat.isRoundRobin {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showPrintPreview = true
-                    } label: {
-                        Label("Print", systemImage: "printer")
-                    }
-                    .disabled(actionsDisabled)
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showPrintPreview = true
+                } label: {
+                    Label("Print", systemImage: "printer")
                 }
+                .disabled(actionsDisabled)
             }
         }
         .sheet(isPresented: $showPrintPreview) {
