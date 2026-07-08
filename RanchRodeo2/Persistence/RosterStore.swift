@@ -90,11 +90,39 @@ final class RosterStore {
 
     func regenerateTeams<RNG: RandomNumberGenerator>(rng: RNG) {
         let riders = allRiders().filter { $0.isActive }
-        let snapshots = buildSnapshots(from: riders)
 
         for team in allTeams() {
             modelContext.delete(team)
         }
+
+        if TeamSettings.eventFormat.isRoundRobin {
+            regenerateRoundRobin(active: riders, rng: rng)
+        } else {
+            regenerateStandard(active: riders, rng: rng)
+        }
+
+        save()
+    }
+
+    /// Round robin requires exactly 28 active riders; callers validate first and
+    /// surface a message. This guards defensively so a wrong count is a no-op
+    /// (teams were already cleared) rather than a crash.
+    private func regenerateRoundRobin<RNG: RandomNumberGenerator>(active: [Rider], rng: RNG) {
+        guard RoundRobinGenerator<RNG>.isValidRiderCount(active.count) else { return }
+        var generator = RoundRobinGenerator(rng: rng)
+        let result = generator.generate(riderCount: active.count)
+        for (index, resultTeam) in result.enumerated() {
+            let team = Team(number: index + 1)
+            team.group = resultTeam.group.rawValue
+            modelContext.insert(team)
+            for riderIndex in resultTeam.riderIndices {
+                team.riders.append(active[riderIndex])
+            }
+        }
+    }
+
+    private func regenerateStandard<RNG: RandomNumberGenerator>(active riders: [Rider], rng: RNG) {
+        let snapshots = buildSnapshots(from: riders)
 
         var generator = TeamGenerator(rng: rng, teamSize: TeamSettings.teamSize)
         let resultTeams = generator.generate(riders: Array(snapshots.values))
@@ -116,8 +144,6 @@ final class RosterStore {
                 }
             }
         }
-
-        save()
     }
 
     private func buildSnapshots(from riders: [Rider]) -> [PersistentIdentifier: GeneratorRider] {

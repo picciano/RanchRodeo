@@ -9,8 +9,11 @@ struct TeamsView: View {
 
     @Query private var allRiders: [Rider]
 
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
     @State private var isGenerating = false
     @State private var showEmptyRosterAlert = false
+    @State private var showRoundRobinCountAlert = false
     @State private var showRegenerateConfirmation = false
     @State private var showPrintPreview = false
 
@@ -68,6 +71,11 @@ struct TeamsView: View {
         } message: {
             Text("Add at least one active rider to the roster before generating teams.")
         }
+        .alert("Round Robin Needs 28 Riders", isPresented: $showRoundRobinCountAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("A round robin event requires exactly \(RoundRobinDesign.riderCount) active riders. You currently have \(allRiders.activeRiders.count). Adjust the roster or change the event type in Settings.")
+        }
         .confirmationDialog(
             "Regenerate teams?",
             isPresented: $showRegenerateConfirmation,
@@ -83,9 +91,17 @@ struct TeamsView: View {
     }
 
     private func generate() {
-        guard !allRiders.activeRiders.isEmpty else {
-            showEmptyRosterAlert = true
-            return
+        let activeCount = allRiders.activeRiders.count
+        if eventFormat.isRoundRobin {
+            guard activeCount == RoundRobinDesign.riderCount else {
+                showRoundRobinCountAlert = true
+                return
+            }
+        } else {
+            guard activeCount > 0 else {
+                showEmptyRosterAlert = true
+                return
+            }
         }
         if !teams.isEmpty {
             showRegenerateConfirmation = true

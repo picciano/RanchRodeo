@@ -6,7 +6,7 @@ struct RiderEditorView: View {
 
     @Environment(\.modelContext) private var modelContext
 
-    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
 
     @Query(
         filter: #Predicate<Rider> { $0.isParent },
@@ -19,7 +19,7 @@ struct RiderEditorView: View {
     /// The number of teams the current roster will produce at the configured size,
     /// used to bound the preferred-team picker. At least 1 so a preference can be set.
     private var teamCount: Int {
-        max(1, allRiders.numberOfTeams(teamSize: teamSize))
+        max(1, allRiders.numberOfTeams(teamSize: eventFormat.teamSize))
     }
 
     var body: some View {
