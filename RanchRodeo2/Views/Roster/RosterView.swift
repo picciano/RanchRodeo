@@ -7,7 +7,7 @@ struct RosterView: View {
     @Query(sort: [SortDescriptor(\Rider.firstName), SortDescriptor(\Rider.lastName)])
     private var riders: [Rider]
 
-    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
 
     @State private var newRiderSheet: NewRiderSheet?
     @State private var pendingNewRider: Rider?
@@ -33,7 +33,7 @@ struct RosterView: View {
                         Section("Summary") {
                             summaryRow("Number of Riders", value: riders.activeRiders.count)
                             summaryRow("Total Rides", value: riders.totalRides)
-                            summaryRow("Number of Teams", value: riders.numberOfTeams(teamSize: teamSize))
+                            summaryRow("Number of Teams", value: riders.numberOfTeams(teamSize: eventFormat.teamSize))
                         }
 
                         ForEach(riders) { rider in

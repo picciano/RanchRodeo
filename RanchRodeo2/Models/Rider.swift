@@ -30,6 +30,12 @@ final class Rider {
     @Relationship(deleteRule: .cascade, inverse: \Payout.rider)
     var payouts: [Payout] = []
 
+    /// Round-robin payouts: one whole-dollar amount per group (A/B/C). Unused by
+    /// standard events, which record payouts per team via `payouts`.
+    var groupPayoutA: Int = 0
+    var groupPayoutB: Int = 0
+    var groupPayoutC: Int = 0
+
     init(
         externalID: UUID = UUID(),
         firstName: String = "",

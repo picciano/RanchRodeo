@@ -5,9 +5,14 @@ struct RiderScheduleView: View {
     @Query(sort: [SortDescriptor(\Rider.firstName), SortDescriptor(\Rider.lastName)])
     private var riders: [Rider]
 
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
     @State private var showPrintPreview = false
 
     private var activeRiders: [Rider] { riders.activeRiders }
+
+    /// Round-robin cards hold three group columns, so they need more width.
+    private var columnMinWidth: CGFloat { eventFormat.isRoundRobin ? 320 : 220 }
 
     private var teamSlots: Int {
         max(2, activeRiders.map { $0.teams.count }.max() ?? 0)
@@ -27,7 +32,7 @@ struct RiderScheduleView: View {
                 )
             } else {
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: columnMinWidth), spacing: 12)], spacing: 12) {
                         ForEach(activeRiders) { rider in
                             NavigationLink {
                                 RiderEditorView(rider: rider)
@@ -35,7 +40,8 @@ struct RiderScheduleView: View {
                                 RiderScheduleCard(
                                     rider: rider,
                                     teamSlots: teamSlots,
-                                    reserveCategorySpace: anyRiderHasCategories
+                                    reserveCategorySpace: anyRiderHasCategories,
+                                    isRoundRobin: eventFormat.isRoundRobin
                                 )
                             }
                             .buttonStyle(.plain)

@@ -4,13 +4,22 @@ import SwiftData
 struct PayoutSummaryView: View {
     @Query private var riders: [Rider]
 
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
     @State private var showPrintPreview = false
 
     /// Riders paired with their total payout, sorted by total descending.
     /// Ties are broken alphabetically by display name to keep the order stable.
+    /// Round robin totals come from the per-group payouts; standard events sum the
+    /// per-team payouts.
     private var sortedEntries: [(rider: Rider, total: Int)] {
         riders.activeRiders
-            .map { ($0, $0.payouts.reduce(0) { $0 + $1.total }) }
+            .map { rider in
+                let total = eventFormat.isRoundRobin
+                    ? rider.totalGroupPayout
+                    : rider.payouts.reduce(0) { $0 + $1.total }
+                return (rider, total)
+            }
             .sorted { lhs, rhs in
                 if lhs.total != rhs.total { return lhs.total > rhs.total }
                 return lhs.rider.displayName < rhs.rider.displayName

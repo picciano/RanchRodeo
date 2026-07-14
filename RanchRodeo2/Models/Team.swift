@@ -5,6 +5,9 @@ import SwiftData
 final class Team {
     var number: Int
 
+    /// Round-robin group label ("A"/"B"/"C"). `nil` for standard events.
+    var group: String?
+
     @Relationship(inverse: \Rider.teams)
     var riders: [Rider] = []
 

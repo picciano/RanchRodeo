@@ -9,8 +9,11 @@ struct TeamsView: View {
 
     @Query private var allRiders: [Rider]
 
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
+
     @State private var isGenerating = false
     @State private var showEmptyRosterAlert = false
+    @State private var showRoundRobinCountAlert = false
     @State private var showRegenerateConfirmation = false
     @State private var showPrintPreview = false
 
@@ -22,17 +25,23 @@ struct TeamsView: View {
                     systemImage: "square.grid.3x3",
                     description: Text("Tap Generate to build teams from the roster.")
                 )
-            } else {
+            } else if isGrouped {
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
-                        ForEach(teams) { team in
-                            NavigationLink(value: team.id) {
-                                TeamCard(team: team)
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(presentGroups) { group in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(group.label)
+                                    .font(.title2.bold())
+                                    .padding(.horizontal)
+                                teamGrid(teams.filter { $0.group == group.rawValue })
                             }
-                            .buttonStyle(.plain)
                         }
                     }
-                    .padding()
+                    .padding(.vertical)
+                }
+            } else {
+                ScrollView {
+                    teamGrid(teams).padding()
                 }
             }
         }
@@ -68,6 +77,11 @@ struct TeamsView: View {
         } message: {
             Text("Add at least one active rider to the roster before generating teams.")
         }
+        .alert("Round Robin Needs 28 Riders", isPresented: $showRoundRobinCountAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("A round robin event requires exactly \(RoundRobinDesign.riderCount) active riders. You currently have \(allRiders.activeRiders.count). Adjust the roster or change the event type in Settings.")
+        }
         .confirmationDialog(
             "Regenerate teams?",
             isPresented: $showRegenerateConfirmation,
@@ -82,10 +96,41 @@ struct TeamsView: View {
         }
     }
 
+    /// Round-robin teams carry a group label; standard teams don't.
+    private var isGrouped: Bool {
+        teams.contains { $0.group != nil }
+    }
+
+    private var presentGroups: [RoundRobinDesign.Group] {
+        RoundRobinDesign.Group.allCases.filter { group in
+            teams.contains { $0.group == group.rawValue }
+        }
+    }
+
+    private func teamGrid(_ teams: [Team]) -> some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 12)], spacing: 12) {
+            ForEach(teams) { team in
+                NavigationLink(value: team.id) {
+                    TeamCard(team: team)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal)
+    }
+
     private func generate() {
-        guard !allRiders.activeRiders.isEmpty else {
-            showEmptyRosterAlert = true
-            return
+        let activeCount = allRiders.activeRiders.count
+        if eventFormat.isRoundRobin {
+            guard activeCount == RoundRobinDesign.riderCount else {
+                showRoundRobinCountAlert = true
+                return
+            }
+        } else {
+            guard activeCount > 0 else {
+                showEmptyRosterAlert = true
+                return
+            }
         }
         if !teams.isEmpty {
             showRegenerateConfirmation = true

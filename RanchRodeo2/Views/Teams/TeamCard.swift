@@ -3,12 +3,12 @@ import SwiftUI
 struct TeamCard: View {
     let team: Team
 
-    @AppStorage("teamSize") private var teamSize = TeamSettings.defaultTeamSize
+    @AppStorage("eventFormat") private var eventFormat: EventFormat = TeamSettings.defaultFormat
 
     // Show at least the configured team size, but expand if a team was hand-edited
     // to hold more riders so none are hidden.
     private var slotCount: Int {
-        max(teamSize, team.riders.count)
+        max(eventFormat.teamSize, team.riders.count)
     }
 
     var body: some View {
@@ -46,6 +46,8 @@ struct TeamCard: View {
     }
 
     private func categorySuffix(for rider: Rider) -> String {
+        // Round-robin ignores parent/child, so don't tag riders with (P)/(C).
+        guard team.group == nil else { return "" }
         let code = rider.categoryCode
         return code.isEmpty ? "" : " (\(code))"
     }

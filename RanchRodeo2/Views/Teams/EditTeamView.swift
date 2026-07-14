@@ -88,7 +88,7 @@ struct EditTeamView: View {
                 } header: {
                     Text("Add Payouts")
                 } footer: {
-                    Text("Sets the \(selectedCategory.label) payout for every rider on this team to the amount entered.")
+                    Text(payoutFooter)
                 }
             }
         }
@@ -112,20 +112,43 @@ struct EditTeamView: View {
     /// The whole-dollar value the organizer has entered on the keypad.
     private var enteredAmount: Int { Int(amountText) ?? 0 }
 
-    /// Category picker, running amount, and the apply button — the left column on iPad,
-    /// stacked above the keypad on iPhone.
+    /// The round-robin group this team belongs to, if any. Standard teams return nil.
+    private var roundRobinGroup: RoundRobinDesign.Group? {
+        team.group.flatMap { RoundRobinDesign.Group(rawValue: $0) }
+    }
+
+    /// Footer copy naming what the entered amount will set — the round-robin group for
+    /// grouped teams, or the selected category for standard teams.
+    private var payoutFooter: String {
+        if let group = roundRobinGroup {
+            return "Adds the amount entered to every rider's \(group.label) payout. Use the Payouts tab to correct an amount."
+        }
+        return "Sets the \(selectedCategory.label) payout for every rider on this team to the amount entered."
+    }
+
+    /// Category picker (or the fixed group for round-robin teams), running amount, and the
+    /// apply button — the left column on iPad, stacked above the keypad on iPhone.
     private var payoutControls: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text("Category")
-                Spacer()
-                Picker("Category", selection: $selectedCategory) {
-                    ForEach(PayoutCategory.allCases) { category in
-                        Text(category.label).tag(category)
-                    }
+            if let group = roundRobinGroup {
+                HStack {
+                    Text("Group")
+                    Spacer()
+                    Text(group.label)
+                        .foregroundStyle(.secondary)
                 }
-                .labelsHidden()
-                .pickerStyle(.menu)
+            } else {
+                HStack {
+                    Text("Category")
+                    Spacer()
+                    Picker("Category", selection: $selectedCategory) {
+                        ForEach(PayoutCategory.allCases) { category in
+                            Text(category.label).tag(category)
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                }
             }
 
             VStack(alignment: .leading, spacing: 2) {
@@ -199,12 +222,30 @@ struct EditTeamView: View {
         let amount = enteredAmount
         guard amount > 0 else { return }
         let riderCount = team.riders.count
-        for rider in team.riders {
-            payoutRecord(for: rider)[keyPath: selectedCategory.keyPath] = amount
+        let isRoundRobin = roundRobinGroup != nil
+        let label: String
+        if let group = roundRobinGroup {
+            // Round-robin payouts are per group. A rider can place on more than one of their
+            // group's teams, so accumulate rather than overwrite; corrections go through the
+            // Payouts tab, which edits each rider's group amount directly.
+            for rider in team.riders {
+                rider.setGroupPayout(rider.groupPayout(group) + amount, for: group)
+            }
+            label = group.label
+        } else {
+            for rider in team.riders {
+                payoutRecord(for: rider)[keyPath: selectedCategory.keyPath] = amount
+            }
+            label = selectedCategory.label
         }
         persist()
         let formattedAmount = amount.formatted(.currency(code: "USD").precision(.fractionLength(0)))
-        showConfirmation("\(selectedCategory.label) set to \(formattedAmount) for \(riderCount) rider\(riderCount == 1 ? "" : "s")")
+        let riderText = "\(riderCount) rider\(riderCount == 1 ? "" : "s")"
+        if isRoundRobin {
+            showConfirmation("Added \(formattedAmount) to \(label) for \(riderText)")
+        } else {
+            showConfirmation("\(label) set to \(formattedAmount) for \(riderText)")
+        }
         amountText = ""
     }
 

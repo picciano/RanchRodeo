@@ -4,6 +4,7 @@ struct RiderScheduleCard: View {
     let rider: Rider
     let teamSlots: Int
     let reserveCategorySpace: Bool
+    var isRoundRobin: Bool = false
 
     private var sortedTeams: [Team] {
         rider.teams.sorted { $0.number < $1.number }
@@ -14,17 +15,43 @@ struct RiderScheduleCard: View {
             Text(rider.displayName)
                 .font(.title3.bold())
                 .foregroundStyle(rider.isWaiverSigned ? Color.primary : Color.red)
-            if reserveCategorySpace {
-                categoryRow
-            }
             Divider()
-            ForEach(0..<teamSlots, id: \.self) { index in
-                teamRow(at: index)
+            if isRoundRobin {
+                groupColumns
+            } else {
+                if reserveCategorySpace {
+                    categoryRow
+                }
+                ForEach(0..<teamSlots, id: \.self) { index in
+                    teamRow(at: index)
+                }
             }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.background.secondary, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    /// Round-robin layout: the rider's teams laid out in three columns (one per
+    /// group) to keep the card compact rather than a tall list of nine teams.
+    private var groupColumns: some View {
+        HStack(alignment: .top, spacing: 12) {
+            ForEach(RoundRobinDesign.Group.allCases) { group in
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(group.rawValue)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.secondary)
+                    let teams = rider.teams
+                        .filter { $0.group == group.rawValue }
+                        .sorted { $0.number < $1.number }
+                    ForEach(teams) { team in
+                        Text("Team \(team.number)")
+                            .font(.callout)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
     }
 
     @ViewBuilder
