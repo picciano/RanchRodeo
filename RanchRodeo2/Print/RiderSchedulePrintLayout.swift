@@ -1,39 +1,50 @@
 import SwiftUI
 
-struct RiderSchedulePrintLayout: View {
-    static let pageSize = CGSize(width: 612, height: 792) // US Letter @ 72 DPI
-    static let ridersPerPage = 24
+/// Builds the header and grid-rows for the rider schedule printout. Riders are laid
+/// out in a fixed number of columns; each grid-row is one paginatable unit so pages
+/// break cleanly between rows. Assembled by `PaginatedPrintDocument`.
+enum RiderSchedulePrintLayout {
     static let columns = 3
+    private static let cellSpacing: CGFloat = 8
 
-    let riders: [Rider]
-    var isRoundRobin: Bool = false
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("Rider Schedule")
-                    .font(.system(size: 12, weight: .semibold))
-                Spacer()
-                Text(Date.now.formatted(date: .abbreviated, time: .omitted))
-                    .font(.system(size: 10))
-                    .foregroundStyle(.secondary)
-            }
-            LazyVGrid(
-                columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: RiderSchedulePrintLayout.columns),
-                spacing: 8
-            ) {
-                ForEach(riders) { rider in
-                    riderCell(rider)
-                }
-            }
-            Spacer(minLength: 0)
+    static func header() -> some View {
+        HStack {
+            Text("Rider Schedule")
+                .font(.system(size: 12, weight: .semibold))
+            Spacer()
+            Text(Date.now.formatted(date: .abbreviated, time: .omitted))
+                .font(.system(size: 10))
+                .foregroundStyle(.secondary)
         }
-        .padding(24)
-        .frame(width: RiderSchedulePrintLayout.pageSize.width, height: RiderSchedulePrintLayout.pageSize.height, alignment: .topLeading)
-        .background(Color.white)
     }
 
-    private func riderCell(_ rider: Rider) -> some View {
+    /// Splits riders into rows of `columns` for pagination.
+    static func rows(_ riders: [Rider]) -> [[Rider]] {
+        stride(from: 0, to: riders.count, by: columns).map {
+            Array(riders[$0..<min($0 + columns, riders.count)])
+        }
+    }
+
+    /// One row of the grid: up to `columns` rider cells, padded with empty slots so
+    /// a partial final row keeps the same column widths as full rows.
+    static func gridRow(_ riders: [Rider], isRoundRobin: Bool) -> some View {
+        HStack(alignment: .top, spacing: cellSpacing) {
+            ForEach(Array(riders.enumerated()), id: \.element.id) { _, rider in
+                riderCell(rider, isRoundRobin: isRoundRobin)
+            }
+            ForEach(riders.count..<columns, id: \.self) { _ in
+                Color.clear.frame(maxWidth: .infinity)
+            }
+        }
+        // Hug content vertically so a row can't absorb the page's leftover space.
+        // Without this the cells' inner Spacer makes each row greedy, and on a
+        // partial (last) page the blocks balloon to fill the sheet.
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    // MARK: - Cell
+
+    private static func riderCell(_ rider: Rider, isRoundRobin: Bool) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(rider.displayName)
                 .font(.system(size: 12, weight: .bold))
@@ -56,7 +67,7 @@ struct RiderSchedulePrintLayout: View {
     }
 
     @ViewBuilder
-    private func standardTeams(_ rider: Rider) -> some View {
+    private static func standardTeams(_ rider: Rider) -> some View {
         let labels = rider.categoryLabels
         if !labels.isEmpty {
             Text(labels.joined(separator: ", "))
@@ -80,7 +91,7 @@ struct RiderSchedulePrintLayout: View {
     }
 
     /// Round-robin: the rider's teams in three group columns to stay compact.
-    private func groupColumns(_ rider: Rider) -> some View {
+    private static func groupColumns(_ rider: Rider) -> some View {
         HStack(alignment: .top, spacing: 6) {
             ForEach(RoundRobinDesign.Group.allCases) { group in
                 VStack(alignment: .leading, spacing: 1) {

@@ -28,13 +28,12 @@ enum PDFRenderer {
     }
 
     static func renderPayoutsPDF(riders: [Rider]) -> Data? {
-        let chunks = riders.chunked(into: PayoutPrintLayout.ridersPerPage)
-        let pageChunks = chunks.isEmpty ? [[]] : chunks
         let grandTotal = riders.flatMap { $0.payouts }.reduce(0) { $0 + $1.total }
-        let pages = pageChunks.enumerated().map { index, pageRiders in
-            PayoutPrintLayout(riders: pageRiders, isLastPage: index == pageChunks.count - 1, grandTotal: grandTotal)
-        }
-        return renderDocument(pageSize: PayoutPrintLayout.pageSize, pages)
+        return PaginatedPrintDocument(
+            header: AnyView(PayoutPrintLayout.header()),
+            rows: riders.map { AnyView(PayoutPrintLayout.riderRow($0)) },
+            footer: AnyView(PayoutPrintLayout.footer(grandTotal: grandTotal))
+        ).render()
     }
 
     /// Round-robin payouts: one row per rider with per-group amounts.
@@ -48,32 +47,32 @@ enum PDFRenderer {
                 groupC: $0.groupPayoutC
             )
         }
-        let chunks = entries.chunked(into: RoundRobinPayoutPrintLayout.ridersPerPage)
-        let pageChunks = chunks.isEmpty ? [[]] : chunks
         let grandTotal = riders.reduce(0) { $0 + $1.totalGroupPayout }
-        let pages = pageChunks.enumerated().map { index, pageEntries in
-            RoundRobinPayoutPrintLayout(entries: pageEntries, isLastPage: index == pageChunks.count - 1, grandTotal: grandTotal)
-        }
-        return renderDocument(pageSize: RoundRobinPayoutPrintLayout.pageSize, pages)
+        return PaginatedPrintDocument(
+            header: AnyView(RoundRobinPayoutPrintLayout.header()),
+            rows: entries.map { AnyView(RoundRobinPayoutPrintLayout.row($0)) },
+            footer: AnyView(RoundRobinPayoutPrintLayout.footer(grandTotal: grandTotal))
+        ).render()
     }
 
     static func renderPayoutSummaryPDF(
         entries: [PayoutSummaryPrintLayout.Entry],
         showTotal: Int
     ) -> Data? {
-        let chunks = entries.chunked(into: PayoutSummaryPrintLayout.entriesPerPage)
-        let pageChunks = chunks.isEmpty ? [[]] : chunks
-        let pages = pageChunks.enumerated().map { index, pageEntries in
-            PayoutSummaryPrintLayout(entries: pageEntries, isLastPage: index == pageChunks.count - 1, showTotal: showTotal)
-        }
-        return renderDocument(pageSize: PayoutSummaryPrintLayout.pageSize, pages)
+        return PaginatedPrintDocument(
+            header: AnyView(PayoutSummaryPrintLayout.header()),
+            rows: entries.map { AnyView(PayoutSummaryPrintLayout.row($0)) },
+            footer: AnyView(PayoutSummaryPrintLayout.footer(showTotal: showTotal))
+        ).render()
     }
 
     static func renderRiderSchedulePDF(riders: [Rider], isRoundRobin: Bool = false) -> Data? {
-        let pages = riders.chunked(into: RiderSchedulePrintLayout.ridersPerPage).map {
-            RiderSchedulePrintLayout(riders: $0, isRoundRobin: isRoundRobin)
-        }
-        return renderDocument(pageSize: RiderSchedulePrintLayout.pageSize, pages)
+        return PaginatedPrintDocument(
+            header: AnyView(RiderSchedulePrintLayout.header()),
+            rows: RiderSchedulePrintLayout.rows(riders).map {
+                AnyView(RiderSchedulePrintLayout.gridRow($0, isRoundRobin: isRoundRobin))
+            }
+        ).render()
     }
 
     // MARK: - Page rendering

@@ -30,7 +30,7 @@ struct TeamPrintLayout: View {
             }
             Spacer(minLength: 0)
         }
-        .padding(24)
+        .padding(36) // 0.5" safe margin — matches the other print layouts, clears the printer dead-zone
         .frame(width: TeamPrintLayout.pageSize.width, height: TeamPrintLayout.pageSize.height, alignment: .topLeading)
         .background(Color.white)
     }

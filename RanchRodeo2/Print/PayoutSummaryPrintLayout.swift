@@ -1,20 +1,15 @@
 import SwiftUI
 
-struct PayoutSummaryPrintLayout: View {
-    static let pageSize = CGSize(width: 612, height: 792) // US Letter @ 72 DPI
-    static let entriesPerPage = 36
-
+/// Builds the header, per-rider rows, and show-total footer for the payout summary
+/// printout. Assembled into pages by `PaginatedPrintDocument`.
+enum PayoutSummaryPrintLayout {
     struct Entry {
         let name: String
         let waiverSigned: Bool
         let total: Int
     }
 
-    let entries: [Entry]
-    let isLastPage: Bool
-    let showTotal: Int
-
-    var body: some View {
+    static func header() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Payout Summary")
@@ -24,7 +19,6 @@ struct PayoutSummaryPrintLayout: View {
                     .font(.system(size: 10))
                     .foregroundStyle(.secondary)
             }
-
             HStack {
                 Text("NAME")
                     .font(.system(size: 11, weight: .semibold))
@@ -33,37 +27,34 @@ struct PayoutSummaryPrintLayout: View {
                     .font(.system(size: 11, weight: .semibold))
             }
             Divider()
+        }
+    }
 
-            ForEach(Array(entries.enumerated()), id: \.offset) { _, entry in
-                HStack {
-                    Text(entry.name)
-                        .font(.system(size: 12))
-                        .foregroundStyle(entry.waiverSigned ? Color.black : Color.red)
-                        .lineLimit(1)
-                    Spacer()
-                    Text(entry.total, format: .currency(code: "USD").precision(.fractionLength(0)))
-                        .font(.system(size: 12))
-                        .monospacedDigit()
-                }
-                .padding(.vertical, 2)
-            }
+    static func row(_ entry: Entry) -> some View {
+        HStack {
+            Text(entry.name)
+                .font(.system(size: 12))
+                .foregroundStyle(entry.waiverSigned ? Color.black : Color.red)
+                .lineLimit(1)
+            Spacer()
+            Text(entry.total, format: .currency(code: "USD").precision(.fractionLength(0)))
+                .font(.system(size: 12))
+                .monospacedDigit()
+        }
+        .padding(.vertical, 2)
+    }
 
-            Spacer(minLength: 0)
-
-            if isLastPage {
-                Divider().padding(.top, 6)
-                HStack {
-                    Text("Show Total")
-                        .font(.system(size: 13, weight: .bold))
-                    Spacer()
-                    Text(showTotal, format: .currency(code: "USD").precision(.fractionLength(0)))
-                        .font(.system(size: 13, weight: .bold))
-                        .monospacedDigit()
-                }
+    static func footer(showTotal: Int) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Divider().padding(.bottom, 6)
+            HStack {
+                Text("Show Total")
+                    .font(.system(size: 13, weight: .bold))
+                Spacer()
+                Text(showTotal, format: .currency(code: "USD").precision(.fractionLength(0)))
+                    .font(.system(size: 13, weight: .bold))
+                    .monospacedDigit()
             }
         }
-        .padding(24)
-        .frame(width: Self.pageSize.width, height: Self.pageSize.height, alignment: .topLeading)
-        .background(Color.white)
     }
 }
